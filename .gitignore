@@ -1,0 +1,9 @@
+_site/
+org/
+.ruby-version
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+*.old
+.#*

@@ -1,0 +1,3519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tiny Basicを読む</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Kazumasa" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Tiny Basicを読む</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6b6fdd5">はじめに</a></li>
+<li><a href="#org70b7929">初期化</a></li>
+<li><a href="#org2f700a3">メインループ</a></li>
+<li><a href="#orgeaef7f6">コマンド実行</a></li>
+<li><a href="#org8288c4c">ダイレクトコマンド</a>
+<ul>
+<li><a href="#orgdb7db24">RUN</a></li>
+<li><a href="#org8eaef8c">LIST</a></li>
+<li><a href="#orga5cf029">NEW</a></li>
+<li><a href="#org32d590f">BYE</a></li>
+<li><a href="#org5b3a606">LOAD</a></li>
+<li><a href="#org398234b">SAVE</a></li>
+<li><a href="#orgc3968ca">FCBSET</a></li>
+</ul>
+</li>
+<li><a href="#orgddf3ab3">ステートメント</a>
+<ul>
+<li><a href="#orgd9877d7">LET</a></li>
+<li><a href="#org85fdae9">IF</a></li>
+<li><a href="#org29a2b0f">GOTO</a></li>
+<li><a href="#org8e0ecb4">GOSUB</a></li>
+<li><a href="#orgd6ae43f">RETURN</a></li>
+<li><a href="#org0a7c491">REM</a></li>
+<li><a href="#orga1d5b81">FOR〜NEXT</a></li>
+<li><a href="#org95fe18c">STOP</a></li>
+<li><a href="#org2da9c2f">INPUT</a></li>
+<li><a href="#org415081e">PRINT</a></li>
+</ul>
+</li>
+<li><a href="#orgb2d1983">式</a>
+<ul>
+<li><a href="#orgd01f5b0">EXPR(RST 3)</a></li>
+</ul>
+</li>
+<li><a href="#org8853361">内部処理</a>
+<ul>
+<li><a href="#org18017b4">SETVAL</a></li>
+<li><a href="#org5600527">IGNBLK(RST 5)</a></li>
+<li><a href="#org5d389bf">TSTC(RST 1)</a></li>
+<li><a href="#org6692474">TSTV(RST 7)</a></li>
+<li><a href="#orga505016">QTSTG</a></li>
+</ul>
+</li>
+<li><a href="#org7ee85a7">実行制御</a>
+<ul>
+<li><a href="#org03cff41">FINISH(RST 6)</a></li>
+<li><a href="#orgb2af9a6">FNDLN</a></li>
+<li><a href="#orgefcc892">PUSHA</a></li>
+<li><a href="#orgd5d7197">POPA</a></li>
+</ul>
+</li>
+<li><a href="#org3b3c495">バッファ操作</a>
+<ul>
+<li><a href="#orgbf54dbb">MVUP</a></li>
+<li><a href="#org32821c0">MVDOWN</a></li>
+</ul>
+</li>
+<li><a href="#org4cd6ca7">エラー処理</a>
+<ul>
+<li><a href="#orgce147b4">ERROR</a></li>
+</ul>
+</li>
+<li><a href="#org7771bd2">関数</a>
+<ul>
+<li><a href="#org3880502">ABS</a></li>
+<li><a href="#org214f0ec">SIZE</a></li>
+<li><a href="#org18fb46d">RND</a></li>
+<li><a href="#org7cc2a56">INP</a></li>
+<li><a href="#orga8cbfe3">PEEK</a></li>
+<li><a href="#orge363e42">POKE</a></li>
+<li><a href="#org7459042">USR</a></li>
+<li><a href="#org6c416b6">XP40</a></li>
+</ul>
+</li>
+<li><a href="#org11bbcef">ユーティリティ</a>
+<ul>
+<li><a href="#org0543b5a">DIVIDE(除算)</a></li>
+<li><a href="#org4e5b5b0">SUBDE(16ビット減算)</a></li>
+<li><a href="#org3220cb1">CHKSGN(符号確認) / CHGSGN(符号変更)</a></li>
+<li><a href="#orgf9f9d1c">CKHLDE(16ビット比較)</a></li>
+<li><a href="#orgfb68381">COMP</a></li>
+</ul>
+</li>
+<li><a href="#org0b05761">入出力</a>
+<ul>
+<li><a href="#org43723ab">GETLN</a></li>
+<li><a href="#org78c52af">CHKIO</a></li>
+<li><a href="#orgdf63ee6">OUTC/CRLF</a></li>
+<li><a href="#org514ff83">PRTSTG</a></li>
+<li><a href="#org9a7cf53">PRTNUM</a></li>
+<li><a href="#orgb0a13a6">PRTLN</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6b6fdd5" class="outline-2">
+<h2 id="org6b6fdd5">はじめに</h2>
+<div class="outline-text-2" id="text-org6b6fdd5">
+<p>
+Tiny Basicはその名の通り小さなBasic処理系で、いくつかのバージョンが存在するが、<a href="https://en.wikipedia.org/wiki/Li-Chen_Wang#Palo_Alto_Tiny_BASIC">Palo Alto版Tiny Basic</a>が最も有名なもののようだ(Wikipediaのリンクから入手できるものは、いくつかの命令を追加したSHERRY BROTHERS TINY BASIC VERSION 3.1である)。Palo Alto版Tiny BasicのターゲットCPUはインテル8080、プログラムサイズは2KBである。その名の通り小さなプログラムであるがアセンブリ言語で書かれているため、ソースコードはそれなりに長い。本稿ではこのTinyBasicの解析を行う。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org70b7929" class="outline-2">
+<h2 id="org70b7929">初期化</h2>
+<div class="outline-text-2" id="text-org70b7929">
+<p>
+CP/Mのアプリケーションプログラム領域は0100H番地から始まる。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-asm8080" id="org6e84754"><span class="linenr">68: </span>       ORG  100H      ;OF CPM.
+<span class="linenr">69: </span>START  JMP  NINIT      ;GO TO INITIALIZATION ROUTINE.	JIF
+</pre>
+</div>
+<ul class="org-ul">
+<li>Tiny Basicインタープリタが開始されると、まずNINIT(0AA0H番地)へ飛ぶ。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080" id="org3a0048e"><span class="linenr">1881: </span>       ORG	0AA0H
+<span class="linenr">1882: </span>NINIT: LXI	H,RST1		;POINT TO BEGINNING OF MODEL TABLE
+<span class="linenr">1883: </span>       LXI	D,RSTBL
+<span class="linenr">1884: </span>NXT:   LDAX	D
+<span class="linenr">1885: </span>       MOV	M,A
+<span class="linenr">1886: </span>       INX	H
+<span class="linenr">1887: </span>       INX	D
+<span class="linenr">1888: </span>       MVI	A,EOT
+<span class="linenr">1889: </span>       CMP	L
+<span class="linenr">1890: </span>       JNZ	NXT
+<span class="linenr">1891: </span>       LXI	H,INIT
+<span class="linenr">1892: </span>       SHLD START+1
+<span class="linenr">1893: </span>       JMP	START
+</pre>
+</div>
+<ul class="org-ul">
+<li>NINITはRSTBLからEOTまでに書かれている機械語サブルーチン群を0008H番地へコピーする。こうすることで、これらのサブルーチンはi8080のRST命令で呼び出すことができる。RST命令は1バイトで表現されるので、CALL命令(3バイト)で呼び出すよりもメモリの消費は少なくてすむ。<br /></li>
+<li>機械語サブルーチン群のコピーが終わったら、機械語プログラム領域の最初の命令のオペランドをNINITからINITに書き換えて、もう一度プログラムエリアの最初の命令(JMP INITになっている)を実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080" id="org76c3b99"><span class="linenr">1808: </span>TXTBGN DS   1         ;TEXT SAVE AREA BEGINS 
+<span class="linenr">1809: </span>MSG1   DB   7FH,7FH,7FH,'SHERRY BROTHERS TINY BASIC VER. 3.1',0DH 
+<span class="linenr">1810: </span>INIT   MVI  A,0FFH
+<span class="linenr">1811: </span>       STA  OCSW      ;TURN ON OUTPUT SWITCH 
+<span class="linenr">1812: </span>       MVI  A,0CH     ;GET FORM FEED 
+<span class="linenr">1813: </span>       RST  2         ;SEND TO CRT 
+<span class="linenr">1814: </span>PATLOP SUB  A         ;CLEAR ACCUMULATOR
+<span class="linenr">1815: </span>       LXI  D,MSG1    ;GET INIT MESSAGE
+<span class="linenr">1816: </span>       CALL PRTSTG    ;SEND IT
+</pre>
+</div>
+<ul class="org-ul">
+<li>INITでは、まず起動メッセージ(SHERRY BROTHERS TINY BASIC&#x2026;)を表示する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1817: </span>LSTRAM LDA  7         ;GET FBASE FOR TOP
+<span class="linenr">1818: </span>       STA  RSTART+2
+<span class="linenr">1819: </span>       DCR  A         ;DECREMENT FOR OTHER POINTERS
+<span class="linenr">1820: </span>       STA  SS1A+2    ;AND FIX THEM TOO
+<span class="linenr">1821: </span>       STA  TV1A+2
+<span class="linenr">1822: </span>       STA  ST3A+2
+<span class="linenr">1823: </span>       STA  ST4A+2
+<span class="linenr">1824: </span>       STA  IP3A+2
+<span class="linenr">1825: </span>       STA  SIZEA+2
+<span class="linenr">1826: </span>       STA  GETLN+3
+<span class="linenr">1827: </span>       STA  PUSHA+2
+</pre>
+</div>
+<ul class="org-ul">
+<li>次にRSTART(メイン)の最初の命令(LXI SP, STACK)のオペランドの上位バイトを書き換え、2000Hから0700Hへ変更する(LSTRAM)。<br /></li>
+<li>同様にSS1A/TV1A/ST3A/ST4A/IP3A/SIZEA/GETLN/PUSHAに含まれるVARBGN/TXTEND/BUFFER/STKLMTの上位バイトを06Hに書き換える。<br /></li>
+<li>整理すると、下記の表のようになる。BUFENDは0F87Hのままだが、下位バイトしか比較には用いないので問題ない。<br /></li>
+</ul>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">STACK</th>
+<th scope="col" class="org-left">STKLMT</th>
+<th scope="col" class="org-left">VARBGN</th>
+<th scope="col" class="org-left">TXTEND</th>
+<th scope="col" class="org-left">BUFFER</th>
+<th scope="col" class="org-left">BUFEND</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">変更前</td>
+<td class="org-left">2000H</td>
+<td class="org-left">0FAFH</td>
+<td class="org-left">0F00H</td>
+<td class="org-left">0F00H</td>
+<td class="org-left">0F37H</td>
+<td class="org-left">0F87H</td>
+</tr>
+
+<tr>
+<td class="org-left">変更後</td>
+<td class="org-left">0700H</td>
+<td class="org-left">06AFH</td>
+<td class="org-left">0600H</td>
+<td class="org-left">0600H</td>
+<td class="org-left">0637H</td>
+<td class="org-left">0F87H</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1828: </span>LXI  H,ST1     ;GET NEW START JUMP
+<span class="linenr">1829: </span>SHLD START+1   ;AND FIX IT
+<span class="linenr">1830: </span>JMP  ST1
+</pre>
+</div>
+<ul class="org-ul">
+<li>最後にNINITと同様に、機械語プログラム領域の最初の命令(JMP INIT)のオペランドを書き換え、JMP ST1とし、今度はST1へ直接ジャンプする。<br /></li>
+<li>ここまでで使用した、起動メッセージ文字列、INIT、NINIT、RST領域へコピーされた機械語プログラムは今後使用されることはないので、この領域は、BASICのプログラムテキスト領域や配列変数領域として最利用される。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2f700a3" class="outline-2">
+<h2 id="org2f700a3">メインループ</h2>
+<div class="outline-text-2" id="text-org2f700a3">
+<p>
+RSTARTはTiny Basicインタープリタのメイン処理部である。エラーが発生した際もRSTARTへ戻ってくる。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-asm8080" id="org3b81001"><span class="linenr">182: </span>RSTART LXI  SP,STACK  ;SET STACK POINTER
+<span class="linenr">183: </span>ST1    CALL CRLF      ;AND JUMP TO HERE
+<span class="linenr">184: </span>       LXI  D,OK      ;DE-&gt;STRING
+<span class="linenr">185: </span>       SUB  A         ;A=0 
+<span class="linenr">186: </span>       CALL PRTSTG    ;PRINT STRING UNTIL 0DH
+<span class="linenr">187: </span>       LXI  H,ST2+1   ;LITERAL 0 
+<span class="linenr">188: </span>       SHLD CURRNT    ;CURRNT-&gt;LINE # = 0
+<span class="linenr">189: </span>ST2    LXI  H,0 
+<span class="linenr">190: </span>       SHLD LOPVAR
+<span class="linenr">191: </span>       SHLD STKGOS
+</pre>
+</div>
+<ul class="org-ul">
+<li>ST1からメインループが開始される。<br /></li>
+<li>ST1では画面に"OK"と印字し、CURRNTを0に設定する。CURRNTは現在行番号ポインタで行番号(0)そのものを代入するのではなく、0が入っているメモリ位置を代入する。<br /></li>
+<li>ST2ではFOR文で使用するループ変数(LOPVAR)、GOSUB文で使用するスタックポインタ保管変数(STKGOSを0に初期化する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">189: </span>ST3    MVI  A,76Q     ;PROMPT '&gt;' AND
+<span class="linenr">190: </span>       CALL GETLN     ;READ A LINE 
+<span class="linenr">191: </span>       PUSH D         ;DE-&gt;END OF LINE 
+</pre>
+</div>
+<ul class="org-ul">
+<li>ST3ではプロンプト('&gt;')を表示し、GETLNを呼び出してユーザーから入力を受け付ける。<br /></li>
+<li>GETLNから戻るとDEレジスタは入力の最後を指している。DEレジスタはコマンドの解析を行う際に使用するので、DEレジスタをスタックへ保存しておく。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">192: </span>ST3A   LXI  D,BUFFER  ;DE-&gt;BEGINNING OF LINE 
+<span class="linenr">193: </span>       CALL TSTNUM    ;TESt IFF IT IS A NUMBER
+<span class="linenr">194: </span>       RST  5 
+<span class="linenr">195: </span>       MOV  A,H       ;HL=VALUE OF THE # OR
+<span class="linenr">196: </span>       ORA  L         ;0 IFF NO # WAS FOUND 
+<span class="linenr">197: </span>       POP  B         ;BC-&gt;END OF LINE 
+<span class="linenr">198: </span>       JZ   DIRECT
+</pre>
+</div>
+<ul class="org-ul">
+<li>DEレジスタを入力バッファの先頭に設定し、入力の解析を行う。<br /></li>
+<li>DEレジスタは、テキストポインタとして使われることが多く、ここでは入力バッファを指しているが、Tiny Basicプログラムを実行する際は、プログラムテキスト領域内の文を指している。<br /></li>
+<li>入力の先頭が数値でなければコマンドが入力されたと解釈し、ダイレクト実行を行う。ダイレクト実行が終わると、RSTARTへ戻る。<br /></li>
+<li>入力の先頭が数値であれば、行番号つきのステートメントであると解釈し、プログラムテキスト領域へコピーする。<br /></li>
+<li>GETLNを呼び出したあとにスタックに保存した入力の末尾位置をBCレジスタへ読み出しておく。この値は後で入力されたステートメントの長さを計算するために使用する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">202: </span>DCX  D         ;BACKUP DE AND SAVE
+<span class="linenr">203: </span>MOV  A,H       ;VALUE OF LINE # THERE 
+<span class="linenr">204: </span>STAX D 
+<span class="linenr">205: </span>DCX  D 
+<span class="linenr">206: </span>MOV  A,L 
+<span class="linenr">207: </span>STAX D 
+</pre>
+</div>
+<ul class="org-ul">
+<li>DEレジスタはステートメントの先頭を指しているので、その前の2バイトにHLレジスタに格納されている行番号を保管する。<br /></li>
+<li>DEレジスタが指すこの行番号の位置から、BCレジスタが指す入力の末尾までをプログラムテキスト領域へ挿入する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">208: </span>PUSH B         ;BC,DE-&gt;BEGIN, END 
+<span class="linenr">209: </span>PUSH D 
+<span class="linenr">210: </span>MOV  A,C 
+<span class="linenr">211: </span>SUB  E 
+<span class="linenr">212: </span>PUSH PSW       ;A=# OF BYTES IN LINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>挿入する領域の先頭と末尾をスタックに保存し、この領域の長さを計算する。入力バッファの長さは80バイトなので、下位バイトのみの演算(C-E)でよい。計算結果もスタックに保存しておく。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">213: </span>CALL FNDLN     ;FIND THIS LINE IN SAVE
+<span class="linenr">214: </span>PUSH D         ;AREA, DE-&gt;SAVE AREA 
+<span class="linenr">215: </span>JNZ  ST4       ;NZ:NOT FOUND, INSERT
+</pre>
+</div>
+<ul class="org-ul">
+<li>HLレジスタにはユーザが入力した行番号が入っている。FNDLNを呼び出して同じ行番号をもつステートメントをプログラムテキスト領域内で検索する。<br /></li>
+<li>FNDLN終了後のDEレジスタをスタックに保存する。行番号を持つステートメントが見つかっていれば、その行の先頭、見つかっていなければ、次の行の先頭を指している。<br /></li>
+<li>入力された文と同じ行番号を持つステートメントが存在していなければ、FNDLN終了後のDEレジスタの位置に入力された文を挿入する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">216: </span>       PUSH D         ;Z:FOUND, DELETE IT
+<span class="linenr">217: </span>       CALL FNDNXT    ;FIND NEXT LINE
+<span class="linenr">218: </span>;*                                       DE-&gt;NEXT LINE 
+<span class="linenr">219: </span>       POP  B         ;BC-&gt;LINE TO BE DELETED
+<span class="linenr">220: </span>       LHLD TXTUNF    ;HL-&gt;UNFILLED SAVE AREA
+<span class="linenr">221: </span>       CALL MVUP      ;MOVE UP TO DELETE 
+<span class="linenr">222: </span>       MOV  H,B       ;TXTUNF-&gt;UNFILLED AREA 
+<span class="linenr">223: </span>       MOV  L,C 
+<span class="linenr">224: </span>       SHLD TXTUNF    ;UPDATE
+</pre>
+</div>
+<ul class="org-ul">
+<li>同じ行番号を持つステートメントが見つかった場合、削除範囲を決定するために次の行を探す。<br /></li>
+<li>この段階でBCレジスタに削除する行の先頭、DEレジスタに削除する行の次の行の先頭位置が入っている。<br /></li>
+<li>次のMVUPはDE〜HLレジスタで示される範囲をBCレジスタから開始される領域に移動する。これでBC〜DEレジスタの範囲にある行が消去される。<br /></li>
+<li>BCレジスタの内容を(一旦HLに入れて)TXTUNFに代入することで、プログラムテキストの終了位置を更新する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">225: </span>ST4    POP  B         ;GET READY TO INSERT 
+<span class="linenr">226: </span>       LHLD TXTUNF    ;BUT FIRT CHECK IF
+<span class="linenr">227: </span>       POP  PSW       ;THE LENGTH OF NEW LINE
+<span class="linenr">228: </span>       PUSH H         ;IS 3 (LINE # AND CR)
+<span class="linenr">229: </span>       CPI  3         ;THEN DO NOT INSERT
+<span class="linenr">230: </span>       JZ   RSTART    ;MUST CLEAR THE STACK
+</pre>
+</div>
+<ul class="org-ul">
+<li>FNDLN呼び出し後にスタックに保存したテキストの挿入位置をBCレジスタに入れる。<br /></li>
+<li>挿入処理前にメモリの空き容量をチェックする。FNDLN呼び出し前にスタックに保存した行の長さをAレジスタに読み込む。<br /></li>
+<li>現在(挿入前)のプログラムテキストの終了位置をスタックに保存しておく。<br /></li>
+<li>行の長さが3(行番号2バイトと改行コード1バイト)であれば、空行であるとみなし、RSTARTへ戻り、スタックをクリアする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">231: </span>       ADD  L         ;COMPUTE NEW TXTUNF
+<span class="linenr">232: </span>       MOV  L,A 
+<span class="linenr">233: </span>       MVI  A,0 
+<span class="linenr">234: </span>       ADC  H 
+<span class="linenr">235: </span>       MOV  H,A       ;HL-&gt;NEW UNFILLED AREA 
+<span class="linenr">236: </span>ST4A   LXI  D,TXTEND  ;CHECK TO SEE IF THERE 
+<span class="linenr">237: </span>       RST  4         ;IS ENOUGH SPACE 
+<span class="linenr">238: </span>       JNC  QSORRY    ;SORRY, NO ROOM FOR IT 
+</pre>
+</div>
+<ul class="org-ul">
+<li>プログラムテキストの終了位置を計算する。その結果がプログラムテキスト領域の最大範囲を超えていたら、入力エラーとし、QSORRYへジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">239: </span>SHLD TXTUNF    ;OK, UPDATE TXTUNF 
+<span class="linenr">240: </span>POP  D         ;DE-&gt;OLD UNFILLED AREA 
+<span class="linenr">241: </span>CALL MVDOWN
+<span class="linenr">242: </span>POP  D         ;DE-&gt;BEGIN, HL-&gt;END
+<span class="linenr">243: </span>POP  H 
+<span class="linenr">244: </span>CALL MVUP      ;MOVE NEW LINE TO SAVE 
+<span class="linenr">245: </span>JMP  ST3       ;AREA
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストの挿入が可能であることがわかったので、プログラムテキスト終了位置を更新する。<br /></li>
+<li>スタックから現在(挿入前)のプログラムテキスト終了位置を取り出す。<br /></li>
+<li>MVDOWNを呼び出し、文を書き込むスペースを確保する。<br /></li>
+<li>挿入する領域の範囲をスタックから取り出し、DEレジスタに開始位置、HLレジスタに終了位置を設定する。<br /></li>
+<li>MVUPを呼び出し、DE〜HLレジスタで示される範囲をBCレジスタで示される挿入位置へコピーする。<br /></li>
+<li>ST3へ戻り、新たな入力を待つ。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgeaef7f6" class="outline-2">
+<h2 id="orgeaef7f6">コマンド実行</h2>
+<div class="outline-text-2" id="text-orgeaef7f6">
+<p>
+コマンド/文の実行は8つのコマンドテーブル(TAB1からTAB8)を用いて行われる。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">273: </span>TAB1   EQU  $         ;DIRECT COMMANDS 
+<span class="linenr">274: </span>       DB   'LIST'
+<span class="linenr">275: </span>       DB   LIST SHR 8 + 128,LIST AND 0FFH
+</pre>
+</div>
+<ul class="org-ul">
+<li>コマンドテーブルの各項目はコマンド名を示す文字列とコマンドの処理内容が書かれているアドレスからなっている。<br /></li>
+<li>コマンドの処理内容が書かれているアドレスについては、アドレスそのものが書かれているわけではない。上位バイト、下位バイトの順序を逆に配置してあり、またアドレスの上位バイトの最上位ビットが1に設定してある。<br />
+<ul class="org-ul">
+<li>ASCII文字の最上位ビットは0であるため、コマンドテーブル内で最上位ビットが1であるようなデータは、アドレスの一部である。また、Tiny Basicインタープリタは0600Hよりも下位のアドレスに配置してあるため、上位アドレスの最上位ビットが1になることはない。従って、テーブルを先頭から１バイトずつ見ていったときに、最上位ビットが1であるバイトが見つかったら、そのバイトと次のバイトはアドレスを構成することがわかる。<br /></li>
+<li>TAB1はダイレクト実行用のコマンドテーブルである。TAB1にはデフォルト動作が定義されていないため、TAB1内にコマンドが見つからなければ、そのままTAB2を検索する。<br /></li>
+<li>TAB2はステートメント用のコマンドテーブルである。このテーブルに含まれる一部のコマンドはダイレクト実行が可能である。<br /></li>
+<li>TAB4は関数用のコマンドテーブルである。<br /></li>
+<li>TAB5はFOR文用のコマンドテーブルで、'TO'が定義されている。<br /></li>
+<li>TAB6もFOR文用のコマンドテーブルで、'STEP'が定義されている。<br /></li>
+<li>TAB8は関係演算子が定義されている。<br /></li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">356: </span>DIRECT LXI  H,TAB1-1  ;*** DIRECT ***
+</pre>
+</div>
+<ul class="org-ul">
+<li>DIRECTは行番号が入力されていない場合に実行される。コマンドテーブルとしてTAB1を選択し、そのままEXECを実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">358: </span>EXEC   EQU  $         ;*** EXEC ***
+<span class="linenr">359: </span>EX0    RST  5         ;IGNORE LEADING BLANKS 
+<span class="linenr">360: </span>       PUSH D         ;SAVE POINTER
+</pre>
+</div>
+<ul class="org-ul">
+<li>最初に空白文字をスキップし、ステートメントの先頭位置をスタックに保存する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">361: </span>EX1    LDAX D         ;IFF FOUND '.' IN STRING
+<span class="linenr">362: </span>       INX  D         ;BEFORE ANY MISMATCH 
+<span class="linenr">363: </span>       CPI  56Q       ;WE DECLARE A MATCH
+<span class="linenr">364: </span>       JZ   EX3 
+<span class="linenr">365: </span>       INX  H         ;HL-&gt;TABLE 
+<span class="linenr">366: </span>       CMP  M         ;IFF MATCH, TEST NEXT 
+<span class="linenr">367: </span>       JZ   EX1 
+</pre>
+</div>
+<ul class="org-ul">
+<li>EX1は文字列比較ループの先頭になる。<br /></li>
+<li>ステートメント文字列に'.'が現れれば、コマンドテーブルの検索を中断し、比較中のコマンドテーブル項目を選択してループを抜ける(EX3へジャンプ)。<br /></li>
+<li>'.'が現れなければ、文字比較に失敗するまで文字列比較を続ける。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">368: </span>MVI  A,177Q    ;ELSE, SEE IFF BIT 7
+<span class="linenr">369: </span>DCX  D         ;OF TABLEIS SET, WHICH
+<span class="linenr">370: </span>CMP  M         ;IS THE JUMP ADDR. (HI)
+<span class="linenr">371: </span>JC   EX5       ;C:YES, MATCHED
+</pre>
+</div>
+<ul class="org-ul">
+<li>文字比較に失敗したら、コマンドテーブル側の文字の最上位ビットが立っているかどうか調べる。最上位ビットが立っていれば、その文字はアドレスデータを表している。つまり、ステートメント文字列の検索に成功したとして、EX5へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">372: </span>EX2    INX  H         ;NC:NO, FIND JUMP ADDR.
+<span class="linenr">373: </span>       CMP  M 
+<span class="linenr">374: </span>       JNC  EX2 
+<span class="linenr">375: </span>       INX  H         ;BUMP TO NEXT TAB. ITEM
+<span class="linenr">376: </span>       POP  D         ;RESTORE STRING POINTER
+<span class="linenr">377: </span>       JMP  EX0       ;TEST AGAINST NEXT ITEM
+</pre>
+</div>
+<ul class="org-ul">
+<li>ステートメント文字列比較に失敗した場合、アドレスデータが見つかるまで読み飛ばす(EX2のループ)。<br /></li>
+<li>アドレスデータが見つかったら、HLレジスタをインクリメントし、次のコマンドテーブル項目を指すようにする。<br /></li>
+<li>その後、スタックから入力されたステートメントの先頭位置を復元し、次のコマンドテーブル項目に対し、文字列比較を開始する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">378: </span>EX3    MVI  A,177Q    ;PARTIAL MATCH, FIND 
+<span class="linenr">379: </span>EX4    INX  H         ;JUMP ADDR., WHICH IS
+<span class="linenr">380: </span>       CMP  M         ;FLAGGED BY BIT 7
+<span class="linenr">381: </span>       JNC  EX4
+</pre>
+</div>
+<ul class="org-ul">
+<li>部分マッチでフープを抜けた場合、アドレスデータが見つかるまでコマンドテーブルを読み飛ばす(EX4のループ)。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">382: </span>EX5    MOV  A,M       ;LOAD HL WITH THE JUMP 
+<span class="linenr">383: </span>       INX  H         ;ADDRESS FROM THE TABLE
+<span class="linenr">384: </span>       MOV  L,M 
+<span class="linenr">385: </span>       ANI  177Q      ;MASK OFF BIT 7
+<span class="linenr">386: </span>       MOV  H,A 
+<span class="linenr">387: </span>       POP  PSW       ;CLEAN UP THE GABAGE 
+<span class="linenr">388: </span>       PCHL           ;AND WE GO DO IT 
+</pre>
+</div>
+<ul class="org-ul">
+<li>アドレスデータをコマンドテーブルから読み出す。上位バイトにはアドレスデータであることを示すフラグが立ててあるので、このフラグを取り除いてアドレス情報を復元し、HLレジスタにセットする。<br /></li>
+<li>スタックにはまだ入力ステートメントの先頭アドレスが残っているので、これを読み捨ててから、PCHL命令でHLレジスタの内容をプログラムカウンタにセットすることで、ステートメントに対応するアドレスにジャンプする。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8288c4c" class="outline-2">
+<h2 id="org8288c4c">ダイレクトコマンド</h2>
+<div class="outline-text-2" id="text-org8288c4c">
+<ul class="org-ul">
+<li>Basic処理系では、プログラム外から入力され、Tiny Basic処理系に命令を与えるものをコマンドと呼んでいる。一方でプログラムの中の文をステートメントと呼ぶ。<br /></li>
+</ul>
+</div>
+<div id="outline-container-orgdb7db24" class="outline-3">
+<h3 id="orgdb7db24">RUN</h3>
+<div class="outline-text-3" id="text-orgdb7db24">
+<ul class="org-ul">
+<li>RUNコマンドはプログラムテキスト領域に保管されているプログラムの実行を行う。<br /></li>
+<li>RUNコマンド処理部は、RUNNXL(次の行を実行)、RUNTSL(この行を実行)、RUNSML(同じ行を実行)の3部から構成される。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">436: </span>RUN    CALL ENDCHK    ;*** RUN(CR) *** 
+<span class="linenr">437: </span>       LXI  D,TXTBGN  ;FIRST SAVED LINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>RUNコマンドの処理が開始されると、最初にENDCHKで"RUN"文字列のあとにパラメータ文字列が存在しないことを確認する。ここまではDEレジスタは入力バッファを指している。<br /></li>
+<li>DEレジスタにプログラムテキスト領域の先頭アドレスをセットし、続けてRUNNXLを実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">439: </span>RUNNXL LXI  H,0       ;*** RUNNXL ***
+<span class="linenr">440: </span>       CALL FNDLNP    ;FIND WHATEVER LINE #
+<span class="linenr">441: </span>       JC   RSTART    ;C:PASSED TXTUNF, QUIT 
+</pre>
+</div>
+<ul class="org-ul">
+<li>RUNNXLでは、DEが指し示すプログラムバッファ領域を行番号0をFNDLNPで検索する。行番号が0なのでFNDLNは、次の行の行番号の位置をDEレジスタにセットして戻る。<br /></li>
+<li>もし、次の行がなければ、RSTARTへ戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">443: </span>RUNTSL XCHG           ;*** RUNTSL ***
+<span class="linenr">444: </span>       SHLD CURRNT    ;SET 'CURRNT'-&gt;LINE #
+<span class="linenr">445: </span>       XCHG 
+<span class="linenr">446: </span>       INX  D         ;BUMP PASS LINE #
+<span class="linenr">447: </span>       INX  D 
+</pre>
+</div>
+<ul class="org-ul">
+<li>RUNTSLはDEが指す行番号位置をCURRNTにセットする。<br /></li>
+<li>DEレジスタを2つ進め、行番号を読み飛ばす。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">449: </span>RUNSML CALL CHKIO     ;*** RUNSML ***
+<span class="linenr">450: </span>       LXI  H,TAB2-1  ;FIND COMMAND IN TAB2
+<span class="linenr">451: </span>       JMP  EXEC      ;AND EXECUTE IT
+</pre>
+</div>
+<ul class="org-ul">
+<li>RUNSMLはCHKIOでキー入力を処理したあと、コマンドテーブルをTAB2にセットし、EXECへジャンプし、ステートメントを実行する。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8eaef8c" class="outline-3">
+<h3 id="org8eaef8c">LIST</h3>
+<div class="outline-text-3" id="text-org8eaef8c">
+<ul class="org-ul">
+<li>LISTコマンドは"LIST"または"LIST 行番号"の形で実行される。<br /></li>
+<li>単に"LIST"と入力された場合、プログラムテキスト領域に保管されたプログラムをすべて印字する。<br /></li>
+<li>"LIST 行番号"の場合は、行番号以降のプログラムを印字する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">612: </span>LIST   CALL TSTNUM    ;TEST IFF THERE IS A #
+<span class="linenr">613: </span>       CALL ENDCHK    ;IFF NO # WE GET A 0
+<span class="linenr">614: </span>       CALL FNDLN     ;FIND THIS OR NEXT LINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>このルーチンが呼び出されたときは、DEレジスタは"LIST"のあとを指している。<br /></li>
+<li>最初にTSTNUMを呼び出し、DEレジスタが指している文字列が行番号かどうか確認する。TSTNUMはHLレジスタに行番号、Bに行番号の桁数を入れて戻る。<br /></li>
+<li>FNDLNを呼び出し、HLレジスタに入った行番号を持つステートメントを検索する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">615: </span>LS1    JC   RSTART    ;C:PASSED TXTUNF 
+<span class="linenr">616: </span>       CALL PRTLN     ;PRINT THE LINE
+<span class="linenr">617: </span>       CALL CHKIO     ;STOP IFF HIT CONTROL-C 
+<span class="linenr">618: </span>       CALL FNDLNP    ;FIND NEXT LINE
+<span class="linenr">619: </span>       JMP  LS1       ;AND LOOP BACK 
+</pre>
+</div>
+<ul class="org-ul">
+<li>もしステートメントが見つからなければ、RSTART(メインループ)へ戻る(LS1)。<br /></li>
+<li>ステートメントが見つかれば、行番号とステートメントを印字し、FNDLNPを呼び出して次の行を検索する。<br /></li>
+<li>LS1へ戻り、FNDLNPの呼び出しでステートメントが見つかっていれば、また行番号とステートメントを印字する。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga5cf029" class="outline-3">
+<h3 id="orga5cf029">NEW</h3>
+<div class="outline-text-3" id="text-orga5cf029">
+<ul class="org-ul">
+<li>プログラムテキスト領域内に保管されたプログラムを消去する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">429: </span>NEW    CALL ENDCHK    ;*** NEW(CR) *** 
+<span class="linenr">430: </span>       LXI  H,TXTBGN
+<span class="linenr">431: </span>       SHLD TXTUNF
+</pre>
+</div>
+<ul class="org-ul">
+<li>実際にはTXTUNF(使用中のプログラムテキスト領域の末尾)にTXTBGN(プログラムテキスト領域の先頭)を代入するのみである。<br /></li>
+<li>続いてSTOPコマンドの処理を実行することでRSTARTへ戻る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org32d590f" class="outline-3">
+<h3 id="org32d590f">BYE</h3>
+<div class="outline-text-3" id="text-org32d590f">
+<ul class="org-ul">
+<li>BYEコマンドには機械語コードが存在しない。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">284: </span>DB   'BYE',80H,0H   ;GO BACK TO CPM
+</pre>
+</div>
+<ul class="org-ul">
+<li>コマンドテーブルの実行アドレス部には0番地が指定してある。つまりBYEコマンドは0番地へジャンプ、すなわち、CP/Mへ戻る(ウォームブート)。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5b3a606" class="outline-3">
+<h3 id="org5b3a606">LOAD</h3>
+<div class="outline-text-3" id="text-org5b3a606">
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">470: </span>DLOAD  RST  5         ;IGNORE BLANKS
+<span class="linenr">471: </span>       PUSH H         ;SAVE H
+<span class="linenr">472: </span>       CALL FCBSET    ;SET UP FILE CONTROL BLOCK
+</pre>
+</div>
+<ul class="org-ul">
+<li>IGNBLK(RST 5)を呼び出して空白文字を取り除き、HLレジスタをスタックに退避したあと、ファイルの読み込みに必要なFCBブロックを作成する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">473: </span>PUSH D         ;SAVE THE REST
+<span class="linenr">474: </span>PUSH B         
+<span class="linenr">475: </span>LXI  D,FCB     ;GET FCB ADDRESS
+<span class="linenr">476: </span>MVI  C,OPEN    ;PREPARE TO OPEN FILE
+<span class="linenr">477: </span>CALL CPM       ;OPEN IT
+<span class="linenr">478: </span>CPI  0FFH      ;IS IT THERE?
+<span class="linenr">479: </span>JZ   QHOW      ;NO, SEND ERROR
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタ(DEレジスタ。LOAD文の末尾を挿している)とBCレジスタをスタックに退避する。DEレジスタにFCBのアドレスを設定し、CP/Mのシステムコールを呼び出してファイルを開く。<br /></li>
+<li>ファイルが開けなければ、エラー処理(QHOW)を行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">480: </span>XRA  A         ;CLEAR A
+<span class="linenr">481: </span>STA  FCB+32    ;START AT RECORD 0
+</pre>
+</div>
+<ul class="org-ul">
+<li>FCBのCR(Current Record)フィールドに0を入れる。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">482: </span>       LXI  D,TXTUNF  ;GET BEGINNING
+<span class="linenr">483: </span>LOAD   PUSH D         ;SAVE DMA ADDRESS
+<span class="linenr">484: </span>       MVI  C,SETDMA  ;
+<span class="linenr">485: </span>       CALL CPM       ;SET DMA ADDRESS
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタ(DEレジスタ)に未使用領域の先頭アドレス(TXTUNF)を設定する。これが最初のDMAアドレスになる。<br /></li>
+<li>DMAアドレスをスタックに保存し、CP/Mのシステムコールを呼び出してDMAアドレスを設定する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">486: </span>MVI  C,READD   ;
+<span class="linenr">487: </span>LXI  D,FCB
+<span class="linenr">488: </span>CALL CPM       ;READ SECTOR
+<span class="linenr">489: </span>CPI  1         ;DONE?
+<span class="linenr">490: </span>JC   RDMORE    ;NO, READ MORE
+<span class="linenr">491: </span>JNZ  QHOW      ;BAD READ
+</pre>
+</div>
+<ul class="org-ul">
+<li>1ブロック読み込む。ファイルの読み込みが完了していなければ(戻り値が1)、RDMOREへジャンプする。<br /></li>
+<li>戻り値が負であれば、エラー処理(QHOW)を行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080">MVI  C,CLOSE
+LXI  D,FCB 
+CALL CPM       ;CLOSE FILE
+POP  D         ;THROW AWAY DMA ADD.
+POP  B         ;GET OLD REGISTERS BACK
+POP  D
+POP  H
+RST  6         ;FINISH
+</pre>
+</div>
+<ul class="org-ul">
+<li>ファイルの読み込みが正しく終わった場合、CP/Mのシステムコールを呼び出し、ファイルを閉じる。<br /></li>
+<li>スタックに積んであるDMAアドレスを廃棄し、BCレジスタ、DEレジスタ、HLレジスタを復元する。<br /></li>
+<li>FINISH(RST 6)を呼び出し、処理を完了する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">492: </span>RDMORE POP  D         ;GET DMA ADDRESS
+<span class="linenr">493: </span>       LXI  H,80H     ;GET 128
+<span class="linenr">494: </span>       DAD  D         ;ADD 128 TO DMA ADD.
+<span class="linenr">495: </span>       XCHG           ;PUT IT BACK IN D
+<span class="linenr">496: </span>       JMP  LOAD      ;AND READ SOME MORE
+</pre>
+</div>
+<ul class="org-ul">
+<li>まだ読み込むデータがある場合、DMAアドレスに80Hを足してLOADに戻る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org398234b" class="outline-3">
+<h3 id="org398234b">SAVE</h3>
+<div class="outline-text-3" id="text-org398234b">
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">506: </span>DSAVE  RST  5         ;IGNORE BLANKS
+<span class="linenr">507: </span>       PUSH H         ;SAVE H
+<span class="linenr">508: </span>       CALL FCBSET    ;SETUP FCB
+<span class="linenr">509: </span>       PUSH D
+<span class="linenr">510: </span>       PUSH B         ;SAVE OTHERS
+</pre>
+</div>
+<ul class="org-ul">
+<li>FCBブロックを作成するところまではDLOADと同じである。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">511: </span>LXI  D,FCB
+<span class="linenr">512: </span>MVI  C,DELETE
+<span class="linenr">513: </span>CALL CPM       ;ERASE FILE IF IT EXISTS
+<span class="linenr">514: </span>LXI  D,FCB  
+<span class="linenr">515: </span>MVI  C,MAKE
+<span class="linenr">516: </span>CALL CPM       ;MAKE A NEW ONE
+<span class="linenr">517: </span>CPI  0FFH      ;IS THERE SPACE?
+<span class="linenr">518: </span>JZ   QHOW      ;NO, ERROR
+</pre>
+</div>
+<ul class="org-ul">
+<li>"DLOAD"ではファイルをオープンしたが、最初に"DSAVE"ではファイルを削除し、同じ名前でファイルを作成する。ファイル作成に失敗した場合、エラー処理(QHOW)を行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">519: </span>       XRA  A         ;CLEAR A
+<span class="linenr">520: </span>       STA  FCB+32    ;START AT RECORD 0
+<span class="linenr">521: </span>       LXI  D,TXTUNF  ;GET BEGINNING
+<span class="linenr">522: </span>SAVE   PUSH D         ;SAVE DMA ADDRESS
+<span class="linenr">523: </span>       MVI  C,SETDMA  ;
+<span class="linenr">524: </span>       CALL CPM       ;SET DMA ADDRESS
+</pre>
+</div>
+<ul class="org-ul">
+<li>"LOAD"と同様にDMAアドレスを設定する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">525: </span>MVI  C,WRITED
+<span class="linenr">526: </span>LXI  D,FCB 
+<span class="linenr">527: </span>CALL CPM       ;WRITE SECTOR
+<span class="linenr">528: </span>ORA  A         ;SET FLAGS
+<span class="linenr">529: </span>JNZ  QHOW      ;IF NOT ZERO, ERROR
+</pre>
+</div>
+<ul class="org-ul">
+<li>CP/Mのシステムコールでファイルを書き込む。書込みに失敗したら、エラー処理(QHOW)を行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">530: </span>POP  D         ;GET DMA ADD. BACK
+<span class="linenr">531: </span>LDA  TXTUNF+1  ;AND MSB OF LAST ADD.
+<span class="linenr">532: </span>CMP  D         ;IS D SMALLER?
+<span class="linenr">533: </span>JC   SAVDON    ;YES, DONE
+<span class="linenr">534: </span>JNZ  WRITMOR   ;DONT TEST E IF NOT EQUAL
+</pre>
+</div>
+<ul class="org-ul">
+<li>DMAアドレスの上位バイトと、未使用テキスト領域の上位バイトを比較する。DMAアドレスのほうが大きければ、保存は終了していると判断し、SAVDONへジャンプする。<br /></li>
+<li>一致していなければ(DMAアドレスのほうが小さければ)、まだ書き込むデータがあると判断し、WRITMORへジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">535: </span>LDA  TXTUNF    ;IS E SMALLER?
+<span class="linenr">536: </span>CMP  E
+<span class="linenr">537: </span>JC   SAVDON    ;YES, DONE
+</pre>
+</div>
+<ul class="org-ul">
+<li>下位バイトを比較する。未使用テキスト領域のアドレスのほうが小さければ、保存は終了したと判断し、SAVDONへジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">538: </span>WRITMOR LXI  H,80H 
+<span class="linenr">539: </span>        DAD  D         ;ADD 128 TO DMA ADD.
+<span class="linenr">540: </span>        XCHG           ;GET IT BACK IN D
+<span class="linenr">541: </span>        JMP  SAVE      ;WRITE SOME MORE
+</pre>
+</div>
+<ul class="org-ul">
+<li>"RDMORE"と同様にDMAアドレスに80Hを加算し、SAVEへジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">542: </span>SAVDON MVI  C,CLOSE
+<span class="linenr">543: </span>       LXI  D,FCB 
+<span class="linenr">544: </span>       CALL CPM       ;CLOSE FILE
+<span class="linenr">545: </span>       POP  B         ;GET REGISTERS BACK
+<span class="linenr">546: </span>       POP  D
+<span class="linenr">547: </span>       POP  H
+<span class="linenr">548: </span>       RST  6         ;FINISH
+</pre>
+</div>
+<ul class="org-ul">
+<li>保存が終わったら、CP/Mのシステムコールを呼び出し、ファイルを閉じる。<br /></li>
+<li>BCレジスタ、DEレジスタ、HLレジスタを復元する。LOADの時とは異なり、終了判定の際にFCBをスタックから取り出しているので、FCBの廃棄を行う必要はない。<br /></li>
+<li>FINISH(RST 6)を呼び出して終了処理を行う。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc3968ca" class="outline-3">
+<h3 id="orgc3968ca">FCBSET</h3>
+<div class="outline-text-3" id="text-orgc3968ca">
+<ul class="org-ul">
+<li>FCB(File Control Block)は、CP/Mでファイルを操作するときに用いられるデータ構造であり、33〜36バイトからなっている。規定のFCB領域は005CHとなっている。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">550: </span>FCBSET LXI  H,FCB     ;GET FILE CONTROL BLOCK ADDRESS
+<span class="linenr">551: </span>       MVI  M,0       ;CLEAR ENTRY TYPE
+</pre>
+</div>
+<ul class="org-ul">
+<li>まずFCBの最初のバイト(ドライブレコード)をクリアする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">552: </span>FNCLR  INX  H         ;NEXT LOCATION
+<span class="linenr">553: </span>       MVI  M,' '     ;CLEAR TO SPACE
+<span class="linenr">554: </span>       MVI  A,FCB+8 AND 255
+<span class="linenr">555: </span>       CMP  L         ;DONE?
+<span class="linenr">556: </span>       JNZ  FNCLR     ;NO, DO IT AGAIN
+</pre>
+</div>
+<ul class="org-ul">
+<li>次に2バイトから9バイト目(ファイル名)をスペースで消去する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">557: </span>INX  H         ;NEXT
+<span class="linenr">558: </span>MVI  M,'T'     ;SET FILE TYPE TO 'TBI'
+<span class="linenr">559: </span>INX  H
+<span class="linenr">560: </span>MVI  M,'B'
+<span class="linenr">561: </span>INX  H
+<span class="linenr">562: </span>MVI  M,'I'
+</pre>
+</div>
+<ul class="org-ul">
+<li>10バイト目から12バイト目までにファイルの種類(拡張子)を記入する。Tiny Basicプログラムの拡張子は"TBI"である。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">563: </span>EXRC   INX  H         ;CLEAR REST OF FCB
+<span class="linenr">564: </span>       MVI  M,0
+<span class="linenr">565: </span>       MVI  A,FCB+15 AND 255
+<span class="linenr">566: </span>       CMP  L         ;DONE?
+<span class="linenr">567: </span>       JNZ  EXRC      ;NO, CONTINUE
+</pre>
+</div>
+<ul class="org-ul">
+<li>13〜15バイト目を0クリアする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">568: </span>       LXI  H,FCB+1   ;GET FILENAME START
+<span class="linenr">569: </span>FN     LDAX D         ;GET CHARACTER
+<span class="linenr">570: </span>       CPI  0DH       ;IS IT A 'CR'
+<span class="linenr">571: </span>       RZ             ;YES, DONE
+</pre>
+</div>
+<ul class="org-ul">
+<li>FNではFCBの2バイト目にテキストポインタ(DEレジスタ)が示す文字列(ファイル名)をコピーする。<br /></li>
+<li>テキストポインタが指す文字をAレジスタに読み込む。Aレジスタが復帰コード(0DH)であれば、呼び出し元に戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">572: </span>CPI  '!'       ;LEGAL CHARACTER?
+<span class="linenr">573: </span>JC   QWHAT     ;NO, SEND ERROR
+<span class="linenr">574: </span>CPI  '['       ;AGAIN
+<span class="linenr">575: </span>JNC  QWHAT     ;DITTO
+<span class="linenr">576: </span>MOV  M,A        ;SAVE IT IN FCB
+<span class="linenr">577: </span>INX  H         ;NEXT
+<span class="linenr">578: </span>INX  D
+<span class="linenr">579: </span>MVI  A,FCB+9 AND 255
+<span class="linenr">580: </span>CMP  L         ;LAST?
+<span class="linenr">581: </span>JNZ  FN        ;NO, CONTINUE
+<span class="linenr">582: </span>RET            ;TRUNCATE AT 8 CHARACTERS
+</pre>
+</div>
+<ul class="org-ul">
+<li>文字(Aレジスタ)が'!'以上、'['より小さいことを確認する。ファイル名に使用する文字はこの範囲でなければならない。この範囲に入っていなければ、エラー処理(QWHAT)を行う。範囲内であれば、FCBにコピーする。<br /></li>
+<li>FCBのファイル名領域がいっぱいになったら、呼び出し元に戻る。この時ファイル名は8文字で切り捨てられる。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgddf3ab3" class="outline-2">
+<h2 id="orgddf3ab3">ステートメント</h2>
+<div class="outline-text-2" id="text-orgddf3ab3">
+</div>
+<div id="outline-container-orgd9877d7" class="outline-3">
+<h3 id="orgd9877d7">LET</h3>
+<div class="outline-text-3" id="text-orgd9877d7">
+<ul class="org-ul">
+<li>"LET"コマンドは変数に値を代入する。<br /></li>
+<li>代入文は','で区切って複数記述することができる。<br /></li>
+<li>また、"LET"は省略することが可能である。コマンドテーブルのDEFLTはLETコマンドを実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">932: </span>LET    CALL SETVAL    ;*** LET *** 
+<span class="linenr">933: </span>       RST  1         ;SET VALUE TO VAR. 
+<span class="linenr">934: </span>       DB   ',' 
+<span class="linenr">935: </span>       DB   3Q
+<span class="linenr">936: </span>       JMP  LET       ;ITEM BY ITEM
+<span class="linenr">937: </span>LT1    RST  6         ;UNTIL FINISH
+</pre>
+</div>
+<ul class="org-ul">
+<li>最初にSETVALを呼び出して代入文を解析し、変数に値を設定する。<br /></li>
+<li>TSTC(RST 1)を呼び出して、次の文字が','であるかどうかを確認し、','であれば次の代入文を解析する。','でなければ、FINISH(RST 6)を呼び出し、次のステートメントの解析に移る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org85fdae9" class="outline-3">
+<h3 id="org85fdae9">IF</h3>
+<div class="outline-text-3" id="text-org85fdae9">
+<ul class="org-ul">
+<li>'IF'コマンドのあとには、条件式が続く。<br /></li>
+<li>条件式が真であれば、その後ろに続く複数のコマンドを実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">862: </span>IFF    RST  3         ;*** IFF ***
+<span class="linenr">863: </span>       MOV  A,H       ;IS THE EXPR.=0? 
+<span class="linenr">864: </span>       ORA  L 
+<span class="linenr">865: </span>       JNZ  RUNSML    ;NO, CONTINUE
+<span class="linenr">866: </span>       CALL FNDSKP    ;YES, SKIP REST OF LINE
+<span class="linenr">867: </span>       JNC  RUNTSL
+<span class="linenr">868: </span>       JMP  RSTART
+</pre>
+</div>
+<ul class="org-ul">
+<li>最初にEXPR(RST 3)を呼び出し、条件式を解析する。EXPRはHLレジスタに結果を返す。<br /></li>
+<li>HLが0かどうかを確認し、0でなければ、後続のコマンドを実行する(RUNSML)。<br /></li>
+<li>HLが0であれば、行の残りを読み飛ばす。<br /></li>
+<li>読み飛ばしたあと、まだ次の行があれば、次の行を実行する(RUNTSL)。次の行がなければメインループに戻る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org29a2b0f" class="outline-3">
+<h3 id="org29a2b0f">GOTO</h3>
+<div class="outline-text-3" id="text-org29a2b0f">
+<ul class="org-ul">
+<li>'GOTO'コマンドは'GOTO 式'の形を取り、式の値を持つ行番号へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">453: </span>GOTO   RST  3         ;*** GOTO EXPR *** 
+<span class="linenr">454: </span>       PUSH D         ;SAVE FOR ERROR ROUTINE
+<span class="linenr">455: </span>       CALL ENDCHK    ;MUST FIND A 0DH
+<span class="linenr">456: </span>       CALL FNDLN     ;FIND THE TARGET LINE
+<span class="linenr">457: </span>       JNZ  AHOW      ;NO SUCH LINE #
+<span class="linenr">458: </span>       POP  PSW       ;CLEAR THE "PUSH DE" 
+<span class="linenr">459: </span>       JMP  RUNTSL    ;GO DO IT
+</pre>
+</div>
+<ul class="org-ul">
+<li>最初にEXPR(RST 3)で式を評価する。結果はHLレジスタに入っている。<br /></li>
+<li>エラー処理時にエラー発生箇所を印字するため、DEレジスタをスタックに保存しておく。<br /></li>
+<li>行の終わりかどうかを確認する(ENDCHK)。行の終わりでなければ、エラーになる。<br /></li>
+<li>FNDLNでHLレジスタに入っている行番号をもつ文を探す。文が見つからなければエラーになる(AHOW)。行番号が見つかれば、DEレジスタが見つけた行を示している。<br /></li>
+<li>エラーが発生しなかった場合、スタックに保存した古いDEレジスタの内容を破棄し(POP PSW)、DEレジスタが示す行を実行する(RUNTSL)。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8e0ecb4" class="outline-3">
+<h3 id="org8e0ecb4">GOSUB</h3>
+<div class="outline-text-3" id="text-org8e0ecb4">
+<ul class="org-ul">
+<li>'GOSUB'コマンドは'GOSUB 式'の形を取り、式の値を持つ行番号へジャンプする。<br /></li>
+<li>ただし、'GOTO'コマンドと違って、'RETURN'文に遭遇すると、GOSUB文の次の行の実行を始める。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">672: </span>GOSUB  CALL PUSHA     ;SAVE THE CURRENT "FOR"
+<span class="linenr">673: </span>       RST  3         ;PARAMETERS
+<span class="linenr">674: </span>       PUSH D         ;AND TEXT POINTER
+<span class="linenr">675: </span>       CALL FNDLN     ;FIND THE TARGET LINE
+<span class="linenr">676: </span>       JNZ  AHOW      ;NOT THERE. SAY "HOW?" 
+<span class="linenr">677: </span>       LHLD CURRNT    ;FOUND IT, SAVE OLD
+<span class="linenr">678: </span>       PUSH H         ;'CURRNT' OLD 'STKGOS' 
+<span class="linenr">679: </span>       LHLD STKGOS
+<span class="linenr">680: </span>       PUSH H 
+<span class="linenr">681: </span>       LXI  H,0       ;AND LOAD NEW ONES 
+<span class="linenr">682: </span>       SHLD LOPVAR
+<span class="linenr">683: </span>       DAD  SP
+<span class="linenr">684: </span>       SHLD STKGOS
+<span class="linenr">685: </span>       JMP  RUNTSL    ;THEN RUN THAT LINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>まず、FOR文の変数をスタックに退避する。<br /></li>
+<li>次にEXPR(RST 3)でジャンプ先の行番号を計算するところから、行の検索、エラー時にAHOWへ飛ぶところまではGOTOステートメントと同じ。<br /></li>
+<li>'RETURN'で戻ってきたときに備えて現在の行番号をスタックに保存する。<br /></li>
+<li>また、GOSUB文が入れ子になっている場合、STKGOSは使用中なので、現在のSTKGOSをスタックに退避する。<br /></li>
+<li>ループ変数(LOPVAR)に0(NULL)を設定し、STKGOSに現在のスタックポインタを入れる。<br /></li>
+<li>RUNTSLでDEレジスタが示す行を実行する。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd6ae43f" class="outline-3">
+<h3 id="orgd6ae43f">RETURN</h3>
+<div class="outline-text-3" id="text-orgd6ae43f">
+<ul class="org-ul">
+<li>"RETURN"ステートメントは、直前に実行されたGOSUBステートメントの直後の行へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">686: </span>RETURN CALL ENDCHK    ;THERE MUST BE A 0DH
+<span class="linenr">687: </span>       LHLD STKGOS    ;OLD STACK POINTER 
+<span class="linenr">688: </span>       MOV  A,H       ;0 MEANS NOT EXIST 
+<span class="linenr">689: </span>       ORA  L 
+<span class="linenr">690: </span>       JZ   QWHAT     ;SO, WE SAY: "WHAT?" 
+<span class="linenr">691: </span>       SPHL           ;ELSE, RESTORE IT
+<span class="linenr">692: </span>       POP  H 
+<span class="linenr">693: </span>       SHLD STKGOS    ;AND THE OLD 'STKGOS'
+<span class="linenr">694: </span>       POP  H 
+<span class="linenr">695: </span>       SHLD CURRNT    ;AND THE OLD 'CURRNT'
+<span class="linenr">696: </span>       POP  D         ;OLD TEXT POINTER
+<span class="linenr">697: </span>       CALL POPA      ;OLD "FOR" PARAMETERS
+<span class="linenr">698: </span>       RST  6         ;AND WE ARE BACK HOME
+</pre>
+</div>
+<ul class="org-ul">
+<li>まず、"RETURN"のあとに何もないことを確認する。<br /></li>
+<li>STKGOSを確認する。GOSUBステートメントはSTKGOSにスタックポインタの値を保存するので、値が0であれば、エラーである。<br /></li>
+<li>値が0でなければ、スタックポインタを復元する。<br /></li>
+<li>スタックから一つ前のSTKGOS、CURRNTを復元する。<br /></li>
+<li>テキストポインタをスタックから復元し、DEレジスタに設定する。<br /></li>
+<li>FOR文の変数をスタックから取り出す。<br /></li>
+<li>FINISH(RST 6)を呼び出し、次のステートメントの解析に移る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0a7c491" class="outline-3">
+<h3 id="org0a7c491">REM</h3>
+<div class="outline-text-3" id="text-org0a7c491">
+<ul class="org-ul">
+<li>"REM"のあとに書かれた文は無視される。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">859: </span>REM    LXI  H,0Q      ;*** REM *** 
+<span class="linenr">860: </span>       DB   76Q 
+<span class="linenr">861: </span>;* 
+<span class="linenr">862: </span>IFF    RST  3         ;*** IFF ***
+<span class="linenr">863: </span>       MOV  A,H       ;IS THE EXPR.=0? 
+<span class="linenr">864: </span>       ORA  L 
+<span class="linenr">865: </span>       JNZ  RUNSML    ;NO, CONTINUE
+<span class="linenr">866: </span>       CALL FNDSKP    ;YES, SKIP REST OF LINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>まずHLレジスタに0を入れる。<br /></li>
+<li>次に"DB 76Q"が来るが、ここは少々わかりにくい。<br /></li>
+<li>76Q=3EHは"MVI A, byte"を意味している。"RST 3"は16進数でDFHとなるので、"MVI A, DFH"を実行している。ところがすぐに"MOV A, H"でAに0を代入するので"DB 76Q; RST 3"の２行は意味がない。<br /></li>
+<li>つまりREM文は条件式が0のIFステートメントに等しい。条件式が0なので、行末までスキップし、次の行があれば次の行を実行し、なければメインループに戻る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga1d5b81" class="outline-3">
+<h3 id="orga1d5b81">FOR〜NEXT</h3>
+<div class="outline-text-3" id="text-orga1d5b81">
+<ul class="org-ul">
+<li>"FOR"ステートメントは"FOR 変数=式1 TO 式2 STEP 式3"の形式を取るが、"STEP"以降は省略可能である。<br /></li>
+<li>"NEXT"ステートメントは"NEXT 変数"の形を取る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">731: </span>FOR    CALL PUSHA     ;SAVE THE OLD SAVE AREA
+<span class="linenr">732: </span>       CALL SETVAL    ;SET THE CONTROL VAR.
+<span class="linenr">733: </span>       DCX  H         ;HL IS ITS ADDRESS 
+<span class="linenr">734: </span>       SHLD LOPVAR    ;SAVE THAT 
+<span class="linenr">735: </span>       LXI  H,TAB5-1  ;USE 'EXEC' TO LOOK
+<span class="linenr">736: </span>       JMP  EXEC      ;FOR THE WORD 'TO' 
+</pre>
+</div>
+<ul class="org-ul">
+<li>古いFOR文変数をスタックに保管する。<br /></li>
+<li>"FOR"キーワードのあとに続く"変数=式1"を解析し、変数に初期値(式1)を設定する。<br /></li>
+<li>HLレジスタは変数の上位バイトを指しているので、下位バイトを指すようにデクリメントする。<br /></li>
+<li>LOPVARに変数のアドレス(HLレジスタの内容)を保管する。<br /></li>
+<li>"TO"キーワードを検索するため、TAB5をコマンドテーブルとして選択し、EXECへジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">737: </span>FR1    RST  3         ;EVALUATE THE LIMIT
+<span class="linenr">738: </span>       SHLD LOPLMT    ;SAVE THAT 
+<span class="linenr">739: </span>       LXI  H,TAB6-1  ;USE 'EXEC' TO LOOK
+<span class="linenr">740: </span>       JMP  EXEC      ;FOR THE WORD 'STEP'
+</pre>
+</div>
+<ul class="org-ul">
+<li>"TO"キーワードが見つかったら、FR1へ制御が移る。<br /></li>
+<li>EXPR(RST 3)を実行し、式2を評価する。<br /></li>
+<li>式2をLOPLMTに保存する。<br /></li>
+<li>"STEP"キーワードを検索するためにTAB6をコマンドテーブルとして選択し、EXECへジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">741: </span>FR2    RST  3         ;FOUND IT, GET STEP
+<span class="linenr">742: </span>       JMP  FR4 
+<span class="linenr">743: </span>FR3    LXI  H,1Q      ;NOT FOUND, SET TO 1 
+<span class="linenr">744: </span>FR4    SHLD LOPINC    ;SAVE THAT TOO 
+</pre>
+</div>
+<ul class="org-ul">
+<li>"STEP"キーワードが見つかるとFR2へ制御が移り、式2を評価する。結果はHLレジスタに入る。<br /></li>
+<li>"STEP"キーワードが見つからなければFR3へ制御が移り、HLレジスタに1を設定する。<br /></li>
+<li>HLレジスタの内容をLOPINCへ保存する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">745: </span>FR5    LHLD CURRNT    ;SAVE CURRENT LINE # 
+<span class="linenr">746: </span>       SHLD LOPLN 
+<span class="linenr">747: </span>       XCHG           ;AND TEXT POINTER
+<span class="linenr">748: </span>       SHLD LOPPT 
+<span class="linenr">749: </span>       LXI  B,12Q     ;DIG INTO STACK TO 
+<span class="linenr">750: </span>       LHLD LOPVAR    ;FIND 'LOPVAR' 
+<span class="linenr">751: </span>       XCHG 
+<span class="linenr">752: </span>       MOV  H,B 
+<span class="linenr">753: </span>       MOV  L,B       ;HL=0 NOW
+<span class="linenr">754: </span>       DAD  SP        ;HERE IS THE STACK 
+</pre>
+</div>
+<ul class="org-ul">
+<li>LOPLN = CURRNT(現在の行番号)、LOPPT = テキストポインタとする。<br /></li>
+<li>BCレジスタ=000AHとする。Bレジスタは00Hであるので、"MOV H, B; MOV L, B"はHLレジスタ=0と同義である。<br /></li>
+<li>DEレジスタ=LOPVARとする。<br /></li>
+<li>"DAD SP"でHL=HL+SP=SPとなる。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">755: </span>       DB   76Q 
+<span class="linenr">756: </span>FR7    DAD  B         ;EACH LEVEL IS 10 DEEP 
+<span class="linenr">757: </span>       MOV  A,M       ;GET THAT OLD 'LOPVAR' 
+<span class="linenr">758: </span>       INX  H 
+<span class="linenr">759: </span>       ORA  M 
+<span class="linenr">760: </span>       JZ   FR8       ;0 SAYS NO MORE IN IT
+<span class="linenr">761: </span>       MOV  A,M 
+<span class="linenr">762: </span>       DCX  H 
+<span class="linenr">763: </span>       CMP  D         ;SAME AS THIS ONE? 
+<span class="linenr">764: </span>       JNZ  FR7 
+<span class="linenr">765: </span>       MOV  A,M       ;THE OTHER HALF? 
+<span class="linenr">766: </span>       CMP  E 
+<span class="linenr">767: </span>       JNZ  FR7 
+<span class="linenr">768: </span>       XCHG           ;YES, FOUND ONE
+<span class="linenr">769: </span>       LXI  H,0Q
+<span class="linenr">770: </span>       DAD  SP        ;TRY TO MOVE SP
+<span class="linenr">771: </span>       MOV  B,H 
+<span class="linenr">772: </span>       MOV  C,L 
+<span class="linenr">773: </span>       LXI  H,12Q 
+<span class="linenr">774: </span>       DAD  D 
+<span class="linenr">775: </span>       CALL MVDOWN    ;AND PURGE 10 WORDS
+<span class="linenr">776: </span>       SPHL           ;IN THE STACK
+<span class="linenr">777: </span>FR8    LHLD LOPPT     ;JOB DONE, RESTORE DE
+<span class="linenr">778: </span>       XCHG 
+<span class="linenr">779: </span>       RST  6         ;AND CONTINUE
+</pre>
+</div>
+<ul class="org-ul">
+<li>"DB 76Q"は"REM"ステートメントのときと同じである。FR5からFR7へ制御が移るとき、FR7の最初の命令("DAD B")を無視する。ジャンプ命令でFR7へ制御が写った場合は、HL=HL+000AH=HL+10とする。<br /></li>
+<li>HLレジスタが指す位置(SP+10*n)の内容(古いLOPVAR)のチェックを行う。<br /></li>
+<li>古いLOPVARが0であれば、FR8へジャンプする。FR8ではLOPPT(テキストポインタ)をDEレジスタに復元し、FINISH(RST 6)を呼び出す。<br /></li>
+<li>古いLOPVARがDEレジスタ(現在のLOPVAR)と異なれば、FR7へ戻ってHLレジスタに10を足し、もう一つ古いLOPVARをチェックする。<br /></li>
+<li>古いLOPVARと現在のLOPVARが同じであれば、DE=HL、BC=SP、HL=HL+10とし、MVDOWNを呼び出して、古いFOR変数を消去する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">781: </span>NEXT   RST  7         ;GET ADDRESS OF VAR. 
+<span class="linenr">782: </span>       JC   QWHAT     ;NO VARIABLE, "WHAT?"
+<span class="linenr">783: </span>       SHLD VARNXT    ;YES, SAVE IT
+</pre>
+</div>
+<ul class="org-ul">
+<li>TSTV(RST 7)を呼び出し、キーワード"NEXT"の次の変数を確認してVARNXTに入れる。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">784: </span>NX0    PUSH D         ;SAVE TEXT POINTER 
+<span class="linenr">785: </span>       XCHG 
+<span class="linenr">786: </span>       LHLD LOPVAR    ;GET VAR. IN 'FOR' 
+<span class="linenr">787: </span>       MOV  A,H 
+<span class="linenr">788: </span>       ORA  L         ;0 SAYS NEVER HAD ONE
+<span class="linenr">789: </span>       JZ   AWHAT     ;SO WE ASK: "WHAT?"
+<span class="linenr">790: </span>       RST  4         ;ELSE WE CHECK THEM
+<span class="linenr">791: </span>       JZ   NX3       ;OK, THEY AGREE
+<span class="linenr">792: </span>       POP  D         ;NO, LET'S SEE 
+<span class="linenr">793: </span>       CALL POPA      ;PURGE CURRENT LOOP
+<span class="linenr">794: </span>       LHLD VARNXT    ;AND POP ONE LEVEL 
+<span class="linenr">795: </span>       JMP  NX0       ;GO CHECK AGAIN
+</pre>
+</div>
+<ul class="org-ul">
+<li>LOPVAR=0であれば、FOR文無しでNEXTが呼ばれたと判断し、エラーとする。<br /></li>
+<li>VARNXTとLOPVARを比較し(COMP/RST 4)、一致しなければスタックからLOPVARを含むFOR変数一式を削除する。NX0へ戻り、同じことを繰り返す。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">796: </span>NX3    MOV  E,M       ;COME HERE WHEN AGREED 
+<span class="linenr">797: </span>       INX  H 
+<span class="linenr">798: </span>       MOV  D,M       ;DE=VALUE OF VAR.
+<span class="linenr">799: </span>       LHLD LOPINC
+<span class="linenr">800: </span>       PUSH H 
+<span class="linenr">801: </span>       DAD  D         ;ADD ONE STEP
+<span class="linenr">802: </span>       XCHG 
+<span class="linenr">803: </span>       LHLD LOPVAR    ;PUT IT BACK 
+<span class="linenr">804: </span>       MOV  M,E 
+<span class="linenr">805: </span>       INX  H 
+<span class="linenr">806: </span>       MOV  M,D 
+<span class="linenr">807: </span>       LHLD LOPLMT    ;HL-&gt;LIMIT 
+<span class="linenr">808: </span>       POP  PSW       ;OLD HL
+<span class="linenr">809: </span>       ORA  A 
+<span class="linenr">810: </span>       JP   NX1       ;STEP &gt; 0
+<span class="linenr">811: </span>       XCHG 
+</pre>
+</div>
+<ul class="org-ul">
+<li>VARNXTとLOPVARが一致した場合、NX3へ制御が移る。<br /></li>
+<li>VARNXT(=LOPVAR)が指す変数の内容をDEレジスタへ読み込む。<br /></li>
+<li>HLレジスタへLOPINCの値を読み込む。<br /></li>
+<li>HL=HL+DEとしてLOPVARの値を更新する。<br /></li>
+<li>HLレジスタへLOPLMTの値を読み込む。<br /></li>
+<li>スタックからLOPINCの値を読み出し、LOPINC&gt;0ならNX1へジャンプする。そうでなければ、DE(LOPVARの内容)とHL(LOPLMT)を入れ替える。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">812: </span>NX1    CALL CKHLDE    ;COMPARE WITH LIMIT
+<span class="linenr">813: </span>       POP  D         ;RESTORE TEXT POINTER
+<span class="linenr">814: </span>       JC   NX2       ;OUTSIDE LIMIT 
+<span class="linenr">815: </span>       LHLD LOPLN     ;WITHIN LIMIT, GO
+<span class="linenr">816: </span>       SHLD CURRNT    ;BACK TO THE SAVED 
+<span class="linenr">817: </span>       LHLD LOPPT     ;'CURRNT' AND TEXT 
+<span class="linenr">818: </span>       XCHG           ;POINTER 
+<span class="linenr">819: </span>       RST  6 
+<span class="linenr">820: </span>NX2    CALL POPA      ;PURGE THIS LOOP 
+<span class="linenr">821: </span>       RST  6 
+</pre>
+</div>
+<ul class="org-ul">
+<li>HLとDEを比較する。"NEXT"の最初でスタックに保存したテキストポインタを復元しておき、HL&lt;DEならNX2へジャンプし、FOR文を終了する。<br /></li>
+<li>DE&lt;HLならLOPLN(FORループ内の先頭の行番号)をCURRNTに設定し、DEレジスタにLOPPT(FORループ内の最初の文)を設定する。FINISH(RST 6)を呼び出してループ内のステートメントを実行する。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org95fe18c" class="outline-3">
+<h3 id="org95fe18c">STOP</h3>
+<div class="outline-text-3" id="text-org95fe18c">
+<p>
+"STOP"ステートメントは、プログラムの実行を中断し、メインループに戻る。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">433: </span>STOP   CALL ENDCHK    ;*** STOP(CR) ***
+<span class="linenr">434: </span>       JMP RSTART
+</pre>
+</div>
+<ul class="org-ul">
+<li>"STOP"のあとに何も書かれていないことを確認する。書かれていればエラーになる。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2da9c2f" class="outline-3">
+<h3 id="org2da9c2f">INPUT</h3>
+<div class="outline-text-3" id="text-org2da9c2f">
+<ul class="org-ul">
+<li>"INPUT"ステートメントは、ユーザーに変数へ値を入力させる。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">877: </span>INPUT  EQU  $         ;*** INPUT *** 
+<span class="linenr">878: </span>IP1    PUSH D         ;SAVE IN CASE OF ERROR 
+<span class="linenr">879: </span>       CALL QTSTG     ;IS NEXT ITEM A STRING?
+<span class="linenr">880: </span>       JMP  IP2       ;NO
+<span class="linenr">881: </span>       RST  7         ;YES. BUT FOLLOWED BY A
+<span class="linenr">882: </span>       JC   IP4       ;VARIABLE?   NO. 
+<span class="linenr">883: </span>       JMP  IP3       ;YES.  INPUT VARIABLE
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタ(DEレジスタ)をスタックに退避する。<br /></li>
+<li>QTSTGを呼び出し、次のテキストが文字列であるかどうか確認する。QTSTGは次のテキストが文字列であった場合、"JMP IP2(3バイト)"をスキップした箇所に戻ってくる。文字列でなかった場合、"JMP IP2"を実行しIP2へジャンプする。<br /></li>
+<li>次のテキストが文字列である場合、TSTV(RST 7)を呼び出して、文字列のあとに変数が続くか確認する。変数でなければIP4へジャンプする。変数であればIP3へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">884: </span>IP2    PUSH D         ;SAVE FOR 'PRTSTG' 
+<span class="linenr">885: </span>       RST  7         ;MUST BE VARIABLE NOW
+<span class="linenr">886: </span>       JC   QWHAT     ;"WHAT?" IT IS NOT?
+<span class="linenr">887: </span>       LDAX D         ;GET READY FOR 'RTSTG'
+<span class="linenr">888: </span>       MOV  C,A 
+<span class="linenr">889: </span>       SUB  A 
+<span class="linenr">890: </span>       STAX D 
+<span class="linenr">891: </span>       POP  D 
+<span class="linenr">892: </span>       CALL PRTSTG    ;PRINT STRING AS PROMPT
+<span class="linenr">893: </span>       MOV  A,C       ;RESTORE TEXT
+<span class="linenr">894: </span>       DCX  D 
+<span class="linenr">895: </span>       STAX D 
+</pre>
+</div>
+<ul class="org-ul">
+<li>"INPUT"ステートメントの引数が文字列ではなかった場合、PRTSTGでINPUTキーワードの次にくる文字を印字するが、その前にTSTV(RST 7)で次の文字が変数を表しているか確認する必要がある。TSTVはテキストポインタを更新するので、PRTSTGでの印字に備えて、テキストポインタ(DEレジスタ)をスタックに退避しておく。<br /></li>
+<li>TSTV(RST 7)で次の文字が変数を表しているか確認する。変数でなければエラー(QWHAT)とする。<br /></li>
+<li>変数であれば、HLレジスタには変数のアドレスが入る。変数名の次の文字をCレジスタに退避しておき、変数名の次の文字を0で上書きする。<br /></li>
+<li>テキストポインタを復元し(TSTVを呼び出す前なので、変数名を指している)、PRTSTGを呼び出して変数名を印字する。<br /></li>
+<li>0で上書きした箇所をもとの値に復元する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">896: </span>IP3    PUSH D         ;SAVE IN CASE OF ERROR 
+<span class="linenr">897: </span>       XCHG 
+<span class="linenr">898: </span>       LHLD CURRNT    ;ALSO SAVE 'CURRNT'
+<span class="linenr">899: </span>       PUSH H 
+<span class="linenr">900: </span>       LXI  H,IP1     ;A NEGATIVE NUMBER 
+<span class="linenr">901: </span>       SHLD CURRNT    ;AS A FLAG 
+<span class="linenr">902: </span>       LXI  H,0Q      ;SAVE SP TOO 
+<span class="linenr">903: </span>       DAD  SP
+<span class="linenr">904: </span>       SHLD STKINP
+<span class="linenr">905: </span>       PUSH D         ;OLD HL
+<span class="linenr">906: </span>       MVI  A,72Q     ;PRINT THIS TOO
+<span class="linenr">907: </span>       CALL GETLN     ;AND GET A LINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタ(DEレジスタ)と行番号(CURRNT)をスタックに退避する。<br /></li>
+<li>IP1をエラー処理のためにCURRNTに保存する。IP1には'PUSH D(D5H)'が書かれているので、負の行番号を設定している。<br /></li>
+<li>STKINPにSPの値を保存する。<br /></li>
+<li>HLレジスタ(変数のアドレス)をスタックに保管する。<br /></li>
+<li>Aレジスタに':'を入れてGETLNを呼び出す。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">908: </span>IP3A   LXI  D,BUFFER  ;POINTS TO BUFFER
+<span class="linenr">909: </span>       RST  3         ;EVALUATE INPUT
+<span class="linenr">910: </span>       NOP            ;CAN BE 'CALL ENDCHK'
+<span class="linenr">911: </span>       NOP
+<span class="linenr">912: </span>       NOP
+<span class="linenr">913: </span>       POP  D         ;OK, GET OLD HL
+<span class="linenr">914: </span>       XCHG 
+<span class="linenr">915: </span>       MOV  M,E       ;SAVE VALUE IN VAR.
+<span class="linenr">916: </span>       INX  H 
+<span class="linenr">917: </span>       MOV  M,D 
+<span class="linenr">918: </span>       POP  H         ;GET OLD 'CURRNT'
+<span class="linenr">919: </span>       SHLD CURRNT
+<span class="linenr">920: </span>       POP  D         ;AND OLD TEXT POINTER
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタをGETLNの入力バッファに設定する。<br /></li>
+<li>EXPR(RST 3)を呼び出し、ユーザの入力を評価する。<br /></li>
+<li>EXPR(RST 3)のあとにNOPを3回呼び出しているが、代わりに'CALL ENDCHK(3バイト)'を入れてもよい。<br /></li>
+<li>変数のアドレスをDEレジスタに復元したあと、DEとHLを入れ替える。この時点でHLレジスタには変数のアドレス、DEレジスタにはユーザ入力の評価結果が入っている。<br /></li>
+<li>変数にDEレジスタの値を保管する。<br /></li>
+<li>行番号(CURRNT)を復元する。<br /></li>
+<li>テキストポインタをDEレジスタに復元する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">921: </span>IP4    POP  PSW       ;PURGE JUNK IN STACK 
+<span class="linenr">922: </span>       RST  1         ;IS NEXT CH. ','?
+<span class="linenr">923: </span>       DB   ',' 
+<span class="linenr">924: </span>       DB   3Q
+<span class="linenr">925: </span>       JMP  IP1       ;YES, MORE ITEMS.
+<span class="linenr">926: </span>IP5    RST  6 
+</pre>
+</div>
+<ul class="org-ul">
+<li>入力エラーに備えて、IP1でテキストポインタをスタックに保存した。この値がまだスタックに残っているので、AFレジスタへ取り出すことでこの値を廃棄する。<br /></li>
+<li>TSTC(RST 1)を呼び出し、次の文字が','であるかを確認する。','でなければ、IP5へジャンプし、FINISH(RST 6)を実行する。','であれば、IP1へジャンプし、新しい入力を取得する。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org415081e" class="outline-3">
+<h3 id="org415081e">PRINT</h3>
+<div class="outline-text-3" id="text-org415081e">
+<ul class="org-ul">
+<li>"PRINT"ステートメントは引数を印字する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">621: </span>PRINT  MVI  C,6       ;C = # OF SPACES 
+<span class="linenr">622: </span>       RST  1         ;IFF NULL LIST &amp; ";"
+<span class="linenr">623: </span>       DB   73Q 
+<span class="linenr">624: </span>       DB   6Q 
+<span class="linenr">625: </span>       CALL CRLF      ;GIVE CR-LF AND
+<span class="linenr">626: </span>       JMP  RUNSML    ;CONTINUE SAME LINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>Cレジスタに6を入れる。<br /></li>
+<li>TSTC(RST 1)を呼び出し、テキストポインタが';'を指しているかどうか確認する。';'であれば、CRLFを印字し、同じ行にあるPRINTステートメントの次の文を実行する。';'でなければPR2へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">627: </span>PR2    RST  1         ;IFF NULL LIST (CR) 
+<span class="linenr">628: </span>       DB   0DH
+<span class="linenr">629: </span>       DB   6Q
+<span class="linenr">630: </span>       CALL CRLF      ;ALSO GIVE CR-LF AND 
+<span class="linenr">631: </span>       JMP  RUNNXL    ;GO TO NEXT LINE 
+</pre>
+</div>
+<ul class="org-ul">
+<li>TSTC(RST 1)を呼び出し、テキストポインタが復帰コード(0DH)を指しているかどうか確認する。復帰コードであれば、CRLFを印字し、次の行を実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">632: </span>PR0    RST  1         ;ELSE IS IT FORMAT?
+<span class="linenr">633: </span>       DB   '#' 
+<span class="linenr">634: </span>       DB   5Q
+<span class="linenr">635: </span>       RST  3         ;YES, EVALUATE EXPR. 
+<span class="linenr">636: </span>       MOV  C,L       ;AND SAVE IT IN C
+<span class="linenr">637: </span>       JMP  PR3       ;LOOK FOR MORE TO PRINT
+</pre>
+</div>
+<ul class="org-ul">
+<li>TSTC(RST 1)を呼び出し、テキストポインタが'#'を指しているかどうか確認する。'#'であれば、EXPR(RST 3)を呼び出し、'#'に続く式を評価する。結果をCレジスタに入れて、PR3にジャンプする。'#'でなければ、PR1へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">638: </span>PR1    CALL QTSTG     ;OR IS IT A STRING?
+<span class="linenr">639: </span>       JMP  PR8       ;IFF NOT, MUST BE EXPR. 
+</pre>
+</div>
+<ul class="org-ul">
+<li>PR0で確認した文字が'#'でなかった場合、QTSTGを呼び出して文字列かどうか確認する。文字列であればQTSTGはPR3へ戻る。文字列でなければ、PR8を実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">640: </span>PR3    RST  1         ;IFF ",", GO FIND NEXT
+<span class="linenr">641: </span>       DB   ',' 
+<span class="linenr">642: </span>       DB   6Q
+<span class="linenr">643: </span>       CALL FIN       ;IN THE LIST.
+<span class="linenr">644: </span>       JMP  PR0       ;LIST CONTINUES
+<span class="linenr">645: </span>PR6    CALL CRLF      ;LIST ENDS 
+<span class="linenr">646: </span>       RST  6 
+</pre>
+</div>
+<ul class="org-ul">
+<li>PR0で確認した文字が'#'と式であった場合、次に','が続くか確認する。','であれば、FINを呼び出して次の文字が';'や復帰コードでないことを確認し、PR0へジャンプして次の要素を確認する。','でなければ、PR6へジャンプし、CRLFの印字とFINISH(RST 6)の呼び出しを行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">647: </span>PR8    RST  3         ;EVALUATE THE EXPR 
+<span class="linenr">648: </span>       PUSH B 
+<span class="linenr">649: </span>       CALL PRTNUM    ;PRINT THE VALUE 
+<span class="linenr">650: </span>       POP  B 
+<span class="linenr">651: </span>       JMP  PR3       ;MORE TO PRINT?
+</pre>
+</div>
+<ul class="org-ul">
+<li>PR1での確認結果が文字列ではなかった場合、テキストポインタは式を指しているはずである。EXPR(RST 3)を呼び出して式を評価する。<br /></li>
+<li>PRTNUMを呼び出して式の評価結果を印字する。PRTNUMを呼び出すとBレジスタの内容が変更されるので、呼び出す前にスタックに退避しておく。<br /></li>
+<li>PR3へジャンプし、印字を継続する必要があるかを確認する。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb2d1983" class="outline-2">
+<h2 id="orgb2d1983">式</h2>
+<div class="outline-text-2" id="text-orgb2d1983">
+</div>
+<div id="outline-container-orgd01f5b0" class="outline-3">
+<h3 id="orgd01f5b0">EXPR(RST 3)</h3>
+<div class="outline-text-3" id="text-orgd01f5b0">
+<ul class="org-ul">
+<li>EXPRは算術式、または論理式を評価する。<br />
+<ul class="org-ul">
+<li>&lt;EXPR&gt;::=&lt;EXPR2&gt; OR &lt;EXPR2&gt;&lt;REL.OP.&gt;&lt;EXPR2&gt;<br />
+<ul class="org-ul">
+<li>ここで&lt;REL.OP.&gt;はTAB8に含まれる関係演算子の一つであり、結果が真であれば1、偽であれば0になる。<br /></li>
+</ul></li>
+<li>&lt;EXPR2&gt;::=(+ OR -)&lt;EXPR3&gt;(+ OR -&lt;EXPR3&gt;)(&#x2026;.)<br />
+<ul class="org-ul">
+<li>ここで()で囲まれる部分は省略可能であり、(&#x2026;.)は省略可能な繰り返しである。<br /></li>
+</ul></li>
+<li>&lt;EXPR3&gt;::=&lt;EXPR4&gt;(&lt;* OR /&gt;&lt;EXPR4&gt;)(&#x2026;.)<br /></li>
+<li>&lt;EXPR4&gt;::=&lt;VARIABLE&gt; OR &lt;FUNCTION&gt; OR (&lt;EXPR&gt;)<br />
+<ul class="org-ul">
+<li>&lt;EXPR&gt;は再帰的に定義されている。<br /></li>
+<li>配列変数('@'で始まる)もインデックスとして&lt;EXPR&gt;を取ることができる。<br /></li>
+<li>関数は&lt;EXPR&gt;を引数に取ることができる。<br /></li>
+<li>&lt;EXPR4&gt;は()内に&lt;EXPR&gt;を含んだ形にもできる。<br /></li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1847: </span>CALL EXPR2     ;*** EXPR OR RST 3 *** 
+<span class="linenr">1848: </span>PUSH H         ;EVALUATE AN EXPRESION 
+<span class="linenr">1849: </span>JMP  EXPR1     ;REST OF IT IS AT EXPR1
+</pre>
+</div>
+<ul class="org-ul">
+<li>EXPR(RST 3)を呼び出すと、まずEXPR2を呼び出し、その結果をスタックへ保存する。その後、EXPR1へジャンプし、処理を継続する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">960: </span>EXPR1  LXI  H,TAB8-1  ;LOOKUP REL.OP.
+<span class="linenr">961: </span>       JMP  EXEC      ;GO DO IT
+</pre>
+</div>
+<ul class="org-ul">
+<li>EXPR1ではコマンドテーブルをTAB8にセットし、&lt;EXPR2&gt;のあとに関係演算子(&lt;REL.OP.&gt;)が続くかどうかを確認する。<br /></li>
+<li>関係演算子が続けば、対応する処理(XP11〜XP16)を実行し、関係演算子が続かなければ、XP17を実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">962: </span>XP11   CALL XP18      ;REL.OP."&gt;=" 
+<span class="linenr">963: </span>       RC             ;NO, RETURN HL=0 
+<span class="linenr">964: </span>       MOV  L,A       ;YES, RETURN HL=1
+<span class="linenr">965: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>XP11〜XP16はほとんど同じなので、XP11("&gt;=")のみを見ていく。<br /></li>
+<li>XP18を呼び出し、その結果に応じてHLレジスタに0、または1を設定する。<br /></li>
+<li>XP11はEXPR(RST 3)からJMP命令でEXPR1、EXPR1からJMP命令でEXEC、EXECからPCHL命令でXP11へと制御が移ってくるので、最後のRET命令で、EXPR(RST 3)の呼び出し元に戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">991: </span>XP18   MOV  A,C       ;SUBROUTINE FOR ALL
+<span class="linenr">992: </span>       POP  H         ;REL.OP.'S 
+<span class="linenr">993: </span>       POP  B 
+<span class="linenr">994: </span>       PUSH H         ;REVERSE TOP OF STACK
+<span class="linenr">995: </span>       PUSH B 
+<span class="linenr">996: </span>       MOV  C,A 
+</pre>
+</div>
+<ul class="org-ul">
+<li>XP18へはCALL命令で制御が移るため、スタックの最上位にはRETURN先のアドレスが入っている。スタックの上位２項目を入れ替え、関係演算子の左の項をスタックの最上位に移動させる。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr"> 997: </span>CALL EXPR2     ;GET 2ND &lt;EXPR2&gt; 
+<span class="linenr"> 998: </span>XCHG           ;VALUE IN DE NOW 
+<span class="linenr"> 999: </span>XTHL           ;1ST &lt;EXPR2&gt; IN HL 
+<span class="linenr">1000: </span>CALL CKHLDE    ;COMPARE 1ST WITH 2ND
+<span class="linenr">1001: </span>POP  D         ;RESTORE TEXT POINTER
+<span class="linenr">1002: </span>LXI  H,0Q      ;SET HL=0, A=1 
+<span class="linenr">1003: </span>MVI  A,1 
+<span class="linenr">1004: </span>RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>関係演算子の右の項&lt;EXPR2&gt;を評価し、XCHG命令でDEレジスタに入れる。このときDEレジスタの内容(テキストポインタ)はHLレジスタに入る。続いてXTHL命令でスタックの最上位のデータ、つまり関係演算子の左の項をHLレジスタへ入れ、代わりにHLレジスタに入っていたテキストポインタをスタックへ退避する。<br /></li>
+<li>HLレジスタとDEレジスタの内容を比較し、フラグレジスタを変化させる。<br /></li>
+<li>スタックからテキストポインタをDEレジスタに復元し、HLレジスタに0、Aレジスタに1を設定する。<br /></li>
+<li>XP18の呼び出し元は、フラグレジスタの値に応じて、HLレジスタに適切な値を設定する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">989: </span>XP17   POP  H         ;NOT REL.OP. 
+<span class="linenr">990: </span>       RET            ;RETURN HL=&lt;EXPR2&gt; 
+</pre>
+</div>
+<ul class="org-ul">
+<li>関係演算子ではなかった場合、XP17が呼び出される。XP17は先にスタックに積んだ演算結果(&lt;EXPR2&gt;)を取り出し、HLレジスタに設定してEXPR(RST 3)の呼び出し元に戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1006: </span>EXPR2  RST  1         ;NEGATIVE SIGN?
+<span class="linenr">1007: </span>       DB   '-' 
+<span class="linenr">1008: </span>       DB   6Q
+<span class="linenr">1009: </span>       LXI  H,0Q      ;YES, FAKE '0-'
+<span class="linenr">1010: </span>       JMP  XP26      ;TREAT LIKE SUBTRACT 
+</pre>
+</div>
+<ul class="org-ul">
+<li>負号で始まれば、HL=0としてXP26へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1034: </span>XP26   PUSH H         ;YES, SAVE 1ST &lt;EXPR3&gt; 
+<span class="linenr">1035: </span>       CALL EXPR3     ;GET 2ND &lt;EXPR3&gt; 
+<span class="linenr">1036: </span>       CALL CHGSGN    ;NEGATE
+<span class="linenr">1037: </span>       JMP  XP24      ;AND ADD THEM
+</pre>
+</div>
+<ul class="org-ul">
+<li>XP26ではHLレジスタの内容(0)をスタックに保存し、EXPR3を呼び出す。<br /></li>
+<li>EXPR3の結果の負号を反転し、XP24(加算処理)へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1011: </span>XP21   RST  1         ;POSITIVE SIGN?  IGNORE
+<span class="linenr">1012: </span>       DB   '+' 
+<span class="linenr">1013: </span>       DB   0Q
+<span class="linenr">1014: </span>XP22   CALL EXPR3     ;1ST &lt;EXPR3&gt; 
+</pre>
+</div>
+<ul class="org-ul">
+<li>正の符号で始まれば、単純に無視する。<br /></li>
+<li>EXPR3を呼び出し、第一項の値を計算する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1015: </span>XP23   RST  1         ;ADD?
+<span class="linenr">1016: </span>       DB   '+' 
+<span class="linenr">1017: </span>       DB   25Q 
+<span class="linenr">1018: </span>       PUSH H         ;YES, SAVE VALUE 
+<span class="linenr">1019: </span>       CALL EXPR3     ;GET 2ND&lt;EXPR3&gt; 
+</pre>
+</div>
+<ul class="org-ul">
+<li>加算であれば、第一項をスタックに保存し、EXPR3を呼び出して第二項の計算を行う。<br /></li>
+<li>加算でなければ、XP25へジャンプし、減算かどうかチェックする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1020: </span>XP24   XCHG           ;2ND IN DE 
+<span class="linenr">1021: </span>       XTHL           ;1ST IN HL 
+<span class="linenr">1022: </span>       MOV  A,H       ;COMPARE SIGN
+<span class="linenr">1023: </span>       XRA  D 
+<span class="linenr">1024: </span>       MOV  A,D 
+<span class="linenr">1025: </span>       DAD  D 
+<span class="linenr">1026: </span>       POP  D         ;RESTORE TEXT POINTER
+<span class="linenr">1027: </span>       JM   XP23      ;1ST 2ND SIGN DIFFER 
+<span class="linenr">1028: </span>       XRA  H         ;1ST 2ND SIGN EQUAL
+<span class="linenr">1029: </span>       JP   XP23      ;SO ISp RESULT
+<span class="linenr">1030: </span>       JMP  QHOW      ;ELSE WE HAVE OVERFLOW 
+</pre>
+</div>
+<ul class="org-ul">
+<li>HLの内容(第二項)をDEレジスタに入れる。DEレジスタの内容(テキストポインタ)はHLレジスタに入る。<br /></li>
+<li>HLレジスタへスタックポインタの最上位データ(第一項)を読み出し、代わりにスタックへテキストポインタの内容を保管する。<br /></li>
+<li>HLとDEの符号を比較し、サインフラグを変化させる。<br /></li>
+<li>HL=HL+DEとし、DEレジスタへテキストポインタを復元する。<br /></li>
+<li>第一項と第二項の符号が異なっていれば、オーバーフローは生じない。XP23へジャンプし(JM XP23)、次の演算を処理する。<br /></li>
+<li>第一項と第二項は符号が同じであれば、演算結果の上位バイトとDレジスタ(第二項の上位バイト)を比較する。これらの符号が同じであれば、演算前後で符号は変わっていない。オーバーフローは発生していないと判断できるので、XP23へジャンプし、次の演算を行う。符号が違えばオーバーフローが発生しているため、エラー処理を行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1031: </span>XP25   RST  1         ;SUBTRACT? 
+<span class="linenr">1032: </span>       DB   '-' 
+<span class="linenr">1033: </span>       DB   203Q
+</pre>
+</div>
+<ul class="org-ul">
+<li>減算であれば、後続のEXPR3を実行する。<br /></li>
+<li>減算でなければXP42へジャンプし、呼び出し元へ戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1039: </span>EXPR3  CALL EXPR4     ;GET 1ST &lt;EXPR4&gt; 
+<span class="linenr">1040: </span>XP31   RST  1         ;MULTIPLY? 
+<span class="linenr">1041: </span>       DB   '*' 
+<span class="linenr">1042: </span>       DB   54Q 
+</pre>
+</div>
+<ul class="org-ul">
+<li>EXPR4を呼び出し、第一項を計算する。<br /></li>
+<li>乗算記号が続けば、後続の処理で乗算を行う。乗算記号でなければ、除算のチェックを行うためにXP34へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1043: </span>PUSH H         ;YES, SAVE 1ST 
+<span class="linenr">1044: </span>CALL EXPR4     ;AND GET 2ND &lt;EXPR4&gt; 
+<span class="linenr">1045: </span>MVI  B,0Q      ;CLEAR B FOR SIGN
+<span class="linenr">1046: </span>CALL CHKSGN    ;CHECK SIGN
+<span class="linenr">1047: </span>XCHG           ;2ND IN DE NOW 
+<span class="linenr">1048: </span>XTHL           ;1ST IN HL 
+<span class="linenr">1049: </span>CALL CHKSGN    ;CHECK SIGN OF 1ST 
+</pre>
+</div>
+<ul class="org-ul">
+<li>乗算記号であれば、第一項をスタックへ退避したあと、再度EXPR4を呼び出し、第二項を計算する。<br /></li>
+<li>各項の符号チェックを行う。<br /></li>
+<li>CHKSGNを2回呼んでいるので、Bレジスタの値は第一項と第二項の符号が同じ場合は0、違えば1になる。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1050: </span>       MOV  A,H       ;IS HL &gt; 255 ? 
+<span class="linenr">1051: </span>       ORA  A 
+<span class="linenr">1052: </span>       JZ   XP32      ;NO
+<span class="linenr">1053: </span>       MOV  A,D       ;YES, HOW ABOUT DE 
+<span class="linenr">1054: </span>       ORA  D 
+<span class="linenr">1055: </span>       XCHG           ;PUT SMALLER IN HL 
+<span class="linenr">1056: </span>       JNZ  AHOW      ;ALSO &gt;, WILL OVERFLOW 
+<span class="linenr">1057: </span>XP32   MOV  A,L       ;THIS IS DUMB
+<span class="linenr">1058: </span>       LXI  H,0Q      ;CLEAR RESULT
+<span class="linenr">1059: </span>       ORA  A         ;ADD AND COUNT 
+<span class="linenr">1060: </span>       JZ   XP35
+<span class="linenr">1061: </span>XP33   DAD  D 
+<span class="linenr">1062: </span>       JC   AHOW      ;OVERFLOW
+<span class="linenr">1063: </span>       DCR  A 
+<span class="linenr">1064: </span>       JNZ  XP33
+<span class="linenr">1065: </span>       JMP  XP35      ;FINISHED
+</pre>
+</div>
+<ul class="org-ul">
+<li>HLまたはDEのいずれかが255以下である必要がある(両方が255より大きければ、オーバーフローが生じるため)。この条件を満たさない場合はエラーとする(AHOW)。<br /></li>
+<li>XP32に到達したとき、HL&lt;=255となっている。AにLを代入し、A=0ならXP35にジャンプし乗算処理を終了する。<br /></li>
+<li>XP33では、HL=HL+DEとして、Aをデクリメントする。A=0となるまでXP33の処理を繰り返し、A=0となったら、XP35へジャンプしてEXPR3の終了処理を行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1066: </span>XP34   RST  1         ;DIVIDE? 
+<span class="linenr">1067: </span>       DB   '/' 
+<span class="linenr">1068: </span>       DB   104Q
+</pre>
+</div>
+<ul class="org-ul">
+<li>除算記号が続くかどうか確認する。除算記号であれば処理を継続、除算記号でなければ、XP42へジャンプし、呼び出し元へ戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1069: </span>PUSH H         ;YES, SAVE 1ST &lt;EXPR4&gt; 
+<span class="linenr">1070: </span>CALL EXPR4     ;AND GET 2ND ONE 
+<span class="linenr">1071: </span>MVI  B,0Q      ;CLEAR B FOR SIGN
+<span class="linenr">1072: </span>CALL CHKSGN    ;CHECK SIGN OF 2ND 
+<span class="linenr">1073: </span>XCHG           ;PUT 2ND IN DE 
+<span class="linenr">1074: </span>XTHL           ;GET 1ST IN HL 
+<span class="linenr">1075: </span>CALL CHKSGN    ;CHECK SIGN OF 1ST 
+</pre>
+</div>
+<ul class="org-ul">
+<li>乗算と同様に第一項をスタックへ退避し、第二項をEXPR4を呼び出すことで評価する。各項の符号チェックを行うところまで同じ。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1076: </span>MOV  A,D       ;DIVIDE BY 0?
+<span class="linenr">1077: </span>ORA  E 
+<span class="linenr">1078: </span>JZ   AHOW      ;SAY "HOW?"
+<span class="linenr">1079: </span>PUSH B         ;ELSE SAVE SIGN
+<span class="linenr">1080: </span>CALL DIVIDE    ;USE SUBROUTINE
+<span class="linenr">1081: </span>MOV  H,B       ;RESULT IN HL NOW
+<span class="linenr">1082: </span>MOV  L,C 
+<span class="linenr">1083: </span>POP  B         ;GET SIGN BACK 
+</pre>
+</div>
+<ul class="org-ul">
+<li>第二項が0でないかどうかを確認する。0であれば0除算のエラーになる。<br /></li>
+<li>符号を含むBCレジスタをスタックに保存し、除算ルーチン(DIVIDE)を呼び出す。<br /></li>
+<li>DIVIDEは結果がBCレジスタに入るので、HLレジスタへ結果を入れる。<br /></li>
+<li>スタックから符号をBCレジスタに復元する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1084: </span>XP35   POP  D         ;AND TEXT POINTER
+<span class="linenr">1085: </span>       MOV  A,H       ;HL MUST BE +
+<span class="linenr">1086: </span>       ORA  A 
+<span class="linenr">1087: </span>       JM   QHOW      ;ELSE IT IS OVERFLOW 
+<span class="linenr">1088: </span>       MOV  A,B 
+<span class="linenr">1089: </span>       ORA  A 
+<span class="linenr">1090: </span>       CM   CHGSGN    ;CHANGE SIGN IFF NEEDED 
+<span class="linenr">1091: </span>       JMP  XP31      ;LOOK OR MORE TERMS 
+</pre>
+</div>
+<ul class="org-ul">
+<li>XP35は乗算、除算共通の終了処理になる。<br /></li>
+<li>スタックからテキストポインタをDEレジスタに復元する。<br /></li>
+<li>HLレジスタ(乗算結果、または除算結果)は正の値を取っているはずである。そうでなければオーバーフローであるとし、エラー処理を行う(QHOW)。<br /></li>
+<li>Bレジスタが示す符号が負であれば、CHGSGNを呼び出してHLの符号を変更する。<br /></li>
+<li>XP31へジャンプし、後続の項の演算を行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1093: </span>EXPR4  LXI  H,TAB4-1  ;FIND FUNCTION IN TAB4 
+<span class="linenr">1094: </span>       JMP  EXEC      ;AND GO DO IT
+</pre>
+</div>
+<ul class="org-ul">
+<li>EXPR4はTAB4をコマンドテーブルに設定し、関数を探す。関数が見つからなければ、XP40を実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1095: </span>XP40   RST  7         ;NO, NOT A FUNCTION
+<span class="linenr">1096: </span>       JC   XP41      ;NOR A VARIABLE
+<span class="linenr">1097: </span>       MOV  A,M       ;VARIABLE
+<span class="linenr">1098: </span>       INX  H 
+<span class="linenr">1099: </span>       MOV  H,M       ;VALUE IN HL 
+<span class="linenr">1100: </span>       MOV  L,A 
+<span class="linenr">1101: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>関数が見つからなかった場合、TSTV(RST 7)を呼び出し、変数であるかどうかを確認する。<br /></li>
+<li>変数だった場合、HLレジスタに値を読み込み、呼び出し元に戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1102: </span>XP41   CALL TSTNUM    ;OR IS IT A NUMBER 
+<span class="linenr">1103: </span>       MOV  A,B       ;# OF DIGIT
+<span class="linenr">1104: </span>       ORA  A 
+<span class="linenr">1105: </span>       RNZ            ;OK
+</pre>
+</div>
+<ul class="org-ul">
+<li>変数でもなかった場合、数値かどうかを確認する。数値であればHLレジスタに値が入るので、呼び出し元に戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1106: </span>PARN   RST  1         ;NO DIGIT, MUST BE 
+<span class="linenr">1107: </span>       DB   '(' 
+<span class="linenr">1108: </span>       DB   5Q
+<span class="linenr">1109: </span>       RST  3         ;"(EXPR)"
+<span class="linenr">1110: </span>       RST  1 
+<span class="linenr">1111: </span>       DB   ')' 
+<span class="linenr">1112: </span>       DB   1Q
+<span class="linenr">1113: </span>XP42   RET
+<span class="linenr">1114: </span>XP43   JMP  QWHAT     ;ELSE SAY: "WHAT?" 
+</pre>
+</div>
+<ul class="org-ul">
+<li>数値でもなかった場合、括弧かどうかを確認する。<br /></li>
+<li>括弧であれば、EXPRを呼び出し、括弧の中を評価する。<br /></li>
+<li>括弧でなければエラーとする。また、EXPRのあとが閉じ括弧でなければ、これもエラーとする。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8853361" class="outline-2">
+<h2 id="org8853361">内部処理</h2>
+<div class="outline-text-2" id="text-org8853361">
+</div>
+<div id="outline-container-org18017b4" class="outline-3">
+<h3 id="org18017b4">SETVAL</h3>
+<div class="outline-text-3" id="text-org18017b4">
+<ul class="org-ul">
+<li>SETVALは変数に値を設定する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1377: </span>SETVAL RST  7         ;*** SETVAL ***
+<span class="linenr">1378: </span>       JC   QWHAT     ;"WHAT?" NO VARIABLE 
+<span class="linenr">1379: </span>       PUSH H         ;SAVE ADDRESS OF VAR.
+<span class="linenr">1380: </span>       RST  1         ;PASS "=" SIGN 
+<span class="linenr">1381: </span>       DB   '=' 
+<span class="linenr">1382: </span>       DB   10Q 
+<span class="linenr">1383: </span>       RST  3         ;EVALUATE EXPR.
+<span class="linenr">1384: </span>       MOV  B,H       ;VALUE IN BC NOW 
+<span class="linenr">1385: </span>       MOV  C,L 
+<span class="linenr">1386: </span>       POP  H         ;GET ADDRESS 
+<span class="linenr">1387: </span>       MOV  M,C       ;SAVE VALUE
+<span class="linenr">1388: </span>       INX  H 
+<span class="linenr">1389: </span>       MOV  M,B 
+<span class="linenr">1390: </span>       RET
+<span class="linenr">1391: </span>SV1    JMP  QWHAT     ;NO "=" SIGN 
+</pre>
+</div>
+<ul class="org-ul">
+<li>最初にTSTV(RST 7)を呼び出して、テキストポインタが指している文字が変数であるかどうかを確認する。変数であればアドレス(HLレジスタ)をスタックに保管する。<br /></li>
+<li>次にTSTC(RST 1)を呼び出し、'<code>'が続くかどうか確認する。'</code>'でなければSV1へジャンプし、エラー処理をする。<br /></li>
+<li>'='であれば、EXPR(RST 3)を呼び出して、右辺を評価する。<br /></li>
+<li>右辺の値をBCレジスタに移動し、スタックから変数のアドレスをHLレジスタに復元する。<br /></li>
+<li>HLレジスタが指すアドレスにBCレジスタの値を入れる。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5600527" class="outline-3">
+<h3 id="org5600527">IGNBLK(RST 5)</h3>
+<div class="outline-text-3" id="text-org5600527">
+<ul class="org-ul">
+<li>空白を読み飛ばす。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1861: </span>SS1:   EQU  28H       ;EXECUTE TIME LOCATION OF THIS INSTRUCTION.
+<span class="linenr">1862: </span>       LDAX D         ;*** IGNBLK/RST 5 ***
+<span class="linenr">1863: </span>       CPI  40Q       ;IGNORE BLANKS 
+<span class="linenr">1864: </span>       RNZ            ;IN TEXT (WHERE DE-&gt;)
+<span class="linenr">1865: </span>       INX  D         ;AND RETURN THE FIRST
+<span class="linenr">1866: </span>       JMP  SS1       ;NON-BLANK CHAR. IN A
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタ(DEレジスタ)が指すメモリの内容を' 'と比較する。<br /></li>
+<li>一致すれば呼び出し元に戻る。<br /></li>
+<li>一致しなければ、テキストポインタをインクリメントし、SS1に戻る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5d389bf" class="outline-3">
+<h3 id="org5d389bf">TSTC(RST 1)</h3>
+<div class="outline-text-3" id="text-org5d389bf">
+<ul class="org-ul">
+<li>TSTCを呼び出す際に使用される'RST 1'命令の後ろに続く命令は、例えば次のようになっている。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">632: </span>PR0    RST  1         ;ELSE IS IT FORMAT?
+<span class="linenr">633: </span>       DB   '#' 
+<span class="linenr">634: </span>       DB   5Q
+<span class="linenr">635: </span>       RST  3         ;YES, EVALUATE EXPR. 
+</pre>
+</div>
+<ul class="org-ul">
+<li>'RST 1'命令は機械語サブルーチンへ移動する際に、スタックに自分自身の次のアドレスをプッシュする。通常はこのアドレスはサブルーチンの戻りアドレスとなるが、この場合は戻りアドレスに有効な命令が書いてあるわけではなく、'#'が書いてある。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1834: </span>XTHL           ;*** TSTC OR RST 1 *** 
+</pre>
+</div>
+<ul class="org-ul">
+<li>最初のXTHL命令でスタックに積んであるアドレス('#'を指している)をHLレジスタへ読み込む。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1835: </span>RST  5         ;IGNORE BLANKS AND 
+<span class="linenr">1836: </span>CMP  M         ;TEST CHARACTER
+<span class="linenr">1837: </span>JMP  TC1       ;REST OF THIS IS AT TC1
+</pre>
+</div>
+<ul class="org-ul">
+<li>空白を読み飛ばし、次の文字をHLレジスタが指すメモリの内容と比較する。<br /></li>
+<li>'RST 1'命令で呼び出せる機械語プログラム領域は8バイトしかない。続きのプログラムが別の場所(TC1)に書いてあるので、JMP命令で移動する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">100: </span>TC1    INX  H         ;COMPARE THE BYTE THAT 
+<span class="linenr">101: </span>       JZ   TC2       ;FOLLOWS THE RST INST. 
+<span class="linenr">102: </span>       PUSH B         ;WITH THE TEXT (DE-&gt;)
+<span class="linenr">103: </span>       MOV  C,M       ;IFF NOT =, ADD THE 2ND 
+<span class="linenr">104: </span>       MVI  B,0       ;BYTE THAT FOLLOWS THE 
+<span class="linenr">105: </span>       DAD  B         ;RST TO THE OLD PC 
+<span class="linenr">106: </span>       POP  B         ;I.E., DO A RELATIVE 
+<span class="linenr">107: </span>       DCX  D         ;JUMP IFF NOT = 
+<span class="linenr">108: </span>TC2    INX  D         ;IFF =, SKIP THOSE BYTES
+<span class="linenr">109: </span>       INX  H         ;AND CONTINUE
+<span class="linenr">110: </span>       XTHL 
+<span class="linenr">111: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>先の比較で、HLレジスタが指すメモリの内容とテキストポインタが指す内容が一致すれば、TC2へ移動し、テキストポインタを一つ進め、HLアドレスは合計2つすすめる。この時点でHLレジスタは'#'と'5Q'を読み飛ばし、'RST 3'を指している。<br /></li>
+<li>'XTHL'命令でHLレジスタの内容をスタックの一番上に積まれた内容と交換し、次のRET命令で'RST 3'にジャンプする。<br /></li>
+<li>HLレジスタが指すメモリの内容と、テキストポインタが指す内容が一致しなければ、HLレジスタを一つ進め、BCレジスタにHLレジスタが指す内容('5Q')を読み込み、HLレジスタに加算する。<br /></li>
+<li>TC2へ移動したあと、テキストポインタがインクリメントされるので、予めテキストポインタをデクリメントしておき、TSTCを抜けたとき、テキストポインタが空白を読み飛ばした直後の位置になるようにしておく。<br /></li>
+<li>最後に加算後のHLレジスタをスタックに戻し、RET命令でHLレジスタが指す位置へジャンプする。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6692474" class="outline-3">
+<h3 id="org6692474">TSTV(RST 7)</h3>
+<div class="outline-text-3" id="text-org6692474">
+<ul class="org-ul">
+<li>TSTV(RST 7(はテキストポンタが指している文字が変数であるかどうかを確認する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1872: </span>RST  5         ;*** TSTV OR RST 7 *** 
+<span class="linenr">1873: </span>SUI  100Q      ;TEST VARIABLES
+<span class="linenr">1874: </span>RC             ;C:NOT A VARIABLE
+<span class="linenr">1875: </span>JMP  TSTV1     ;JUMP AROUND RESERVED AREA
+</pre>
+</div>
+<ul class="org-ul">
+<li>最初にテキストポインタが指す文字と'@(100Q)'を比較する。'@'よりも小さければ、変数ではないので呼び出し元へ戻る。<br /></li>
+<li>'@'以上であれば、TSTV1へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">70: </span>TSTV1  JNZ  TV1       ;NOT "@" ARRAY 
+<span class="linenr">71: </span>       INX  D         ;IT IS THE "@" ARRAY 
+<span class="linenr">72: </span>       CALL PARN      ;@ SHOULD BE FOLLOWED
+<span class="linenr">73: </span>       DAD  H         ;BY (EXPR) AS ITS INDEX
+<span class="linenr">74: </span>       JC   QHOW      ;IS INDEX TOO BIG? 
+<span class="linenr">75: </span>       PUSH D         ;WILL IT OVERWRITE 
+<span class="linenr">76: </span>       XCHG           ;TEXT? 
+<span class="linenr">77: </span>       CALL SIZE      ;FIND SIZE OF FREE 
+<span class="linenr">78: </span>       RST  4         ;AND CHECK THAT
+<span class="linenr">79: </span>       JC   ASORRY    ;IFF SO, SAY "SORRY"
+</pre>
+</div>
+<ul class="org-ul">
+<li>ます、テキストポインタが指す文字が'@'に等しいかどうかを確認する。等しければ配列なので、処理を継続、等しくなければ通常の変数なので、TV1以降で処理する。<br /></li>
+<li>PARNで'@'に続く括弧の中の式を評価する。括弧が続いてなければ、PARN内でエラー処理を行う。<br /></li>
+<li>式の評価結果は配列のインデックスになる。データサイズは16ビットなので、評価結果を２倍する(DAD H)。<br /></li>
+<li>インデックスが大きすぎないかチェックを行う。大きすぎればエラー処理(ASORRY)を行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">80: </span>SS1A   LXI  H,VARBGN  ;IFF NOT, GET ADDRESS 
+<span class="linenr">81: </span>       CALL SUBDE     ;OF @(EXPR) AND PUT IT 
+<span class="linenr">82: </span>       POP  D         ;IN HL 
+<span class="linenr">83: </span>       RET            ;C FLAG IS CLEARED 
+</pre>
+</div>
+<ul class="org-ul">
+<li>配列の要素はVARBGNからINDEXだけ下位のバイトが格納位置になる。配列変数の場合はここで呼び出し元に戻る。結果はHLレジスタに入っている。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">84: </span>TV1    CPI  33Q       ;NOT @, IS IT A TO Z?
+<span class="linenr">85: </span>       CMC            ;IFF NOT RETURN C FLAG
+<span class="linenr">86: </span>       RC 
+<span class="linenr">87: </span>       INX  D         ;IFF A THROUGH Z
+<span class="linenr">88: </span>TV1A   LXI  H,VARBGN  ;COMPUTE ADDRESS OF
+<span class="linenr">89: </span>       RLC            ;THAT VARIABLE 
+<span class="linenr">90: </span>       ADD  L         ;AND RETURN IT IN HL 
+<span class="linenr">91: </span>       MOV  L,A       ;WITH C FLAG CLEARED 
+<span class="linenr">92: </span>       MVI  A,0 
+<span class="linenr">93: </span>       ADC  H 
+<span class="linenr">94: </span>       MOV  H,A 
+<span class="linenr">95: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga505016" class="outline-3">
+<h3 id="orga505016">QTSTG</h3>
+<div class="outline-text-3" id="text-orga505016">
+<ul class="org-ul">
+<li>QTSTGは引用符がついた文字列を印字する。また、"_"であった場合、RI(Reverse Line Feed)を印字する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1568: </span>QTSTG  RST  1         ;*** QTSTG *** 
+<span class="linenr">1569: </span>       DB   '"' 
+<span class="linenr">1570: </span>       DB   17Q 
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタが二重引用符を指しているかどうか確認する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1571: </span>       MVI  A,42Q     ;IT IS A " 
+<span class="linenr">1572: </span>QT1    CALL PRTSTG    ;PRINT UNTIL ANOTHER 
+<span class="linenr">1573: </span>       CPI  0DH       ;WAS LAST ONE A CR?
+<span class="linenr">1574: </span>       POP  H         ;RETURN ADDRESS
+<span class="linenr">1575: </span>       JZ   RUNNXL    ;WAS CR, RUN NEXT LINE 
+</pre>
+</div>
+<ul class="org-ul">
+<li>二重引用符を指していれば、次の二重引用符まで印字する。<br /></li>
+<li>印字した文字列の次が改行コードであれば、スタック上の戻りアドレスを廃棄し、次の行を実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1576: </span>QT2    INX  H         ;SKIP 3 BYTES ON RETURN
+<span class="linenr">1577: </span>       INX  H 
+<span class="linenr">1578: </span>       INX  H 
+<span class="linenr">1579: </span>       PCHL           ;RETURN
+</pre>
+</div>
+<ul class="org-ul">
+<li>改行コードでなければ、呼び出し元に戻るが、CALL QTSTGのあとはJMP命令が続いている。QTSTG呼び出し時のテキストポインタは文字列を指していたので、これをスキップするために戻りアドレスを+3してから戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1580: </span>QT3    RST  1         ;IS IT A ' ? 
+<span class="linenr">1581: </span>       DB   47Q 
+<span class="linenr">1582: </span>       DB   5Q
+<span class="linenr">1583: </span>       MVI  A,47Q     ;YES, DO SAME
+<span class="linenr">1584: </span>       JMP  QT1       ;AS IN " 
+</pre>
+</div>
+<ul class="org-ul">
+<li>二重引用符ではなかった場合、単一引用符かどうかを調べて、単一引用符のときと同じ処理をする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1585: </span>QT4    RST  1         ;IS IT BACK-ARROW? 
+<span class="linenr">1586: </span>       DB   137Q
+<span class="linenr">1587: </span>       DB   10Q 
+<span class="linenr">1588: </span>       MVI  A,215Q    ;YES, 0DHWITHOUT LF!!
+<span class="linenr">1589: </span>       RST  2         ;DO IT TWICE TO GIVE 
+<span class="linenr">1590: </span>       RST  2         ;TTY ENOUGH TIME 
+<span class="linenr">1591: </span>       POP  H         ;RETURN ADDRESS
+<span class="linenr">1592: </span>       JMP  QT2 
+<span class="linenr">1593: </span>QT5    RET            ;NONE OF ABOVE 
+</pre>
+</div>
+<ul class="org-ul">
+<li>単一引用符でもなかった場合、"_"かどうか確認する。<br /></li>
+<li>"_"だった場合、RI(Reverse Line Feed)を二度送る。この場合も戻りアドレスを+3してからQTSTGから戻る。<br /></li>
+<li>"_"ではなかった場合、QT5へジャンプし、呼び出し元に戻る。この場合、文字列ではなかったので"CALL QTSTG"のあとのJMP命令を実行する。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org7ee85a7" class="outline-2">
+<h2 id="org7ee85a7">実行制御</h2>
+<div class="outline-text-2" id="text-org7ee85a7">
+</div>
+<div id="outline-container-org03cff41" class="outline-3">
+<h3 id="org03cff41">FINISH(RST 6)</h3>
+<div class="outline-text-3" id="text-org03cff41">
+<ul class="org-ul">
+<li>FINISH(RST 6)は文の終わりで呼び出される。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1867: </span>POP  PSW       ;*** FINISH/RST 6 ***
+<span class="linenr">1868: </span>CALL FIN       ;CHECK END OF COMMAND
+<span class="linenr">1869: </span>JMP  QWHAT     ;PRINT "WHAT?" IFF WRONG
+</pre>
+</div>
+<ul class="org-ul">
+<li>FINISH(RST 6)は呼び出し元へはRETで戻らないので、'POP PSW'でスタックに積まれた戻りアドレスを読み捨てる。<br /></li>
+<li>次に処理の本体(FIN)を呼び出す。<br /></li>
+<li>FINはエラー時のみRETで戻ってくる。エラーで戻ってきたら、QWHATへ飛び、メインループに戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1393: </span>FIN    RST  1         ;*** FIN *** 
+<span class="linenr">1394: </span>       DB   73Q 
+<span class="linenr">1395: </span>       DB   4Q 
+<span class="linenr">1396: </span>       POP  PSW       ;";", PURGE RET ADDR.
+<span class="linenr">1397: </span>       JMP  RUNSML    ;CONTINUE SAME LINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>まず、次の文字が';'かどうかをチェックする。<br /></li>
+<li>';'であれば、戻りアドレスを読み捨て、RUNSMLに飛んで後続の文を実行する。<br /></li>
+<li>';'でなければFI1へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1398: </span>FI1    RST  1         ;NOT ";", IS IT CR?
+<span class="linenr">1399: </span>       DB   0DH
+<span class="linenr">1400: </span>       DB   4Q 
+<span class="linenr">1401: </span>       POP  PSW       ;YES, PURGE RET ADDR.
+<span class="linenr">1402: </span>       JMP  RUNNXL    ;RUN NEXT LINE 
+<span class="linenr">1403: </span>FI2    RET            ;ELSE RETURN TO CALLER 
+</pre>
+</div>
+<ul class="org-ul">
+<li>次に、';'でなかった場合、'\r'かどうか確認する。<br /></li>
+<li>'\r'であれば、戻りアドレスを読み捨て、RUNNXLに飛んで次の行を実行する。<br /></li>
+<li>'\r'でなければ、呼び出し元(FINISH)に戻り、エラー処理を行う。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb2af9a6" class="outline-3">
+<h3 id="orgb2af9a6">FNDLN</h3>
+<div class="outline-text-3" id="text-orgb2af9a6">
+<ul class="org-ul">
+<li>FNDLNはHLレジスタに入った行番号をもつ行を検索する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1501: </span>FNDLN  MOV  A,H       ;*** FNDLN *** 
+<span class="linenr">1502: </span>       ORA  A         ;CHECK SIGN OF HL
+<span class="linenr">1503: </span>       JM   QHOW      ;IT CANNT BE -
+<span class="linenr">1504: </span>       LXI  D,TXTBGN  ;INIT. TEXT POINTER
+</pre>
+</div>
+<ul class="org-ul">
+<li>行番号は負であってはならない。負であればエラーとする(QHOW)。<br /></li>
+<li>エラーでなければ、テキストポインタ(DEレジスタ)にプログラムバッファの先頭アドレスをセットする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1506: </span>FNDLNP EQU  $         ;*** FNDLNP ***
+<span class="linenr">1507: </span>FL1    PUSH H         ;SAVE LINE # 
+<span class="linenr">1508: </span>       LHLD TXTUNF    ;CHECK IFF WE PASSED END
+<span class="linenr">1509: </span>       DCX  H 
+<span class="linenr">1510: </span>       RST  4 
+<span class="linenr">1511: </span>       POP  H         ;GET LINE # BACK 
+<span class="linenr">1512: </span>       RC             ;C,NZ PASSED END 
+<span class="linenr">1513: </span>       LDAX D         ;WE DID NOT, GET BYTE 1
+<span class="linenr">1514: </span>       SUB  L         ;IS THIS THE LINE? 
+<span class="linenr">1515: </span>       MOV  B,A       ;COMPARE LOW ORDER 
+<span class="linenr">1516: </span>       INX  D 
+<span class="linenr">1517: </span>       LDAX D         ;GET BYTE 2
+<span class="linenr">1518: </span>       SBB  H         ;COMPARE HIGH ORDER
+<span class="linenr">1519: </span>       JC   FL2       ;NO, NOT THERE YET 
+<span class="linenr">1520: </span>       DCX  D         ;ELSE WE EITHER FOUND
+<span class="linenr">1521: </span>       ORA  B         ;IT, OR IT IS NOT THERE
+<span class="linenr">1522: </span>       RET            ;NC,Z:FOUND; NC,NZ:NO
+</pre>
+</div>
+<ul class="org-ul">
+<li>FNDLNPは、行番号(HL)をもつ行をテキストポインタがさすアドレス以降の領域から検索する。<br /></li>
+<li>まず、テキストポインタがプログラムテキスト領域の終了位置より後ろにないことをCOMP(RST 4)を呼び出して確認する。後ろにあれば、呼び出し元に戻る。<br /></li>
+<li>テキストポインタが指す行の行番号(2バイト)を読み出し、探している行番号(HLレジスタ)と比較する。<br /></li>
+<li>テキストポインタが指す行番号が、探している行番号より小さければ、FL2に飛んで行末まで読み飛ばし(FNDSKP)、検索を続ける。<br /></li>
+<li>テキストポインタが指す行番号が、探している行と同じであるか、探している行番号より大きくなれば、呼び出し元に戻る。行が見つかったか見つからなかったかはフラグレジスタの内容で判断する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1524: </span>FNDNXT EQU  $         ;*** FNDNXT ***
+<span class="linenr">1525: </span>       INX  D         ;FIND NEXT LINE
+<span class="linenr">1526: </span>FL2    INX  D         ;JUST PASSED BYTE 1 &amp; 2
+<span class="linenr">1527: </span>;* 
+<span class="linenr">1528: </span>FNDSKP LDAX D         ;*** FNDSKP ***
+<span class="linenr">1529: </span>       CPI  0DH       ;TRY TO FIND 0DH
+<span class="linenr">1530: </span>       JNZ  FL2       ;KEEP LOOKING
+<span class="linenr">1531: </span>       INX  D         ;FOUND CR, SKIP OVER 
+<span class="linenr">1532: </span>       JMP  FL1       ;CHECK IFF END OF TEXT
+</pre>
+</div>
+<ul class="org-ul">
+<li>FNDNXTは次の行の先頭から検索を行う。<br /></li>
+<li>FNDNXTがCALLされたときは、行番号の2バイトを読み飛ばす。<br /></li>
+<li>FNDLNPからジャンプしてきたときは、テキストポインタは行番号の2バイト目を指しているので、1バイトだけ読み飛ばす。<br /></li>
+<li>FNDSKPは'\r'が見つかるまでテキストポインタをインクリメントする。<br /></li>
+<li>'\r'が見つかったら、テキストポインタをもう一回インクリメントし、次の行の行番号を指すようにしてからFL1へジャンプして検索を始める。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgefcc892" class="outline-3">
+<h3 id="orgefcc892">PUSHA</h3>
+<div class="outline-text-3" id="text-orgefcc892">
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1701: </span>PUSHA  LXI  H,STKLMT  ;*** PUSHA *** 
+<span class="linenr">1702: </span>       CALL CHGSGN
+<span class="linenr">1703: </span>       POP  B         ;BC=RETURN ADDRESS 
+<span class="linenr">1704: </span>       DAD  SP        ;IS STACK NEAR THE TOP?
+<span class="linenr">1705: </span>       JNC  QSORRY    ;YES, SORRY FOR THAT.
+</pre>
+</div>
+<ul class="org-ul">
+<li>まず、スタックの上限に近づいていないか確認する。<br /></li>
+<li>スタックの上限に近づいていれば、エラー処理を行う。<br /></li>
+<li>ループ変数をスタックに積む前に、戻りアドレスをBCレジスタに読み込んでおく。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1706: </span>LHLD LOPVAR    ;ELSE SAVE LOOP VAR.S
+<span class="linenr">1707: </span>MOV  A,H       ;BUT IFF LOPVAR IS 0
+<span class="linenr">1708: </span>ORA  L         ;THAT WILL BE ALL
+<span class="linenr">1709: </span>JZ   PU1 
+</pre>
+</div>
+<ul class="org-ul">
+<li>ループ変数(LOPVAR)をチェックする。LOPVAR=0であれば、LOPVAR以外のFOR変数はスタックに積まずにPU1にジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1710: </span>LHLD LOPPT     ;ELSE, MORE TO SAVE
+<span class="linenr">1711: </span>PUSH H 
+<span class="linenr">1712: </span>LHLD LOPLN 
+<span class="linenr">1713: </span>PUSH H 
+<span class="linenr">1714: </span>LHLD LOPLMT
+<span class="linenr">1715: </span>PUSH H 
+<span class="linenr">1716: </span>LHLD LOPINC
+<span class="linenr">1717: </span>PUSH H 
+<span class="linenr">1718: </span>LHLD LOPVAR
+</pre>
+</div>
+<ul class="org-ul">
+<li>LOPVARが0でなければ、ループ変数をすべてスタックに積む。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1719: </span>PU1    PUSH H 
+<span class="linenr">1720: </span>       PUSH B         ;BC = RETURN ADDR. 
+<span class="linenr">1721: </span>       RET
+<span class="linenr">1722: </span>- 最後にLOPVARと戻りアドレスをスタックにプッシュする。
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd5d7197" class="outline-3">
+<h3 id="orgd5d7197">POPA</h3>
+<div class="outline-text-3" id="text-orgd5d7197">
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1684: </span>POPA   POP  B         ;BC = RETURN ADDR. 
+<span class="linenr">1685: </span>       POP  H         ;RESTORE LOPVAR, BUT 
+<span class="linenr">1686: </span>       SHLD LOPVAR    ;=0 MEANS NO MORE
+<span class="linenr">1687: </span>       MOV  A,H 
+<span class="linenr">1688: </span>       ORA  L 
+<span class="linenr">1689: </span>       JZ   PP1       ;YEP, GO RETURN
+</pre>
+</div>
+<ul class="org-ul">
+<li>まず戻りアドレスをBCレジスタに退避し、LOPVARを取り出す。<br /></li>
+<li>LOPVAR=0であれば、もうFOR変数は積まれていないので、PP1にジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1690: </span>POP  H         ;NOP, RESTORE OTHERS 
+<span class="linenr">1691: </span>SHLD LOPINC
+<span class="linenr">1692: </span>POP  H 
+<span class="linenr">1693: </span>SHLD LOPLMT
+<span class="linenr">1694: </span>POP  H 
+<span class="linenr">1695: </span>SHLD LOPLN 
+<span class="linenr">1696: </span>POP  H 
+<span class="linenr">1697: </span>SHLD LOPPT 
+</pre>
+</div>
+<ul class="org-ul">
+<li>FOR変数をスタックから取り出す。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1698: </span>PP1    PUSH B         ;BC = RETURN ADDR. 
+<span class="linenr">1699: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>戻りアドレスをスタックに戻し、RETで呼び出し元に戻る。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org3b3c495" class="outline-2">
+<h2 id="org3b3c495">バッファ操作</h2>
+<div class="outline-text-2" id="text-org3b3c495">
+</div>
+<div id="outline-container-orgbf54dbb" class="outline-3">
+<h3 id="orgbf54dbb">MVUP</h3>
+<div class="outline-text-3" id="text-orgbf54dbb">
+<ul class="org-ul">
+<li>MVUPはDEからHL-1までのメモリブロックをBCレジスタが指すアドレスから始まるメモリブロックに移動する。<br /></li>
+<li>BC&lt;DEである必要がある。<br /></li>
+</ul>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">ADR</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">BC</td>
+<td class="org-left">BEGIN(NEW)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">END(NEW)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">DE</td>
+<td class="org-left">BEGIN(ORIGINAL)</td>
+</tr>
+
+<tr>
+<td class="org-left">HL-1</td>
+<td class="org-left">END(ORIGINAL)</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1664: </span>MVUP   RST  4         ;*** MVUP ***
+<span class="linenr">1665: </span>       RZ             ;DE = HL, RETURN 
+<span class="linenr">1666: </span>       LDAX D         ;GET ONE BYTE
+<span class="linenr">1667: </span>       STAX B         ;MOVE IT 
+<span class="linenr">1668: </span>       INX  D         ;INCREASE BOTH POINTERS
+<span class="linenr">1669: </span>       INX  B 
+<span class="linenr">1670: </span>       JMP  MVUP      ;UNTIL DONE
+</pre>
+</div>
+<ul class="org-ul">
+<li>HL(移動先)とDE(移動元)のアドレスを比較する。HL=DEなら終了する。<br /></li>
+<li>DEが指すメモリの内容を読み取り、BCレジスタが指すメモリにコピーする。<br /></li>
+<li>DEとBCをインクリメントし、MVUPに戻る。データのコピーをHL=DEとなるまで繰り返す。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org32821c0" class="outline-3">
+<h3 id="org32821c0">MVDOWN</h3>
+<div class="outline-text-3" id="text-org32821c0">
+<ul class="org-ul">
+<li>MVDOWNはBC〜DE-1で表されるメモリブロックを、HLレジスタが指すアドレス-1で終わるメモリブロックに移動する。<br /></li>
+<li>BC&gt;DEである必要がある。<br /></li>
+</ul>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">ADR</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">BC</td>
+<td class="org-left">BEGIN(ORIGINAL)</td>
+</tr>
+
+<tr>
+<td class="org-left">DE-1</td>
+<td class="org-left">END(ORIGINAL)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">BEGIN(NEW)</td>
+</tr>
+
+<tr>
+<td class="org-left">HL-1</td>
+<td class="org-left">END(NEW)</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1672: </span>MVDOWN MOV  A,B       ;*** MVDOWN ***
+<span class="linenr">1673: </span>       SUB  D         ;TEST IFF DE = BC 
+<span class="linenr">1674: </span>       JNZ  MD1       ;NO, GO MOVE 
+<span class="linenr">1675: </span>       MOV  A,C       ;MAYBE, OTHER BYTE?
+<span class="linenr">1676: </span>       SUB  E 
+<span class="linenr">1677: </span>       RZ             ;YES, RETURN 
+<span class="linenr">1678: </span>MD1    DCX  D         ;ELSE MOVE A BYTE
+<span class="linenr">1679: </span>       DCX  H         ;BUT FIRST DECREASE
+<span class="linenr">1680: </span>       LDAX D         ;BOTH POINTERS AND 
+<span class="linenr">1681: </span>       MOV  M,A       ;THEN DO IT
+<span class="linenr">1682: </span>       JMP  MVDOWN    ;LOOP BACK 
+</pre>
+</div>
+<ul class="org-ul">
+<li>BC=DEであれば、処理を終了する。そうでなければMD1へ進む。<br /></li>
+<li>先にDEとHLをデクリメントする。<br /></li>
+<li>DEが指すメモリの内容をHLレジスタが指すメモリにコピーする。<br /></li>
+<li>MVDOWNへジャンプし、BC=DEとなるまで処理を繰り返す。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org4cd6ca7" class="outline-2">
+<h2 id="org4cd6ca7">エラー処理</h2>
+<div class="outline-text-2" id="text-org4cd6ca7">
+</div>
+<div id="outline-container-orgce147b4" class="outline-3">
+<h3 id="orgce147b4">ERROR</h3>
+<div class="outline-text-3" id="text-orgce147b4">
+<ul class="org-ul">
+<li>エラーメッセージには"WHAT?", "SORRY?", "HOW?"がある。<br /></li>
+<li>エラーメッセージを表示したら、RSTARTへ戻るか、入力エラーの場合は再入力を促す。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">142: </span>QHOW   PUSH D         ;*** ERROR: "HOW?" *** 
+<span class="linenr">143: </span>AHOW   LXI  D,HOW 
+<span class="linenr">144: </span>       JMP  ERROR 
+</pre>
+</div>
+<ul class="org-ul">
+<li>QHOWとAHOWの違いは、テキストポインタを保存するかどうかである。呼び出し時にスタックにテキストポインタを退避済みであれば、AHOW、まだ退避していなければQHOWを呼び出す。<br /></li>
+<li>QHOWはテキストポインタ(DEレジスタ)をスタックに退避したあと、DEレジスタに"HOW"文字列を設定し、ERRORルーチンへジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1437: </span>QSORRY PUSH D         ;*** QSORRY ***
+<span class="linenr">1438: </span>ASORRY LXI  D,SORRY   ;*** ASORRY ***
+<span class="linenr">1439: </span>       JMP  ERROR 
+</pre>
+</div>
+<ul class="org-ul">
+<li>QSORRYとASORRY、QWHATとAWHATも同様であるが、QWHATはERRORルーチンの前に配置されているため、JMP命令は使用しない。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1409: </span>QWHAT  PUSH D         ;*** QWHAT *** 
+<span class="linenr">1410: </span>AWHAT  LXI  D,WHAT    ;*** AWHAT *** 
+<span class="linenr">1411: </span>ERROR  SUB  A         ;*** ERROR *** 
+<span class="linenr">1412: </span>       CALL PRTSTG    ;PRINT 'WHAT?', 'HOW?' 
+<span class="linenr">1413: </span>       POP  D         ;OR 'SORRY'
+<span class="linenr">1414: </span>       LDAX D         ;SAVE THE CHARACTER
+<span class="linenr">1415: </span>       PUSH PSW       ;AT WHERE OLD DE -&gt;
+<span class="linenr">1416: </span>       SUB  A         ;AND PUT A 0 THERE 
+<span class="linenr">1417: </span>       STAX D 
+<span class="linenr">1418: </span>       LHLD CURRNT    ;GET CURRENT LINE #
+<span class="linenr">1419: </span>       PUSH H 
+<span class="linenr">1420: </span>       MOV  A,M       ;CHECK THE VALUE 
+<span class="linenr">1421: </span>       INX  H 
+<span class="linenr">1422: </span>       ORA  M 
+<span class="linenr">1423: </span>       POP  D 
+<span class="linenr">1424: </span>       JZ   RSTART    ;IFF ZERO, JUST RERSTART
+<span class="linenr">1425: </span>       MOV  A,M       ;IFF NEGATIVE,
+<span class="linenr">1426: </span>       ORA  A 
+<span class="linenr">1427: </span>       JM   INPERR    ;REDO INPUT
+<span class="linenr">1428: </span>       CALL PRTLN     ;ELSE PRINT THE LINE 
+<span class="linenr">1429: </span>       DCX  D         ;UPTO WHERE THE 0 IS 
+<span class="linenr">1430: </span>       POP  PSW       ;RESTORE THE CHARACTER 
+<span class="linenr">1431: </span>       STAX D 
+<span class="linenr">1432: </span>       MVI  A,77Q     ;PRINTt A "?" 
+<span class="linenr">1433: </span>       RST  2 
+<span class="linenr">1434: </span>       SUB  A         ;AND THE REST OF THE 
+<span class="linenr">1435: </span>       CALL PRTSTG    ;LINE
+<span class="linenr">1436: </span>       JMP  RSTART
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタにエラー文字列を設定した後、Aレジスタをクリアし、PRTSTGを呼び出すことでエラー文字列を印字する。<br /></li>
+<li>テキストポインタを復元し、テキストポインタが指す最初の文字をスタックに退避しておいてから、その文字を'0'に置き換える。<br /></li>
+<li>現在の行番号を取得し、行番号が0(ダイレクト実行を表す)であれば、RSTARTへジャンプし、リスタートする。<br /></li>
+<li>行番号が負であれば、INPUT文での入力エラーであると判断し、再入力を促す。<br /></li>
+<li>行番号が正であれば、現在行を先頭から'0'で置き換えた箇所まで印字する(PRTLNは'0'を見つけると印字を終了する)。<br /></li>
+<li>'0'で置き換えた箇所まで印字した後、'0'を元の文字に戻し、'?'を印字する。<br /></li>
+<li>その後、現在行の残りを印字する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">145: </span>HOW    DB   'HOW?',0DH 
+<span class="linenr">146: </span>OK     DB   'OK',0DH 
+<span class="linenr">147: </span>WHAT   DB   'WHAT?',0DH 
+<span class="linenr">148: </span>SORRY  DB   'SORRY',0DH 
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7771bd2" class="outline-2">
+<h2 id="org7771bd2">関数</h2>
+<div class="outline-text-2" id="text-org7771bd2">
+<ul class="org-ul">
+<li>関数テーブル(TAB4)に登録されているTiny Basic関数の処理を行うサブルーチン群の説明を行う。<br /></li>
+</ul>
+</div>
+<div id="outline-container-org3880502" class="outline-3">
+<h3 id="org3880502">ABS</h3>
+<div class="outline-text-3" id="text-org3880502">
+<ul class="org-ul">
+<li>ABS関数の引数の絶対値を求める。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1142: </span>ABS    CALL PARN      ;*** ABS(EXPR) *** 
+<span class="linenr">1143: </span>       CALL CHKSGN    ;CHECK SIGN
+<span class="linenr">1144: </span>       MOV  A,H       ;NOTE THAT -32768
+<span class="linenr">1145: </span>       ORA  H         ;CANNOT CHANGE SIGN
+<span class="linenr">1146: </span>       JM   QHOW      ;SO SAY: "HOW?"
+<span class="linenr">1147: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>引数を評価し、その結果の符号をCHKSGNで確認する。<br /></li>
+<li>CHKSGNはHLレジスタの値が負であれば2の補数を求めることで絶対値を求めるが、HLレジスタの値が0x8000の場合、2の補数も0x8000であるため、絶対値を求めることができない。この場合、エラー処理(QHOW)を行う。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org214f0ec" class="outline-3">
+<h3 id="org214f0ec">SIZE</h3>
+<div class="outline-text-3" id="text-org214f0ec">
+<ul class="org-ul">
+<li>プログラムテキスト領域の残りバイト数を求める。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1148: </span>SIZE   LHLD TXTUNF    ;*** SIZE ***
+<span class="linenr">1149: </span>       PUSH D         ;GET THE NUMBER OF FREE
+<span class="linenr">1150: </span>       XCHG           ;BYTES BETWEEN 'TXTUNF'
+<span class="linenr">1151: </span>SIZEA  LXI  H,VARBGN  ;AND 'VARBGN'
+<span class="linenr">1152: </span>       CALL SUBDE 
+<span class="linenr">1153: </span>       POP  D 
+<span class="linenr">1154: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>VARBGN(変数領域の先頭)からTXTUNF(プログラムテキストの終了位置)を減算することでプログラムテキスト領域の残りバイト数を求める。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org18fb46d" class="outline-3">
+<h3 id="org18fb46d">RND</h3>
+<div class="outline-text-3" id="text-org18fb46d">
+<ul class="org-ul">
+<li>RND(I)は乱数を計算する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1116: </span>RND    CALL PARN      ;*** RND(EXPR) *** 
+<span class="linenr">1117: </span>       MOV  A,H       ;EXPR MUST BE +
+<span class="linenr">1118: </span>       ORA  A 
+<span class="linenr">1119: </span>       JM   QHOW
+<span class="linenr">1120: </span>       ORA  L         ;AND NON-ZERO
+<span class="linenr">1121: </span>       JZ   QHOW
+<span class="linenr">1122: </span>       PUSH D         ;SAVE BOTH 
+<span class="linenr">1123: </span>       PUSH H 
+</pre>
+</div>
+<ul class="org-ul">
+<li>まず、PARNを呼び出し、引数を評価する。引数は正である必要がある。正でなければエラー処理(QHOW)を行う。<br /></li>
+<li>テキストポインタ(DEレジスタ)と引数(HLレジスタ)をスタックに退避する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1124: </span>LHLD RANPNT    ;GET MEMORY AS RANDOM
+<span class="linenr">1125: </span>LXI  D,LSTROM  ;NUMBER
+<span class="linenr">1126: </span>RST  4 
+<span class="linenr">1127: </span>JC   RA1       ;WRAP AROUND IFF LAST 
+<span class="linenr">1128: </span>LXI  H,START 
+</pre>
+</div>
+<ul class="org-ul">
+<li>HLレジスタにRANPNTの値(初期値はSTART)を読み込み、LSTROMと同じかどうか確認する。<br /></li>
+<li>LSTROMと同じであれば、HLレジスタの値を初期値(START)にリセットする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1129: </span>RA1    MOV  E,M 
+<span class="linenr">1130: </span>       INX  H 
+<span class="linenr">1131: </span>       MOV  D,M 
+<span class="linenr">1132: </span>       SHLD RANPNT
+<span class="linenr">1133: </span>       POP  H 
+<span class="linenr">1134: </span>       XCHG 
+<span class="linenr">1135: </span>       PUSH B 
+<span class="linenr">1136: </span>       CALL DIVIDE    ;RND(N)=MOD(M,N)+1 
+<span class="linenr">1137: </span>       POP  B 
+<span class="linenr">1138: </span>       POP  D 
+<span class="linenr">1139: </span>       INX  H 
+<span class="linenr">1140: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>HLレジスタが指すメモリの値をDEレジスタに読み込む。この過程でHLレジスタの値は+1される。<br /></li>
+<li>HLレジスタの値をRANPNTへ保存する。<br /></li>
+<li>引数をスタックからHLレジスタに読み出す。<br /></li>
+<li>BCレジスタをスタックへ退避してから、DIVIDEを呼び出し、HL/DEを計算する。DIVIDEはHLレジスタに剰余を保管して戻る。<br /></li>
+<li>BCレジスタとDEレジスタ(テキストポインタ)をスタックから復元し、HLに1を加える。<br /></li>
+<li>まとめると、この関数は引数をメモリの内容で除算し、その剰余に1を加えたものを乱数としている。除数となるメモリのアドレスはRNDを呼び出すたびに+1される。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7cc2a56" class="outline-3">
+<h3 id="org7cc2a56">INP</h3>
+<div class="outline-text-3" id="text-org7cc2a56">
+<ul class="org-ul">
+<li>INP(I)はポート'I'から値を読み、その値を返す。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1231: </span>INP    CALL PARN
+<span class="linenr">1232: </span>       MOV  A,L
+<span class="linenr">1233: </span>       STA  INPIO + 1
+<span class="linenr">1234: </span>       MVI  H,0
+<span class="linenr">1235: </span>       JMP  INPIO
+<span class="linenr">1236: </span>       JMP  QWHAT
+</pre>
+</div>
+<ul class="org-ul">
+<li>PARNを使って引数を評価する。結果の下位バイト(Lレジスタ)をINPIO+1に書き込む。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1792: </span>INPIO  IN   0FFH
+<span class="linenr">1793: </span>       MOV  L,A
+<span class="linenr">1794: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>INPIO+1はIN命令の引数になっている。ソースコード上は0FFHになっているが、ここにジャンプしてくる前にINP(I)命令の引数に書き換えられている。<br /></li>
+<li>IN命令を実行後、結果(Aレジスタ)をLレジスタにコピーし、呼び出し元に戻る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga8cbfe3" class="outline-3">
+<h3 id="orga8cbfe3">PEEK</h3>
+<div class="outline-text-3" id="text-orga8cbfe3">
+<ul class="org-ul">
+<li>PEEK(I)は引数Iで表されるアドレスの値を返す。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1250: </span>PEEK   CALL PARN
+<span class="linenr">1251: </span>       MOV  L,M
+<span class="linenr">1252: </span>       MVI  H,0
+<span class="linenr">1253: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>PARNを呼び出し、引数を評価する。<br /></li>
+<li>評価結果(HLレジスタ)が指すメモリの値をLレジスタに入れる。<br /></li>
+<li>PEEKの戻り値は8ビットなので、Hレジスタには0を入れて呼び出し元に戻る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge363e42" class="outline-3">
+<h3 id="orge363e42">POKE</h3>
+<div class="outline-text-3" id="text-orge363e42">
+<ul class="org-ul">
+<li>POKE I, Jはアドレス'I'にデータ'J'を書き込む。アドレスとデータの組は一つである必要はなく、POKE I, J, K, Lの様に書くことでアドレス'K'にデータ'L'を書き込むことができる。引数には括弧をつけてはならない。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1237: </span>POKE   RST  3
+<span class="linenr">1238: </span>       PUSH H
+<span class="linenr">1239: </span>       RST  1
+<span class="linenr">1240: </span>       DB   ','
+<span class="linenr">1241: </span>       DB   12H
+<span class="linenr">1242: </span>       RST  3
+<span class="linenr">1243: </span>       MOV  A,L
+<span class="linenr">1244: </span>       POP  H
+<span class="linenr">1245: </span>       MOV  M,A
+<span class="linenr">1246: </span>       RST  1
+<span class="linenr">1247: </span>       DB   ',',03H
+<span class="linenr">1248: </span>       JMP  POKE
+<span class="linenr">1249: </span>       RST 6
+</pre>
+</div>
+<ul class="org-ul">
+<li>EXPRを呼び出し、第一引数を評価する。評価結果(HLレジスタ)をスタックに保存する。<br /></li>
+<li>TSTC(RST 1)を使って、次の文字が','であることを確認する。','でなければFINISH(RST 6)を呼び出す。<br /></li>
+<li>','であれば、第二引数を評価する。評価結果の下位バイト(Lレジスタ)をAレジスタに入れる。<br /></li>
+<li>スタックから第一引数を読み出し、第二引数の値を第一引数で示されるメモリに書き込む。<br /></li>
+<li>TSTC(RST 1)を再び呼び出し、次の文字を確認する。次の文字が','であれば、第三引数があると判断し、POKEへジャンプする。<br /></li>
+<li>','でなければFINISH(RST 6)を呼び出す。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7459042" class="outline-3">
+<h3 id="org7459042">USR</h3>
+<div class="outline-text-3" id="text-org7459042">
+<ul class="org-ul">
+<li>USR(I(, J))はアドレス'I'に配置されている機械語ルーチンを実行する。引数'J'が与えられている場合は、'J'の値をHLレジスタに設定して機械語ルーチンを呼び出す。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1255: </span>USR    PUSH B
+<span class="linenr">1256: </span>       RST  1
+<span class="linenr">1257: </span>       DB   '(',28D    ;QWHAT
+<span class="linenr">1258: </span>       RST  3          ;EXPR
+<span class="linenr">1259: </span>       RST  1
+<span class="linenr">1260: </span>       DB   ')',7      ;PASPARM
+<span class="linenr">1261: </span>       PUSH D
+<span class="linenr">1262: </span>       LXI  D,USRET
+<span class="linenr">1263: </span>       PUSH D
+<span class="linenr">1264: </span>       PUSH H
+<span class="linenr">1265: </span>       RET             ;CALL USR ROUTINE
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1278: </span>USRET  POP  D
+<span class="linenr">1279: </span>       POP  B
+<span class="linenr">1280: </span>       RET
+<span class="linenr">1281: </span>       JMP  QWHAT
+</pre>
+</div>
+<ul class="org-ul">
+<li>BCレジスタをスタックに退避し、TSTC(RST 1)を呼び出して次の文字が'('であることを確認する。<br /></li>
+<li>EXPR(RST 3)を呼び出し、第一引数を評価する。HLレジスタにはユーザ定義の機械語ルーチンの先頭アドレスが入る。<br /></li>
+<li>TSTC(RST 1)を呼び出し、次の文字が')'であるかどうか確認する。')'でなければ、次の引数を評価するためにPASPRMへジャンプする。<br /></li>
+<li>次の文字が')'であった場合、テキストポインタ(DEレジスタ)をスタックに退避する。<br /></li>
+<li>次にユーザ定義の機械語ルーチンからの戻りアドレスとしてUSRETをスタックに積む。このようにしてユーザ定義の機械語ルーチンから戻ったときにBC、DEレジスタを復元する。<br /></li>
+<li>次に第一引数(HLレジスタ)をスタックにプッシュする。このあとRET命令を実行することで、ユーザ定義関数へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1266: </span>PASPRM RST  1
+<span class="linenr">1267: </span>       DB   ',',14D
+<span class="linenr">1268: </span>       PUSH H
+<span class="linenr">1269: </span>       RST  3
+<span class="linenr">1270: </span>       RST  1
+<span class="linenr">1271: </span>       DB   ')',9
+<span class="linenr">1272: </span>       POP  B
+<span class="linenr">1273: </span>       PUSH D
+<span class="linenr">1274: </span>       LXI  D,USRET
+<span class="linenr">1275: </span>       PUSH D
+<span class="linenr">1276: </span>       PUSH B
+<span class="linenr">1277: </span>       RET             ;CALL USR ROUTINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>第二引数がある場合、PASPRMを実行する。<br /></li>
+<li>PASPRMでは最初に次の文字が','であるかどうかを確認する。','でなければUSRETへジャンプし、BCレジスタ、DEレジスタを復元して呼び出し元に戻る。<br /></li>
+<li>','であれば、第一引数(HLレジスタ)をスタックに退避したあと、EXPR(RST 3)を実行し、第二引数を評価する。<br /></li>
+<li>第二引数を評価したあと、次の文字が')'であるか確認する。')'であれば、スタックから第一引数を復元し、テキストポインタ、USRET、第一引数の順でスタックに積み、RET命令を実行する。RET命令を実行すると、スタックの一番上に積まれているデータ(第一引数)で示されるアドレスにジャンプする。HLレジスタには第二引数が保管されているので、ユーザ定義関数側ではHLの引数として使用することができる。<br /></li>
+<li>第二引数のあとの文字が')'でなければ、USRETへジャンプする。USRETでは第一引数をDEレジスタへ復元し、BCレジスタへはUSRを呼び出す前のBCレジスタの値を復元してから呼び出し元に戻る。テキストポインタの復元は、呼び出し元に戻ってから行う。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6c416b6" class="outline-3">
+<h3 id="org6c416b6">XP40</h3>
+<div class="outline-text-3" id="text-org6c416b6">
+<ul class="org-ul">
+<li>テキストポインタが指している式が、関数テーブルに登録されていない場合の処理を行う。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1095: </span>XP40   RST  7         ;NO, NOT A FUNCTION
+<span class="linenr">1096: </span>       JC   XP41      ;NOR A VARIABLE
+<span class="linenr">1097: </span>       MOV  A,M       ;VARIABLE
+<span class="linenr">1098: </span>       INX  H 
+<span class="linenr">1099: </span>       MOV  H,M       ;VALUE IN HL 
+<span class="linenr">1100: </span>       MOV  L,A 
+<span class="linenr">1101: </span>       RET
+<span class="linenr">1102: </span>XP41   CALL TSTNUM    ;OR IS IT A NUMBER 
+<span class="linenr">1103: </span>       MOV  A,B       ;# OF DIGIT
+<span class="linenr">1104: </span>       ORA  A 
+<span class="linenr">1105: </span>       RNZ            ;OK
+</pre>
+</div>
+<ul class="org-ul">
+<li>まずTSTV(RST 7)で変数であるかどうかを確認する。<br /></li>
+<li>変数でなければ、XP41へジャンプする。<br /></li>
+<li>変数であれば、変数の値をHLレジスタに設定し、呼び出し元に戻る。<br /></li>
+<li>XP41では、テキストポインタが数値文字列を指しているかどうかを確認する。<br /></li>
+<li>数値文字列であるかどうかは、桁数(Bレジスタ)を調べることで確認できる。<br /></li>
+<li>数値文字列であれば、呼び出し元に戻る。数値文字列でなければ、次のルーチン(PARN)を実行する。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org11bbcef" class="outline-2">
+<h2 id="org11bbcef">ユーティリティ</h2>
+<div class="outline-text-2" id="text-org11bbcef">
+</div>
+<div id="outline-container-org0543b5a" class="outline-3">
+<h3 id="org0543b5a">DIVIDE(除算)</h3>
+<div class="outline-text-3" id="text-org0543b5a">
+<ul class="org-ul">
+<li>HLをDEで除算する。商をBC、剰余をHLに入れて戻る。<br /></li>
+<li>大まかなアルゴリズムは、HL&lt;=0となるまでHLからDEを引き続け、引いた回数を商とする、というものである。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1300: </span>DIVIDE PUSH H         ;*** DIVIDE ***
+<span class="linenr">1301: </span>       MOV  L,H       ;DIVIDE H BY DE
+<span class="linenr">1302: </span>       MVI  H,0 
+<span class="linenr">1303: </span>       CALL DV1 
+<span class="linenr">1304: </span>       MOV  B,C       ;SAVE RESULT IN B
+<span class="linenr">1305: </span>       MOV  A,L       ;(REMAINDER+L)/DE
+<span class="linenr">1306: </span>       POP  H 
+<span class="linenr">1307: </span>       MOV  H,A 
+<span class="linenr">1308: </span>DV1    MVI  C,377Q    ;RESULT IN C 
+<span class="linenr">1309: </span>DV2    INR  C         ;DUMB ROUTINE
+<span class="linenr">1310: </span>       CALL SUBDE     ;DIVIDE BY SUBTRACT
+<span class="linenr">1311: </span>       JNC  DV2       ;AND COUNT 
+<span class="linenr">1312: </span>       DAD  D 
+<span class="linenr">1313: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>最初に上位8ビットだけを考える。HLの上位8ビットに対してDV1を呼び出す。<br /></li>
+<li>DV1はCに0xFFをセットするところから始まる。CはSUBDEを呼び出した回数をカウントするために使われている。C=0xFFとした直後にINRCでインクリメントするため、SUBDEを最初に呼び出すときにはC=0となっている。<br /></li>
+<li>SUBDEの結果が正であれば、DV2にもどり、減算を再実行する。<br /></li>
+<li>SUBDEの結果が正でなければ、DEを一回引きすぎているので、DAD DとしてHLにDEを加算してDV1の呼び出し元に戻る。<br /></li>
+<li>DV1の呼び出しから戻ると、減算回数をBレジスタに保存する。<br /></li>
+<li>(上位8ビット除算の余り*16+L)をHLレジスタに設定し、DV1の処理を行う。Cレジスタの内容は、Bレジスタと合わせて、HL/DEの商となる。今回のDV1の戻り先はDIVIDEを呼び出した箇所である。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4e5b5b0" class="outline-3">
+<h3 id="org4e5b5b0">SUBDE(16ビット減算)</h3>
+<div class="outline-text-3" id="text-org4e5b5b0">
+<ul class="org-ul">
+<li>HL-DEを計算する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1315: </span>SUBDE  MOV  A,L       ;*** SUBDE *** 
+<span class="linenr">1316: </span>       SUB  E         ;SUBTRACT DE FROM
+<span class="linenr">1317: </span>       MOV  L,A       ;HL
+<span class="linenr">1318: </span>       MOV  A,H 
+<span class="linenr">1319: </span>       SBB  D 
+<span class="linenr">1320: </span>       MOV  H,A 
+<span class="linenr">1321: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>単純な16ビット減算である。<br /></li>
+<li>まず、L-Eを計算し、次にH-DをL-Eのボロー付きで計算する。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3220cb1" class="outline-3">
+<h3 id="org3220cb1">CHKSGN(符号確認) / CHGSGN(符号変更)</h3>
+<div class="outline-text-3" id="text-org3220cb1">
+<ul class="org-ul">
+<li>HLレジスタの符号を確認し、負であれば符号を反転する。また、Bレジスタの最上位ビットも反転する。呼び出す前にBレジスタの最上位ビットをクリアしておけば、Bレジスタで符号、HLレジスタで絶対値を表現できる。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1323: </span>CHKSGN MOV  A,H       ;*** CHKSGN ***
+<span class="linenr">1324: </span>       ORA  A         ;CHECK SIGN OF HL
+<span class="linenr">1325: </span>       RP             ;IFF -, CHANGE SIGN 
+<span class="linenr">1326: </span>;* 
+</pre>
+</div>
+<ul class="org-ul">
+<li>H OR Hを計算して、Hレジスタの符号を確認する。符号が正であればそのまま呼び出し元に戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1327: </span>CHGSGN MOV  A,H       ;*** CHGSGN ***
+<span class="linenr">1328: </span>       CMA            ;CHANGE SIGN OF HL 
+<span class="linenr">1329: </span>       MOV  H,A 
+<span class="linenr">1330: </span>       MOV  A,L 
+<span class="linenr">1331: </span>       CMA
+<span class="linenr">1332: </span>       MOV  L,A 
+<span class="linenr">1333: </span>       INX  H 
+<span class="linenr">1334: </span>       MOV  A,B       ;AND ALSO FLIP B 
+<span class="linenr">1335: </span>       XRI  200Q
+<span class="linenr">1336: </span>       MOV  B,A 
+<span class="linenr">1337: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>HLレジスタの符号が負であれば、CHGSGNで符号を反転する。<br /></li>
+<li>2の補数を求めるために、HLの符号を反転し、1を加算する。<br /></li>
+<li>Bレジスタの符号も反転する。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf9f9d1c" class="outline-3">
+<h3 id="orgf9f9d1c">CKHLDE(16ビット比較)</h3>
+<div class="outline-text-3" id="text-orgf9f9d1c">
+<ul class="org-ul">
+<li>16ビットデータの符号付き比較を行う。<br /></li>
+<li>符号が同じであれば、そのままCOMP(RST 4)で比較する。<br /></li>
+<li>符号が異なれば、HLとDEを入れ替えてからCOMP(RST 4)を呼び出す。<br />
+<ul class="org-ul">
+<li>HL&gt;0、DE&lt;0の場合、期待される結果はHL&gt;DEであるが、符号なしで比較するとHL&lt;DEとなるため、期待した結果が得られない。<br /></li>
+<li>HL&lt;0、DE&gt;0の場合も同様で、期待される結果はHL&lt;DEであるが、COMPが返す結果はHL&gt;DEである。<br /></li>
+<li>このため、HLとDEの符号が違う場合、期待とは逆の結果になるため、COMP(RST 4)を呼び出す前にHLとDEを入れ替えておく。<br /></li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1339: </span>CKHLDE MOV  A,H 
+<span class="linenr">1340: </span>       XRA  D         ;SAME SIGN?
+<span class="linenr">1341: </span>       JP   CK1       ;YES, COMPARE
+<span class="linenr">1342: </span>       XCHG           ;NO, XCH AND COMP
+<span class="linenr">1343: </span>CK1    RST  4 
+<span class="linenr">1344: </span>       RET
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfb68381" class="outline-3">
+<h3 id="orgfb68381">COMP</h3>
+<div class="outline-text-3" id="text-orgfb68381">
+<ul class="org-ul">
+<li>16ビットデータの符号なし比較を行う。<br /></li>
+<li>HL-DEを計算し、その結果のフラグを設定すれば良いが、8ビットずつ比較を実施する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1852: </span>MOV  A,H       ;*** COMP OR RST 4 *** 
+<span class="linenr">1853: </span>CMP  D         ;COMPARE HL WITH DE
+<span class="linenr">1854: </span>RNZ            ;RETURN CORRECT C AND
+<span class="linenr">1855: </span>MOV  A,L       ;Z FLAGS 
+<span class="linenr">1856: </span>CMP  E         ;BUT OLD A IS LOST 
+<span class="linenr">1857: </span>RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>H-Dを計算し、結果がゼロでなければ、呼び出し元に戻る。フラグはH-Dの結果がそのまま設定されている。<br /></li>
+<li>H=Dであれば、L-Eを計算し、結果がゼロでなければ呼び出し元に戻る。フラグにはL-Eの結果が設定される。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0b05761" class="outline-2">
+<h2 id="org0b05761">入出力</h2>
+<div class="outline-text-2" id="text-org0b05761">
+</div>
+<div id="outline-container-org43723ab" class="outline-3">
+<h3 id="org43723ab">GETLN</h3>
+<div class="outline-text-3" id="text-org43723ab">
+<ul class="org-ul">
+<li>キーボードから一行読み込む<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1468: </span>GETLN  RST  2         ;*** GETLN *** 
+<span class="linenr">1469: </span>       LXI  D,BUFFER  ;PROMPT AND INIT
+</pre>
+</div>
+<ul class="org-ul">
+<li>GETLNを呼び出す前にAレジスタにプロンプト文字を入れてある。最初にOUTC(RST 2)を呼び出してプロンプトを表示する。次にテキストポインタを行入力用のバッファを指すように設定する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1470: </span>GL1    CALL CHKIO     ;CHECK KEYBOARD
+<span class="linenr">1471: </span>       JZ   GL1       ;NO INPUT, WAIT
+</pre>
+</div>
+<ul class="org-ul">
+<li>CHKIOを呼び出し、キーボードの状態を確認する。入力があるまでCHKIOを実行する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1472: </span>CPI  177Q      ;DELETE LST CHARACTER?
+<span class="linenr">1473: </span>JZ   GL3       ;YES 
+<span class="linenr">1474: </span>CPI  12Q       ;IGNORE LF 
+<span class="linenr">1475: </span>JZ   GL1 
+<span class="linenr">1476: </span>ORA  A         ;IGNORE NULL 
+<span class="linenr">1477: </span>JZ   GL1 
+<span class="linenr">1478: </span>CPI  134Q      ;DELETE THE WHOLE LINE?
+<span class="linenr">1479: </span>JZ   GL4       ;YES 
+</pre>
+</div>
+<ul class="org-ul">
+<li>入力が7FHであった場合、GL3へジャンプする。<br /></li>
+<li>入力が0AH(改行コード)である場合、GL1へジャンプして再入力を行う。<br /></li>
+<li>入力が0である場合もGL1へジャンプして再入力を行う。<br /></li>
+<li>入力が5CHである場合はGL4へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1480: </span>STAX D         ;ELSE, SAVE INPUT
+<span class="linenr">1481: </span>INX  D         ;AND BUMP POINTER
+<span class="linenr">1482: </span>CPI  15Q       ;WAS IT CR?
+<span class="linenr">1483: </span>JNZ  GL2       ;NO
+<span class="linenr">1484: </span>MVI  A,12Q     ;YES, GET LINE FEED
+<span class="linenr">1485: </span>RST  2         ;CALL OUTC AND LINE FEED
+<span class="linenr">1486: </span>RET            ;WE'VE GOT A LINE
+</pre>
+</div>
+<ul class="org-ul">
+<li>入力(Aレジスタ)をテキストポインタ(DEレジスタ)が指すメモリに保存する。<br /></li>
+<li>テキストポインタ(DEレジスタ)を一つ進める。<br /></li>
+<li>入力が復帰コード(0DH)であれば、OUTC(RST 2)を呼び出して改行コード(0AH)を印字し、呼び出し元へ戻る。復帰コードでなければ、GL2へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1487: </span>GL2    MOV  A,E       ;MORE FREE ROOM?
+<span class="linenr">1488: </span>       CPI  BUFEND AND 0FFH
+<span class="linenr">1489: </span>       JNZ  GL1       ;YES, GET NEXT INPUT 
+</pre>
+</div>
+<ul class="org-ul">
+<li>入力バッファに空きがあるか確認する。<br /></li>
+<li>テキストポインタの下位バイトを入力バッファの終わり(BUFEND)の下位バイトと比較する。入力バッファの大きさは80バイト(50H)なので、下位バイトの比較のみで十分である。一致しなければまだバッファに空きがあると判断し、GL1に戻って追加入力を受け付ける。一致した場合、GL3へ進む。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1490: </span>GL3    MOV  A,E       ;DELETE LAST CHARACTER 
+<span class="linenr">1491: </span>       CPI  BUFFER AND 0FFH    ;BUT DO WE HAVE ANY? 
+<span class="linenr">1492: </span>       JZ   GL4       ;NO, REDO WHOLE LINE 
+<span class="linenr">1493: </span>       DCX  D         ;YES, BACKUP POINTER 
+<span class="linenr">1494: </span>       MVI  A,'_'     ;AND ECHO A BACK-SPACE 
+<span class="linenr">1495: </span>       RST  2 
+<span class="linenr">1496: </span>       JMP  GL1       ;GO GET NEXT INPUT 
+<span class="linenr">1497: </span>GL4    CALL CRLF      ;REDO ENTIRE LINE
+<span class="linenr">1498: </span>       MVI  A,136Q    ;CR, LF AND UP-ARROW 
+<span class="linenr">1499: </span>       JMP  GETLN 
+</pre>
+</div>
+<ul class="org-ul">
+<li>GL3では最後の文字を一文字削除する。ここに来るのは、入力が5CHである場合、または入力バッファの最後に到達した場合である。<br /></li>
+<li>まず、入力バッファの先頭アドレス(BUFFER)とテキストポインタ(DEレジスタ)を比較する。前述した理由で比較は下位バイトのみで良い。一致しなければ、テキストポインタ(DEレジスタ)を一文字前へ戻し、バックスペース文字('_')を印字する。GGL1へ戻って追加入力を受け付ける。一致した場合は、テキストポインタを一つ前へ戻すことができない。GL4へジャンプする。<br /></li>
+<li>GL4では、復帰コード(0DH)と改行コード(0AH)、一行消去したことを意味する'^'を印字し、GETLNへ戻って最初から入力をやり直す。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org78c52af" class="outline-3">
+<h3 id="org78c52af">CHKIO</h3>
+<div class="outline-text-3" id="text-org78c52af">
+<ul class="org-ul">
+<li>キーボードから一文字読み取る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1765: </span>CHKIO  PUSH B         ;SAVE B ON STACK
+<span class="linenr">1766: </span>       PUSH D         ;AND D
+<span class="linenr">1767: </span>       PUSH H         ;THEN H
+<span class="linenr">1768: </span>       MVI  C,11      ;GET CONSTAT WORD
+<span class="linenr">1769: </span>       CALL CPM       ;CALL THE BDOS
+</pre>
+</div>
+<ul class="org-ul">
+<li>BC/DE/HLレジスタをスタックに退避する。<br /></li>
+<li>Cレジスタに11を設定し、CP/MのシステムコールCONSTATを呼び出し、キーボードの接続状態を確認する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1770: </span>       ORA  A         ;SET FLAGS
+<span class="linenr">1771: </span>       JNZ  CI1       ;IF READY GET CHARACTER
+<span class="linenr">1772: </span>       JMP  IDONE     ;RESTORE AND RETURN
+<span class="linenr">1773: </span>CI1    MVI  C,1       ;GET CONIN WORD
+<span class="linenr">1774: </span>       CALL CPM       ;CALL THE BDOS
+</pre>
+</div>
+<ul class="org-ul">
+<li>システムコールの戻り値が0でなければ、CI1へジャンプし、文字を取得する。0であればIDONEへジャンプし、スタックへ退避しておいたBC/DE/HLレジスタを復元する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1775: </span>CPI  0FH       ;IS IT CONTROL-O?
+<span class="linenr">1776: </span>JNZ  CI2       ;NO, MORE CHECKING
+<span class="linenr">1777: </span>LDA  OCSW      ;CONTROL-O  FLIP OCSW
+<span class="linenr">1778: </span>CMA            ;ON TO OFF, OFF TO ON
+<span class="linenr">1779: </span>STA  OCSW      ;AND PUT IT BACK
+<span class="linenr">1780: </span>JMP  CHKIO     ;AND GET ANOTHER CHARACTER
+</pre>
+</div>
+<ul class="org-ul">
+<li>入力された文字が0FHでなければ、CI2にジャンプする。0FHであればOSCWの内容を反転し、もう一文字取得するためCHKIOへジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1781: </span>CI2    CPI  3         ;IS IT CONTROL-C?
+<span class="linenr">1782: </span>       JNZ  IDONE     ;RETURN AND RESTORE IF NOT
+<span class="linenr">1783: </span>       JMP  RSTART    ;YES, RESTART TBI
+</pre>
+</div>
+<p>
+入力が03Hであれば、RSTARTへジャンプし、Tiny Basicをリスタートする。03Hでなければ、BC/DE/HLレジスタを復元し、呼び出し元へ戻る。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgdf63ee6" class="outline-3">
+<h3 id="orgdf63ee6">OUTC/CRLF</h3>
+<div class="outline-text-3" id="text-orgdf63ee6">
+<ul class="org-ul">
+<li>OUTC(RST 2)ではAレジスタに格納されている文字を印字する。CRLFは復帰コード(0DH)と改行コード(0AH)を印字する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1839: </span>CRLF:  EQU  0EH       ;EXECUTE TIME LOCATION OF THIS INSTRUCTION.
+<span class="linenr">1840: </span>       MVI  A,0DH     ;*** CRLF ***
+<span class="linenr">1841: </span>;* 
+</pre>
+</div>
+<ul class="org-ul">
+<li>'CALL CRLF(CALL 000EH)'を実行した場合、Aレジスタに復帰コード(0DH)を入れて、そのままOUTCの処理へ進む。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1841: </span>PUSH PSW       ;*** OUTC OR RST 2 *** 
+<span class="linenr">1842: </span>LDA  OCSW      ;PRINT CHARACTER ONLY
+<span class="linenr">1843: </span>ORA  A         ;IFF OCSW SWITCH IS ON
+<span class="linenr">1844: </span>JMP  OC2       ;REST OF THIS IS AT OC2
+</pre>
+</div>
+<ul class="org-ul">
+<li>OUTCはRST 2で呼び出される。RST 2を実行すると、1842行目(アドレス0010H)から実行される。<br /></li>
+<li>Aレジスタ(印字する文字)をスタックに退避しておく。<br /></li>
+<li>出力スイッチ(OCSW)の内容を確認する。ORA命令でフラグを変化させておいて、OC2へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1743: </span>OC2    JNZ  OC3       ;IT IS ON
+<span class="linenr">1744: </span>       POP  PSW       ;IT IS OFF 
+<span class="linenr">1745: </span>       RET            ;RESTORE AF AND RETURN 
+</pre>
+</div>
+<ul class="org-ul">
+<li>出力スイッチ(OCSW)が0であれば、文字を出力しない。Aレジスタを復旧し、呼び出し元に戻る。0でなければOC3へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1746: </span>OC3    POP  A         ;GET OLD A BACK
+<span class="linenr">1747: </span>       PUSH B         ;SAVE B ON STACK
+<span class="linenr">1748: </span>       PUSH D         ;AND D
+<span class="linenr">1749: </span>       PUSH H         ;AND H TOO
+<span class="linenr">1750: </span>       STA  OUTCAR    ;SAVE CHARACTER
+<span class="linenr">1751: </span>       MOV  E,A       ;PUT CHAR. IN E FOR CPM
+<span class="linenr">1752: </span>       MVI  C,2       ;GET CONOUT COMMAND
+<span class="linenr">1753: </span>       CALL CPM       ;CALL CPM AND DO IT
+</pre>
+</div>
+<ul class="org-ul">
+<li>Aレジスタ(文字データ)を復旧し、BCレジスタとDEレジスタ、HLレジスタをスタックに退避する。Aレジスタの内容はOUTCARに保管する。<br /></li>
+<li>CP/Mのシステムコールを使って印字を行う。Eレジスタに印字する文字、Cレジスタに文字出力(CONOUT)を表す2を設定し、CP/Mのシステムコールを呼び出す(CALL 0005H)。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1754: </span>LDA  OUTCAR    ;GET CHAR. BACK
+<span class="linenr">1755: </span>CPI  0DH       ;WAS IT A 'CR'?
+<span class="linenr">1756: </span>JNZ  DONE      ;NO, DONE
+<span class="linenr">1757: </span>MVI  E,0AH     ;GET LINEFEED
+<span class="linenr">1758: </span>MVI  C,2       ;AND CONOUT AGAIN
+<span class="linenr">1759: </span>CALL CPM       ;CALL CPM
+</pre>
+</div>
+<ul class="org-ul">
+<li>Aレジスタに印字した文字を復旧する。もし印字した文字が復帰コードであれば、改行コード(0AH)を印字する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1760: </span>DONE   LDA  OUTCAR    ;GET CHARACTER BACK
+<span class="linenr">1761: </span>IDONE  POP  H         ;GET H BACK
+<span class="linenr">1762: </span>       POP  D         ;AND D
+<span class="linenr">1763: </span>       POP  B         ;AND B TOO
+<span class="linenr">1764: </span>       RET            ;DONE AT LAST
+</pre>
+</div>
+<ul class="org-ul">
+<li>A/BC/DE/HLの各レジスタの内容を復旧し、呼び出し元に戻る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org514ff83" class="outline-3">
+<h3 id="org514ff83">PRTSTG</h3>
+<div class="outline-text-3" id="text-org514ff83">
+<ul class="org-ul">
+<li>テキストポインタ(DEレジスタ)で始まる文字列を印字する。終端文字(Aレジスタ)を見つけたら、印字を終了する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1558: </span>PRTSTG MOV  B,A       ;*** PRTSTG ***
+<span class="linenr">1559: </span>PS1    LDAX D         ;GET A CHARACTERr 
+<span class="linenr">1560: </span>       INX  D         ;BUMP POINTER
+<span class="linenr">1561: </span>       CMP  B         ;SAME AS OLD A?
+<span class="linenr">1562: </span>       RZ             ;YES, RETURN 
+<span class="linenr">1563: </span>       RST  2         ;ELSE PRINT IT 
+<span class="linenr">1564: </span>       CPI  0DH       ;WAS IT A CR?
+<span class="linenr">1565: </span>       JNZ  PS1       ;NO, NEXT
+<span class="linenr">1566: </span>       RET            ;YES, RETURN 
+</pre>
+</div>
+<ul class="org-ul">
+<li>文の末尾を示す文字(終端文字)をBレジスタに設定する。<br /></li>
+<li>テキストポインタ(DEレジスタ)が指す文字をAレジスタに読み込み、テキストポインタを一文字すすめる。<br /></li>
+<li>読み込んだ文字(Aレジスタの内容)が終端文字(Bレジスタの内容)と一致したら、印字を終了し、呼び出し元に戻る。違っていれば、OUTC(RST 2)を呼び出してAレジスタの内容を印字する。<br /></li>
+<li>印字した文字(Aレジスタの内容)と復帰コード(0DH)を比較し、一致すれば呼び出し元に戻る。一致しなければPS1に戻り、印字を継続する。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9a7cf53" class="outline-3">
+<h3 id="org9a7cf53">PRTNUM</h3>
+<div class="outline-text-3" id="text-org9a7cf53">
+<ul class="org-ul">
+<li>数字を印字する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1595: </span>PRTNUM PUSH D         ;*** PRTNUM ***
+<span class="linenr">1596: </span>       LXI  D,12Q     ;DECIMAL 
+<span class="linenr">1597: </span>       PUSH D         ;SAVE AS A FLAG
+<span class="linenr">1598: </span>       MOV  B,D       ;B=SIGN
+<span class="linenr">1599: </span>       DCR  C         ;C=SPACES
+<span class="linenr">1600: </span>       CALL CHKSGN    ;CHECK SIGN
+<span class="linenr">1601: </span>       JP   PN1       ;NO SIGN 
+<span class="linenr">1602: </span>       MVI  B,55Q     ;B=SIGN
+<span class="linenr">1603: </span>       DCR  C         ;'-' TAKES SPACE 
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタ(DEレジスタ)をスタックに退避する。<br /></li>
+<li>DEレジスタに10(000AH)を設定し、スタックにプッシュする。<br /></li>
+<li>BレジスタにDレジスタの値(00H)を代入する。Bレジスタは符号を表すために使用する。<br /></li>
+<li>桁を表すCレジスタを一つ減らす。<br /></li>
+<li>CHKSGNを呼び出し、符号を確認する。正の値であればPN1へ進む。負の値であれば、Bレジスタに'-'を入れ、Cレジスタを一つ減らす。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1604: </span>PN1    PUSH B         ;SAVE SIGN &amp; SPACE 
+<span class="linenr">1605: </span>PN2    CALL DIVIDE    ;DEVIDE HL BY 10 
+<span class="linenr">1606: </span>       MOV  A,B       ;RESULT 0? 
+<span class="linenr">1607: </span>       ORA  C 
+<span class="linenr">1608: </span>       JZ   PN3       ;YES, WE GOT ALL 
+<span class="linenr">1609: </span>       XTHL           ;NO, SAVE REMAINDER
+<span class="linenr">1610: </span>       DCR  L         ;AND COUNT SPACE 
+<span class="linenr">1611: </span>       PUSH H         ;HL IS OLD BC
+<span class="linenr">1612: </span>       MOV  H,B       ;MOVE RESULT TO BC 
+<span class="linenr">1613: </span>       MOV  L,C 
+<span class="linenr">1614: </span>       JMP  PN2       ;AND DIVIDE BY 10
+</pre>
+</div>
+<ul class="org-ul">
+<li>PN1ではまず符号を表すBCレジスタをスタックに退避する。<br /></li>
+<li>DIVIDEを呼び出し、HLレジスタをDEレジスタ(10が入っている)で除算する。<br /></li>
+<li>商(BCレジスタ)が0であるかどうかを確認する。上位バイト(Bレジスタ)と下位バイト(Cレジスタ)のORを取って結果が0であれば、BCレジスタはすべてのビットが立っていない、つまり0であると判断できる。0であればすべての桁を処理したと判断し、PN3へジャンプする。<br /></li>
+<li>商が0でない場合、XTHL命令でHLレジスタ(剰余)とスタックの先頭にあるデータ(上位:符号、下位:桁数)を入れ替える。<br /></li>
+<li>Lレジスタ(桁数)を一つ減らして、HLレジスタ(上位:符号、下位:桁数)をスタックにプッシュする。<br /></li>
+<li>HLレジスタの内容をBCレジスタに代入し、PN2へ戻る。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1615: </span>PN3    POP  B         ;WE GOT ALL DIGITS IN
+<span class="linenr">1616: </span>PN4    DCR  C         ;THE STACK 
+<span class="linenr">1617: </span>       MOV  A,C       ;LOOK AT SPACE COUNT 
+<span class="linenr">1618: </span>       ORA  A 
+<span class="linenr">1619: </span>       JM   PN5       ;NO LEADING BLANKS 
+<span class="linenr">1620: </span>       MVI  A,40Q     ;LEADING BLANKS
+<span class="linenr">1621: </span>       RST  2 
+<span class="linenr">1622: </span>       JMP  PN4       ;MORE? 
+</pre>
+</div>
+<ul class="org-ul">
+<li>すべての桁を処理した場合、PN3へ移動する。<br /></li>
+<li>スタック先頭のデータ(上位:符号、下位:桁数)をBCレジスタに代入する。<br /></li>
+<li>桁数(Cレジスタ)を一つ減らす。<br /></li>
+<li>Cレジスタが負になっていなければ、OUTC(RST 2)を使って' '(20H)を印字し、PN4に戻る。<br /></li>
+<li>Cレジスタが負になっていれば、空白文字の印字が終わったと判断しPN5へジャンプする。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1623: </span>PN5    MOV  A,B       ;PRINT SIGN
+<span class="linenr">1624: </span>       RST  2         ;MAYBE - OR NULL 
+<span class="linenr">1625: </span>       MOV  E,L       ;LAST REMAINDER IN E 
+</pre>
+</div>
+<ul class="org-ul">
+<li>Bレジスタから符号を取り出し、OUTC(RST 2)を使って印字する。<br /></li>
+<li>この時点ではHLレジスタに最後の除算による剰余、つまり数値の最上位桁が入っている。剰余は10より小さいので、下位バイトだけが有効な数字である。<br /></li>
+<li>この数値をEレジスタに代入する。これは、あとの処理でスタックからデータ(これまでの除算の剰余)をDEレジスタへ読み込むためである。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1626: </span>PN6    MOV  A,E       ;CHECK DIGIT IN E
+<span class="linenr">1627: </span>       CPI  12Q       ;10 IS FLAG FOR NO MORE
+<span class="linenr">1628: </span>       POP  D 
+<span class="linenr">1629: </span>       RZ             ;IFF SO, RETURN 
+<span class="linenr">1630: </span>       ADI  60Q		;ELSE CONVERT TO ASCII
+<span class="linenr">1631: </span>       RST  2         ;AND PRINT THE DIGIT 
+<span class="linenr">1632: </span>       JMP  PN6       ;GO BACK FOR MORE
+</pre>
+</div>
+<ul class="org-ul">
+<li>下位バイト(Lレジスタ)をEレジスタに入れ、10と比較するが、最初は必ず10より小さな数であるので、一致しない。<br /></li>
+<li>スタックの先頭データ(次の桁の数値)をDEレジスタへ戻す。<br /></li>
+<li>RZ命令を実施するが最初は一致しないので次に進む。<br /></li>
+<li>剰余に'0'(30H)を加算し、文字へ変換し、印字する。<br /></li>
+<li>PN6へジャンプする。<br /></li>
+<li>2回目以降の比較で10と一致した場合、DEレジスタにはPRTNUMの最初でスタックにプッシュした数値(10)を読み出したことがわかる。スタックからテキストポインタをDEレジスタに読み出し、RZ命令を実行して呼び出し元に戻る。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb0a13a6" class="outline-3">
+<h3 id="orgb0a13a6">PRTLN</h3>
+<div class="outline-text-3" id="text-orgb0a13a6">
+<ul class="org-ul">
+<li>プログラムテキストを一行印字する。<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-asm8080"><span class="linenr">1634: </span>PRTLN  LDAX D         ;*** PRTLN *** 
+<span class="linenr">1635: </span>       MOV  L,A       ;LOW ORDER LINE #
+<span class="linenr">1636: </span>       INX  D 
+<span class="linenr">1637: </span>       LDAX D         ;HIGH ORDER
+<span class="linenr">1638: </span>       MOV  H,A 
+<span class="linenr">1639: </span>       INX  D 
+<span class="linenr">1640: </span>       MVI  C,4Q      ;PRINT 4 DIGIT LINE #
+<span class="linenr">1641: </span>       CALL PRTNUM
+<span class="linenr">1642: </span>       MVI  A,40Q     ;FOLLOWED BY A BLANK 
+<span class="linenr">1643: </span>       RST  2 
+<span class="linenr">1644: </span>       SUB  A         ;AND THEN THE TEXT 
+<span class="linenr">1645: </span>       CALL PRTSTG
+<span class="linenr">1646: </span>       RET
+</pre>
+</div>
+<ul class="org-ul">
+<li>テキストポインタ(DEレジスタ)の内容をHLレジスタにコピーする。PRTLNを呼び出すときのDEレジスタは行番号を指しているので、HLレジスタには行番号が設定される。<br /></li>
+<li>行番号は4桁である。Cレジスタに4を設定し、PRTNUMを呼び出す。<br /></li>
+<li>Aレジスタに' 'を設定し、OUTC(RST 2)を呼び出して' 'を印字する。<br /></li>
+<li>Aレジスタに0を設定し、文を印字する。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2017-08-26 土 09:47</p>
+<p class="author">&#33879;&#32773;: Kazumasa</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

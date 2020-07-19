@@ -1,0 +1,19 @@
+#+TITLE: JekyllへOrg-modeで投稿
+#+LAYOUT: post
+#+TAGS: jekyll org-mode jekyll-org rbenv
+#+DESCRIPTION: Post Jekyll using Org-mode with jekyll-org
+Markdownは慣れないのと、Emacsで書こうとするとキーバインドが変わるみたいで使いにくいので、Org-modeで投稿できるようにした。使用するJekyllプラグインはjekyll-orgで、[[https://github.com/eggcaker/jekyll-org][Webサイト]]の通りにインストールすれば良いはずなのだが、Jekyllの使い方がよくわかっていなかったり、Rubyのバージョンを替えたりしていたので少し苦労した。Rubyのバージョンの方はArchlinuxが替えたのかもしれないが。いろいろ触りすぎて何が効いたのかよくわからないが、今回やった(と思われる)ことをまとめておく。
+
+1. Rubyのバージョンを前のバージョン(2.6.6)にするために *rbenv* 、 *ruby-build* をAURからインストールする。
+2. rbenvを使ってRuby 2.6.6をインストール
+3. ホームページがあるディレクトリに移動し、localのRubyバージョンを2.6.6に設定
+4. Gemfileを編集。github-pagesを使っているので
+   #+begin_example
+   group :jekyll_plugins do
+     ...
+     gem 'jekyll-org', '>= 1.1.0'
+   end
+   #+end_example
+   と書いておく。
+5. bundle update、bundle installを実行
+6. _config.ymlを編集。jekyll-orgをプラグインに登録する。

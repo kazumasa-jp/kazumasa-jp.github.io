@@ -1,0 +1,1295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dell Inspiron 11 3000へのArch Linuxのインストール(2020年3月版)</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Kazumasa" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Dell Inspiron 11 3000へのArch Linuxのインストール(2020年3月版)</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge9a37f5">準備</a>
+<ul>
+<li><a href="#org13891ad">Arch Linuxインストール用USBメモリの作成</a></li>
+<li><a href="#org80dd6f6">回復ドライブの作成</a></li>
+<li><a href="#org2ce21cb">Linux用領域の確保</a></li>
+<li><a href="#org7d37d1d">高速スタートアップの無効化</a></li>
+<li><a href="#org5dd244f">ファームウェアの設定(Secure Boot/Fast Boot/Legacy Option Rom)</a></li>
+</ul>
+</li>
+<li><a href="#orgb491a20">基本インストール</a>
+<ul>
+<li><a href="#orgcaf77f9">インストール用USBメモリによる起動</a></li>
+<li><a href="#orgb815bc6">キーボードの設定</a></li>
+<li><a href="#org84e830d">無線LANの設定</a></li>
+<li><a href="#org744fcd1">時間の設定</a></li>
+<li><a href="#orga9f364a">インストール先パーティションの作成</a></li>
+<li><a href="#org79c7d8a">パーティションのマウント</a></li>
+<li><a href="#org50d15cd">ベースパッケージのインストール</a></li>
+<li><a href="#org9514f34">初期の起動設定</a></li>
+<li><a href="#orgc4420bb">ブートローダーのインストール</a></li>
+<li><a href="#org08ff5a7">再起動とネットワークサービスの登録</a></li>
+</ul>
+</li>
+<li><a href="#org3e99f27">基本設定</a>
+<ul>
+<li><a href="#org75e4532">ユーザの作成</a></li>
+<li><a href="#org24fed4a">時刻の設定</a></li>
+<li><a href="#org94348f4">TRIMの設定</a></li>
+<li><a href="#org8bdfda2">CtrlキーとCaps Lockキーの入れ替え</a></li>
+</ul>
+</li>
+<li><a href="#org1ef227f">非GUI環境での日本語表示設定</a>
+<ul>
+<li><a href="#orgd1529a0">フォントのインストール</a></li>
+<li><a href="#org4a97cd9">kmsconのインストール</a></li>
+<li><a href="#orgce5981e">kmsconの設定</a></li>
+</ul>
+</li>
+<li><a href="#org7603035">日本語環境の構築</a>
+<ul>
+<li><a href="#orgd27b7b6">準備</a></li>
+<li><a href="#org3a59c62">Emacsのインストール</a></li>
+<li><a href="#org0197273">Mozcのインストール</a></li>
+<li><a href="#orgae24c2a">cmigemoのインストール</a></li>
+</ul>
+</li>
+<li><a href="#org1b2f0c2">GUI環境のインストール</a>
+<ul>
+<li><a href="#orge614a47">Xサーバー(Xorg)のインストール</a></li>
+<li><a href="#org3fc7bfc">ウインドウマネージャ(i3)のインストール</a></li>
+<li><a href="#orgc9ce6f9">ディスプレイマネージャ(LightDM)のインストール</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge9a37f5" class="outline-2">
+<h2 id="orge9a37f5">準備</h2>
+<div class="outline-text-2" id="text-orge9a37f5">
+</div>
+<div id="outline-container-org13891ad" class="outline-3">
+<h3 id="org13891ad">Arch Linuxインストール用USBメモリの作成</h3>
+<div class="outline-text-3" id="text-org13891ad">
+<p>
+インストール用USBメモリはMacで作成した。<br />
+</p>
+<ol class="org-ol">
+<li><p>
+Arch Linuxのミラーサイトから次のファイルをダウンロードする。<br />
+</p>
+<ul class="org-ul">
+<li>archlinux-yyyy.mm.dd-x86_64.iso<br /></li>
+<li>archlinux-yyyy.mm.dd-x86_64.iso.sig<br /></li>
+<li>md5sums.txt<br /></li>
+<li>sha1sum.txt<br /></li>
+</ul>
+<p>
+ここで、yyyyは年、mmは月、ddは日である。今回は2020年03月01日のイメージを使用した。<br />
+</p></li>
+<li><p>
+ファイルの正当性を確認する。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ gpg --keyserver-options auto-key-retrieve --verify archlinux-yyyy.mm.dd-x86_64.iso.sig
+$ md5 -r archlinux-yyyy.mm.dd-x86_64.iso | diff -b - md5sums.txt
+$ shasum -a <span style="color: #40e0d0;">1</span> archlinux-yyyy.mm.dd-x86_64.iso | diff -b - sha1sum.txt
+</pre>
+</div></li>
+<li><p>
+ファイルの正当性が確認できたら、イメージをUSBメモリに書き込む。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ diskutil list
+$ diskutil unmountDisk /dev/diskX
+$ dd <span style="color: #9acd32;">if</span>=./archlinux-yyyy.mm.dd-x86_64.iso <span style="color: #9acd32;">of</span>=/dev/rdiskX <span style="color: #9acd32;">bs</span>=<span style="color: #40e0d0;">1m</span>
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org80dd6f6" class="outline-3">
+<h3 id="org80dd6f6">回復ドライブの作成</h3>
+<div class="outline-text-3" id="text-org80dd6f6">
+<p>
+ここからはInspiron 11 3000での作業になる。<br />
+Linuxのインストール作業に入る前にプリインストールされているWindowsの回復ドライブを作成する。<br />
+Inspiron 11では、下記の5の段階で、8GB以上のUSBメモリが必要というメッセージを出していたが、パッケージに8GBと表示されているものでは若干容量が足りないので16GBのものが必要だ。<br />
+</p>
+<ol class="org-ol">
+<li>スタートメニューから、「Windows システムツール」を選ぶ。<br /></li>
+<li>表示されたサブメニューから「コントロールパネル」を選び、コントロールパネルを起動する。<br /></li>
+<li>「表示方法」が「大きいアイコン」または「小さいアイコン」になっているときは「回復」を選択し、「カテゴリ」になっている場合は、「システムとセキュリティ」→「セキュリティとメンテナンス」→「回復」を選ぶ。<br /></li>
+<li>「回復ドライブの作成」を選ぶ。<br /></li>
+<li>「このアプリがデバイスに変更を加えることを許可しますか？」(このアプリとは回復メディア作成ツールのこと)と表示されるので、「はい」を選ぶ。<br /></li>
+<li>「システムファイルを回復ドライブにバックアップします」にチェックを入れて次へ進む<br /></li>
+<li>しばらく待つと回復ドライブに必要な容量が表示される。<br /></li>
+<li>必要な容量を持っているUSBメモリを接続すると「使用可能なドライブ」として表示される。<br /></li>
+<li>「次へ」を押すとドライブ上のすべてのデータが消去されると警告される。問題なければ「作成」を押す。<br /></li>
+<li>回復ドライブの作成にはかなりの時間がかかる。「回復ドライブの準備ができました」と表示されたら、「完了」をおして回復ドライブの作成を終了する。<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org2ce21cb" class="outline-3">
+<h3 id="org2ce21cb">Linux用領域の確保</h3>
+<div class="outline-text-3" id="text-org2ce21cb">
+<p>
+WindowsとのDual Boot環境を作成する場合は、Windows用のパーティションを縮小してLinux用の領域を確保する必要がある。ここではArch Linuxは32GBのシングルパーティションにインストールすることにする。<br />
+</p>
+<ol class="org-ol">
+<li>[Windows]キーと[X]キーを同時に押す。<br /></li>
+<li>表示されたメニューから「ディスクの管理」を選ぶ。<br /></li>
+<li>「ディスクの管理」が表示されたら、Cドライブを右クリックし、「ボリュームの縮小」を選ぶ。<br /></li>
+<li>しばらく待つと「C:の縮小」が表示されるので、「縮小する領域のサイズ(MB)」に「32000」と入力する。<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org7d37d1d" class="outline-3">
+<h3 id="org7d37d1d">高速スタートアップの無効化</h3>
+<div class="outline-text-3" id="text-org7d37d1d">
+<p>
+Windowsの高速スタートアップ機能は、シャットダウン時にユーザーセッションのみを終了させ、カーネルセッションは休止状態にすることで、次回起動時にドライバの初期化にかかる時間を節約する。基本的には有用な機能だが、次の起動までにハードウェアの変更があった場合は不具合を生じる可能性もある。Linuxとのデュアルブート環境ではEFIシステムパーティションを共有するので、高速スタートアップを無効にすることが推奨されている。<br />
+</p>
+<ol class="org-ol">
+<li><a href="#org80dd6f6">回復ドライブの作成</a>と同様の手順で「コントロールパネル」を起動する。<br /></li>
+<li>「システムとセキュリティ」→「電源オプション」を選ぶ。<br /></li>
+<li>「電源オプション」が表示されたら、「電源ボタンの動作の選択」を選ぶ。<br /></li>
+<li>「システム設定」が表示されるので、「現在利用可能ではない設定を変更します」を選ぶ。<br /></li>
+<li>「シャットダウン設定」欄にある「高速スタートアップを有効にする」のチェックボックスをオフにする。<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org5dd244f" class="outline-3">
+<h3 id="org5dd244f">ファームウェアの設定(Secure Boot/Fast Boot/Legacy Option Rom)</h3>
+<div class="outline-text-3" id="text-org5dd244f">
+<p>
+Inspiron 11にはUEFIが搭載されている。UEFIは従来のBIOSに代わるPC用のファームウェアで、<br />
+</p>
+<ul class="org-ul">
+<li>2テラバイトを超える大きさのディスクからのブート<br /></li>
+<li>Secure Boot<br /></li>
+<li>Fast Boot<br /></li>
+</ul>
+<p>
+などの機能を備えている。<br />
+Secure Bootはブートコードが改ざんされていないことを保証する機能で、Arch LinuxはSecure Bootに対応しているが、インストール時は無効にしておく。<br />
+Fast Bootは起動時のレガシーデバイスのスキャンを省略することで起動を高速化する機能で、Windowsの高速スタートアップとは別の機能の機能である。有効にしていても問題はなさそうだが、念の為にこれも無効にしておく。<br />
+また、Inspiron 11のUEFI設定メニューには「Load Legacy Option Rom」という項目があるが、ここが「Enabled」になっているとArch LinuxがSSDから起動しないので、ここもオフにする。<br />
+</p>
+<ol class="org-ol">
+<li>起動時にDellのロゴが出ているとき、[F2]キーを押し、UEFIの設定画面に入ることができる。<br /></li>
+<li>[←]、[→]キーでタブを切り替え、「Boot」設定画面を表示させる。<br /></li>
+<li>[↑]、[↓]キーで項目を選択し、スペースで設定を変更する。「Fast Boot」、「Secure Boot」、「Load Legacy Option Rom」をそれぞれ「Disabled」に変更する。<br /></li>
+<li>「Exit」設定画面で設定を保存し、再起動する。<br /></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb491a20" class="outline-2">
+<h2 id="orgb491a20">基本インストール</h2>
+<div class="outline-text-2" id="text-orgb491a20">
+<p>
+ここでは、Arch LinuxをPCにインストールし、ワイヤレス・ネットワークへの接続設定、ユーザーの追加までを行う。<br />
+</p>
+</div>
+<div id="outline-container-orgcaf77f9" class="outline-3">
+<h3 id="orgcaf77f9">インストール用USBメモリによる起動</h3>
+<div class="outline-text-3" id="text-orgcaf77f9">
+<p>
+USBメモリからブートするには、ブートデバイス選択画面を表示させる必要がある。<br />
+</p>
+<ol class="org-ol">
+<li>USBメモリを接続した状態で再起動する。<br /></li>
+<li>Dellのロゴが出ているときにF12キーを押す。<br /></li>
+<li>USBメモリを選択し、Arch Linuxを起動する。<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgb815bc6" class="outline-3">
+<h3 id="orgb815bc6">キーボードの設定</h3>
+<div class="outline-text-3" id="text-orgb815bc6">
+<p>
+インストール作業に先立ち、日本語キーボード用のキーマップをロードする。<br />
+</p>
+<pre class="example">
+root@archiso ~ # loadkeys jp106
+</pre>
+</div>
+</div>
+<div id="outline-container-org84e830d" class="outline-3">
+<h3 id="org84e830d">無線LANの設定</h3>
+<div class="outline-text-3" id="text-org84e830d">
+<p>
+Inspiron 11には有線LANインターフェースがついていないので、ベースパッケージのインストール前に無線LANの設定をする必要がある。SSIDをステルスモードにしている場合について記載する。<br />
+</p>
+<ol class="org-ol">
+<li><p>
+無線LANのインターフェース名を調べる。wlp1s0という名前だということがわかる。<br />
+</p>
+<pre class="example">
+root@archiso ~ # ip link
+1: lo: &lt;LOOPBACK, ...
+2: wlan0: &lt;BROADCAST, ...
+</pre></li>
+<li><p>
+無線LANインターフェースを有効化する。<br />
+</p>
+<pre class="example">
+root@archiso ~ # ip link set wlan0 up
+</pre></li>
+<li><p>
+wpa_supplicantの設定ファイル(/etc/wpa_supplicant.conf)を作成する。<br />
+</p>
+<pre class="example">
+root@archiso ~ # echo 'ctrl_interface=/run/wpa_supplicant' &gt; /etc/wpa_supplicant.conf
+root@archiso ~ # wpa_passphrase MYSSID passphrase &gt;&gt; /etc/wpa_supplicant.conf
+</pre></li>
+<li><p>
+設定ファイル(/etc/wpa_supplicant.conf)にステルスアクセスポイントを検索するためのオプション(scan_ssid=1)を追加する。emacsはインストールされていないため、編集にはviやnanoを使用する。<br />
+</p>
+<pre class="example">
+root@archiso ~ # vi /etc/wpa_supplicant.conf
+---
+ctrl_interface=/run/wpa_supplicant
+network={
+    ssid="MYSSID"
+    #psk="passphrase"
+    psk=59e0d07fa4c7741797a4e394f38a5c321e3bed51d54ad5fcbd3f84bc7415d73d
+    scan_ssid=1
+}
+</pre></li>
+<li><p>
+ネットワークに接続する。<br />
+</p>
+<pre class="example">
+root@archiso ~ # wpa_supplicant -B -D nl80211 -c /etc/wpa_supplicant.conf -i wlan0
+root@archiso ~ # dhcpcd -A wlan0
+</pre></li>
+<li><p>
+ネットワーク接続を確認する<br />
+</p>
+<pre class="example">
+root@archiso ~ # ping www.archlinux.org
+</pre></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org744fcd1" class="outline-3">
+<h3 id="org744fcd1">時間の設定</h3>
+<div class="outline-text-3" id="text-org744fcd1">
+<p>
+ネットワークに繋がったので、NTPを使ってシステムクロックを合わせる。<br />
+</p>
+<pre class="example">
+root@archiso ~ # timedatectl set-ntp true
+</pre>
+</div>
+</div>
+<div id="outline-container-orga9f364a" class="outline-3">
+<h3 id="orga9f364a">インストール先パーティションの作成</h3>
+<div class="outline-text-3" id="text-orga9f364a">
+<p>
+ここからは、Dual Boot環境にしない構成で説明する。Dual Boot環境の場合は必要に応じてディスク名(sdaX)を読み替えれば良い。<br />
+Linux用のパーティションをgdiskを使って作成する。作成結果は下記の通りで、Linux用のパーティションは/dev/sda3になる。<br />
+</p>
+<pre class="example">
+root@archiso ~ # gdisk /dev/sda
+root@archiso ~ # gdisk -l /dev/sda
+---
+GPT fdisk (gdisk) version 1.0.5
+...
+Number  Start (sector)    End (sector)  Size      Code  Name
+   1            2048         1026047   500.0 MiB  EF00  EFI System partition
+   2         1026048         1288191   128.0 MiB  0C01  Microsoft reserved ...
+   3         1288192       233224191   110.6 GiB  8300  Linux filesystem
+   4       233224192       250068991   8.0 GiB    2700
+---
+root@archiso ~ # mkfs.ext4 /dev/sda3
+</pre>
+</div>
+</div>
+<div id="outline-container-org79c7d8a" class="outline-3">
+<h3 id="org79c7d8a">パーティションのマウント</h3>
+<div class="outline-text-3" id="text-org79c7d8a">
+<p>
+インストール先のパーティションを/mntへマウントする。<br />
+</p>
+<pre class="example">
+root@archiso ~ # mount /dev/sda3 /mnt
+root@archiso ~ # mount /dev/sda1 /mnt/boot
+</pre>
+</div>
+</div>
+<div id="outline-container-org50d15cd" class="outline-3">
+<h3 id="org50d15cd">ベースパッケージのインストール</h3>
+<div class="outline-text-3" id="text-org50d15cd">
+<p>
+Linux用のパーティション(/mnt)にベースパッケージをインストールする。<br />
+</p>
+<ol class="org-ol">
+<li><p>
+/etc/pacman.d/mirrorlistを修正し、日本のサイトを上位に持ってくる。<br />
+</p>
+<pre class="example">
+root@archiso ~ # vi /etc/pacman.d/mirrorlist
+---
+##
+## Arch Linux repository mirrorlist
+## Filtered by mirror score from mirror status page
+## Generated on 2020-03-01
+##
+
+## Japan
+Server = ...
+## Japan
+Server = ...
+## Japan
+Server = ...
+....
+</pre></li>
+<li><p>
+ベースパッケージをインストールする<br />
+</p>
+<pre class="example">
+root@archiso ~ # pacstrap /mnt base linux linux-firmware
+</pre></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org9514f34" class="outline-3">
+<h3 id="org9514f34">初期の起動設定</h3>
+<div class="outline-text-3" id="text-org9514f34">
+<p>
+SSDからのブートを可能にするために/mntにマウントしたパーティションに起動時の設定を書き込む。<br />
+</p>
+<ol class="org-ol">
+<li><p>
+fstabを作成する<br />
+</p>
+<pre class="example">
+root@archiso ~ # genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</pre></li>
+<li><p>
+ルートディレクトリを変更する<br />
+</p>
+<pre class="example">
+root@archiso ~ # arch-chroot /mnt
+</pre></li>
+<li><p>
+Time Zoneの設定を行う<br />
+</p>
+<pre class="example">
+[root@archiso /]# ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+[root@archiso /]# hwclock --systohc --utc
+</pre></li>
+<li><p>
+arch-chroot後の環境にはエディタやネットワーク関連のツールが入っていないため、ここでインストールしておく<br />
+</p>
+<pre class="example">
+[root@archiso /]# pacman -S vi netctl wpa_supplicant dhcpcd
+</pre></li>
+<li>Localeの設定を行う。<br />
+<ol class="org-ol">
+<li><p>
+/etc/locale.genを修正し、en_US.UTF-8 UTF-8とja_JP.UTF-8 UTF-8のコメントを外す。<br />
+</p>
+<pre class="example">
+[root@archiso /]# vi /etc/locale.gen
+---
+# Configuration file for locale-gen
+#
+...
+en_US.UTF-8 UTF-8
+...
+ja_JP.UTF-8 UTF-8
+...
+</pre></li>
+<li><p>
+Localeを生成する<br />
+</p>
+<pre class="example">
+[root@archiso /]# locale-gen
+</pre></li>
+<li><p>
+デフォルトのLocaleを設定する。コンソール画面では英語しか表示されないため、デフォルトのLocaleは英語にする<br />
+</p>
+<pre class="example">
+[root@archiso /]# echo LANG=en_US.UTF-8 &gt; /etc/locale.conf
+</pre></li>
+<li><p>
+起動時にキーボード設定が反映されるようにしておく。<br />
+</p>
+<pre class="example">
+[root@archiso /]# echo KEYMAP=jp106 &gt; /etc/vconsole.conf
+</pre></li>
+</ol></li>
+<li>ネットワーク設定を行う<br />
+<ol class="org-ol">
+<li><p>
+Host名の設定を行う。以下、「myhostname」は自分のPCの名前に置き換えること。<br />
+</p>
+<pre class="example">
+[root@archiso /]# echo myhostname &gt; /etc/hostname
+</pre></li>
+<li><p>
+/etc/hostsの修正を行う。<br />
+</p>
+<pre class="example">
+[root@archiso /]# vi /etc/hosts
+---
+127.0.0.1	localhost
+::1		localhost
+127.0.1.1	myhostname.localdomain	myhostname
+</pre></li>
+</ol></li>
+<li><p>
+Ram FSを初期化する<br />
+</p>
+<pre class="example">
+[root@archiso /]# mkinitcpio -p linux
+</pre></li>
+<li><p>
+パスワードを変更する<br />
+</p>
+<pre class="example">
+[root@archiso /]# passwd
+</pre></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc4420bb" class="outline-3">
+<h3 id="orgc4420bb">ブートローダーのインストール</h3>
+<div class="outline-text-3" id="text-orgc4420bb">
+<p>
+ブートローダーの選択肢はいくつかあるようだが、簡単に設定できそうなsystemd-bootを使うことにする。<br />
+</p>
+<ol class="org-ol">
+<li><p>
+EFI変数にアクセスできることを確認する<br />
+</p>
+<pre class="example">
+[root@archiso /]# pacman -S efivar
+[root@archiso /]# efivar -l
+</pre></li>
+<li><p>
+UEFIパーティション(/dev/sda1)を/bootにマウントする。<br />
+</p>
+<pre class="example">
+[root@archiso /]# mount /dev/sda1 /boot
+</pre></li>
+<li><p>
+systemd-bootブートローダーをインストールする<br />
+</p>
+<pre class="example">
+[root@archiso /]# bootctl --path=/boot install
+</pre></li>
+<li><p>
+一旦、UEFIパーティション(/dev/sda1)を別のディレクトリにマウントする<br />
+</p>
+<pre class="example">
+[root@archiso /]# umount /boot
+[root@archiso /]# mount /dev/sda1 /mnt
+</pre></li>
+<li><p>
+initramfs-linux.img、vmlinuz-linuxをUEFIパーティションにコピーする。<br />
+</p>
+<pre class="example">
+[root@archiso /]# cp /boot/initramfs-linux.img /mnt
+[root@archiso /]# cp /boot/vmlinuz-linux /mnt
+</pre></li>
+<li><p>
+Arch Linuxのエントリーを作成する。options行のrootオプションにはルートパーティションのPARTUUIDを指定する。PARTUUIDはblkidコマンドで調べることができる。<br />
+</p>
+<pre class="example">
+[root@archiso /]# blkid /dev/sda3
+[root@archiso /]# vi /mnt/loader/entries/arch.conf
+---
+title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options root=PARTUUID=xxxxxxxxxxxxxxxxxxxx rw
+</pre></li>
+<li><p>
+作成したエントリーをブートローダーに登録する。設定ファイル中の"default arch"のarchは"arch.conf"を指している。"auto-entries no"を入れておくことで、Windows用のBootメニューが表示されなくなる。<br />
+</p>
+<pre class="example">
+[root@archiso /]# vi /mnt/loader/loader.conf
+---
+default arch
+timeout 3
+auto-entries no
+</pre></li>
+<li><p>
+EFI変数をクリアする。これを実施していない場合、loader.conf中のデフォルト値指定(default arch)が反映されないことがある。<br />
+</p>
+<pre class="example">
+[root@archiso /]# bootctl set-default ""
+</pre></li>
+<li><p>
+PCを再起動し、SSDから立ち上がることを確認する。<br />
+</p>
+<pre class="example">
+[root@archiso /]# umount /mnt
+[root@archiso /]# exit
+root@archiso ~ # reboot
+</pre></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org08ff5a7" class="outline-3">
+<h3 id="org08ff5a7">再起動とネットワークサービスの登録</h3>
+<div class="outline-text-3" id="text-org08ff5a7">
+<p>
+起動時にネットワークサービスが起動されるように設定する。rootでログインし、次の作業を行う。<br />
+</p>
+<ol class="org-ol">
+<li><a href="#org84e830d">無線LANの設定</a>と同じ手順で、wpa_supplicantの設定ファイルを作成する。/etc/wpa_supplicant/というディレクトリがあるので、wpa_supplicant.confはこのディレクトリ内におくことにする。<br /></li>
+<li><p>
+他のユーザーから読み書きできないように設定ファイルのモードを変更する。<br />
+</p>
+<pre class="example">
+[root@myhostname ~]# chmod 600 /etc/wpa_supplicant/wpa_supplicant.conf
+</pre></li>
+<li><p>
+無線LANインターフェースの名前を確認しておく。インストールUSBで起動したときとは名前が違っていることがあるため、注意すること<br />
+</p>
+<pre class="example">
+[root@myhostname ~]# ip link
+1: lo: &lt;LOOPBACK, ...
+2: wlp1s0: &lt;BROADCAST, ...
+</pre></li>
+<li><p>
+netctlのプロファイルを作成する。/etc/netctl/examples/wireless-wpa-configをもとに修正を行う。<br />
+</p>
+<pre class="example">
+[root@myhostname ~]# cp /etc/netctl/examples/wireless-wpa-config /etc/netctl/wireless-wpa-config
+[root@myhostname ~]# vi /etc/netctl/wireless-wpa-config
+---
+Description='A wpa_supplicant configuration file based wireless connection'
+Interface=wlp1s0
+Connection=wireless
+Security=wpa-config
+WPAConfigFile='/etc/wpa_supplicant/wpa_supplicant.conf'
+IP=dhcp
+</pre></li>
+<li><p>
+ネットワークサービスを開始し、動作することを確認する<br />
+</p>
+<pre class="example">
+[root@myhostname ~]# systemctl start systemd-networkd
+[root@myhostname ~]# systemctl start systemd-resolved
+[root@myhostname ~]# ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+[root@myhostname ~]# netctl start wireless-wpa-config
+[root@myhostname ~]# ping archlinux.org
+</pre></li>
+<li><p>
+接続が確認できたら、起動時にサービスが開始されるようにする。<br />
+</p>
+<pre class="example">
+[root@myhostname ~]# systemctl enable systemd-networkd
+[root@myhostname ~]# systemctl enable systemd-resolved
+[root@myhostname ~]# netctl enable wireless-wpa-config
+</pre></li>
+<li>再起動後、rootでログインし、ネットワークに接続できていることを確認する。<br /></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org3e99f27" class="outline-2">
+<h2 id="org3e99f27">基本設定</h2>
+<div class="outline-text-2" id="text-org3e99f27">
+</div>
+<div id="outline-container-org75e4532" class="outline-3">
+<h3 id="org75e4532">ユーザの作成</h3>
+<div class="outline-text-3" id="text-org75e4532">
+<p>
+root以外のユーザを作成し、このユーザでインストール作業を行えるようにしておく。<br />
+</p>
+<ol class="org-ol">
+<li><p>
+sudoが使えるだけで良いのだが、いずれ必要になるためsudoを含む開発ツールパッケージを導入しておく。<br />
+</p>
+<pre class="example">
+[root@myhostname ~]# pacman -S base-devel
+</pre></li>
+<li><p>
+ユーザを追加する。<br />
+</p>
+<pre class="example">
+[root@myhostname ~]# useradd -m -g users -G wheel username
+[root@myhostname ~]# passwd username
+</pre></li>
+<li><p>
+/etc/sudoersを編集し、wheelグループに全コマンドの実行権限を与える。<br />
+</p>
+<pre class="example">
+[root@myhostname ~]# visudo
+---
+%wheel ALL=(ALL) ALL
+</pre></li>
+</ol>
+<p>
+これから先はsudoコマンドを使って、ここで作成したユーザでインストール作業を行う。一旦、ログアウトし、作成したユーザでログインしておく。コマンドプロンプトのusernameは適宜置き換えること。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org24fed4a" class="outline-3">
+<h3 id="org24fed4a">時刻の設定</h3>
+<div class="outline-text-3" id="text-org24fed4a">
+<p>
+時刻の設定はArch Linuxのガイドに従う。つまり、ハードウェアクロックはUTCにしておき、Dual Bootの場合はWindows 11もUTCで動作させる。Windowsの設定については省略する。<br />
+</p>
+<ol class="org-ol">
+<li><p>
+Arch Linuxにntpをインストールする。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo pacman -S ntp
+</pre></li>
+<li><p>
+ネットワーク接続時のみにntpdを実行するように設定する。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo vi /etc/netctl/wireless-wpa-config
+---
+(下記を追加する)
+ExecUpPost='/usr/bin/ntpd || true'
+ExecDownPre='killall ntpd || true'
+</pre></li>
+<li><p>
+/etc/ntpd.confを修正する<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo vi /etc/ntpd.conf
+---
+...
+# Associate to Arch's NTP pool
+# server 0.arch.pool.ntp.org
+# server 1.arch.pool.ntp.org
+# server 2.arch.pool.ntp.org
+# server 3.arch.pool.ntp.org
+server 0.jp.pool.ntp.org
+server 1.jp.pool.ntp.org
+server 2.jp.pool.ntp.org
+server 3.jp.pool.ntp.org
+</pre></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org94348f4" class="outline-3">
+<h3 id="org94348f4">TRIMの設定</h3>
+<div class="outline-text-3" id="text-org94348f4">
+<p>
+SSDの速度低下を抑制するためにTRIMの設定を行う。<br />
+</p>
+<ol class="org-ol">
+<li><p>
+hdparmをインストールする。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo pacman -S hdparm
+</pre></li>
+<li><p>
+SSDがTRIMをサポートしているかどうか確認する。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo hdparm -I /dev/sda | grep TRIM
+</pre></li>
+<li><p>
+SSDがTRIMをサポートしていることが確認できたら、fstrim.timerをsystemdに登録し、一週間ごとにTRIMを実行させるようにする。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo systemctl enable fstrim.timer
+</pre></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org8bdfda2" class="outline-3">
+<h3 id="org8bdfda2">CtrlキーとCaps Lockキーの入れ替え</h3>
+<div class="outline-text-3" id="text-org8bdfda2">
+<p>
+操作性を改善するためにキーボードのCtrlキーとCaps Lockキーを入れ替える。<br />
+</p>
+<ol class="org-ol">
+<li>キーマップを格納するディレクトリを作成する<br /></li>
+</ol>
+<pre class="example">
+[username@myhostname ~]$ sudo mkdir -p /usr/local/share/kbd/keymaps
+</pre>
+<ol class="org-ol">
+<li>キーマップを作成する<br /></li>
+</ol>
+<pre class="example">
+[username@myhostname ~]$ sudo vi /usr/local/share/kbd/keymaps/local.map
+---
+include "/usr/share/kbd/keymaps/i386/qwerty/jp106.map.gz"
+keycode 29 = Caps_Lock
+keycode 58 = Control
+</pre>
+<ol class="org-ol">
+<li>起動時にキーマップが読み込まれるように設定する<br /></li>
+</ol>
+<pre class="example">
+[username@myhostname ~]$ sudo vi /etc/vconsole.conf
+---
+KEYMAP=/usr/local/share/kbd/keymaps/local.map
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1ef227f" class="outline-2">
+<h2 id="org1ef227f">非GUI環境での日本語表示設定</h2>
+<div class="outline-text-2" id="text-org1ef227f">
+</div>
+<div id="outline-container-orgd1529a0" class="outline-3">
+<h3 id="orgd1529a0">フォントのインストール</h3>
+<div class="outline-text-3" id="text-orgd1529a0">
+<p>
+表示用のフォントにはInconsolataとMigu 1Mフォントを使用する。この2つはRictyフォントの元になるフォントだが、Rictyを生成して使用するより、合成前の状態で使用したほうが見栄えは良いようだ。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ pacman -S ttf-inconsolata
+[username@myhostname ~]$ pacman -S ttf-migu
+</pre>
+</div>
+</div>
+<div id="outline-container-org4a97cd9" class="outline-3">
+<h3 id="org4a97cd9">kmsconのインストール</h3>
+<div class="outline-text-3" id="text-org4a97cd9">
+<p>
+コンソールソフトウェアのkmsconをインストールする。AURに開発版が含まれているが、公式パッケージのもののほうが苦労は少ない。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo pacman -S kmscon
+</pre>
+</div>
+</div>
+<div id="outline-container-orgce5981e" class="outline-3">
+<h3 id="orgce5981e">kmsconの設定</h3>
+<div class="outline-text-3" id="text-orgce5981e">
+<p>
+kmsconの起動オプションは、/etc/kmscon/kmscon.confに書いておくことができる。フォントの指定もできるが、ここではキーボードの設定だけをを行うことにする。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo mkdir /etc/kmscon
+[username@myhostname ~]$ sudo vi /etc/kmscon/kmscon.conf
+---
+xkb-layout=jp
+xkb-model=jp106
+xkb-options=ctrl:swapcaps
+</pre>
+<p>
+フォントの設定は、/etc/fonts/conf.d/99-kmscon.confで行う。先にインストールしたInconsolataを英数文字に、Migu 1Mを日本語文字に使用する。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo vi /etc/fonts/conf.d/99-kmscon.conf
+---
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt;
+&lt;fontconfig&gt;
+&lt;match&gt;
+        &lt;test name="family"&gt;&lt;string&gt;monospace&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name="family" mode="prepend" binding="strong"&gt;
+                &lt;string&gt;Inconsolata&lt;/string&gt;
+                &lt;string&gt;Migu 1M&lt;/string&gt;
+        &lt;/edit&gt;
+&lt;/match&gt;
+&lt;/fontconfig&gt;
+</pre>
+<p>
+ここで、kmsconを起動し、動作確認をしておく。スーパーユーザの特権で実行する必要がある。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo kmscon
+</pre>
+<p>
+次のようにすれば、起動時にkmsconが立ち上がるようにすることができるが、kmsconからはstartxでXウインドウを起動できないようなので、注意が必要である。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo rm /etc/systemd/system/getty.target.wants/getty@tty1.service
+[username@myhostname ~]$ sudo systemctl enable kmsconvt@tty1.service
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7603035" class="outline-2">
+<h2 id="org7603035">日本語環境の構築</h2>
+<div class="outline-text-2" id="text-org7603035">
+</div>
+<div id="outline-container-orgd27b7b6" class="outline-3">
+<h3 id="orgd27b7b6">準備</h3>
+<div class="outline-text-3" id="text-orgd27b7b6">
+<p>
+ここでインストールするソフトウェアのいくつかはArch Linuxの公式パッケージには含まれておらず、AUR(Arch User Repository)を使用することになる。AURを使うためにはgitが必要になるため、あらかじめインストールしておく。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo pacman -S git
+</pre>
+<p>
+また、作業用のディレクトリを作成しておく。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ mkdir -p ~/work/aur
+</pre>
+</div>
+</div>
+<div id="outline-container-org3a59c62" class="outline-3">
+<h3 id="org3a59c62">Emacsのインストール</h3>
+<div class="outline-text-3" id="text-org3a59c62">
+<p>
+Emacsは公式リポジトリに含まれているので、pacmanでインストールする。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ sudo pacman -S emacs
+</pre>
+</div>
+</div>
+<div id="outline-container-org0197273" class="outline-3">
+<h3 id="org0197273">Mozcのインストール</h3>
+<div class="outline-text-3" id="text-org0197273">
+<p>
+日本語変換ソフトウェアのMozcは公式リポジトリにfcitx-mozcとして含まれているが、Emacsへの対応がなされていない。AURからmozcパッケージをダウンロードする。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ cd ~/work/aur
+[username@myhostname aur]$ git clone https://aur.archlinux.org/mozc.git
+</pre>
+<p>
+Emacsで使用できるようにするためには、PKGBUILDファイルを修正する必要がある。修正後、makepkgを使用してビルドとインストールを行う。<br />
+</p>
+<pre class="example">
+[username@myhostname aur]$ cd mozc
+[username@myhostname mozc]$ vi PKGBUILD
+---
+# Maintainer: ponsfoot &lt;....&gt;
+
+## If you will be using mozc.el on Emacs, uncomment below.
+_emacs_mozc="yes"
+...
+---
+[username@myhostname mozc]$ makepkg -si
+</pre>
+</div>
+</div>
+<div id="outline-container-orgae24c2a" class="outline-3">
+<h3 id="orgae24c2a">cmigemoのインストール</h3>
+<div class="outline-text-3" id="text-orgae24c2a">
+<p>
+ローマ字で日本語検索を可能にするcmigemoをビルドするためには、文字コード変換ツールのnkfが必要になるが、自動ではインストールされないようなので、先にインストールしておく。<br />
+</p>
+<pre class="example">
+[username@myhostname ~]$ cd ~/work/aur
+[username@myhostname aur]$ git clone https://aur.archlinux.org/nkf.git
+[username@myhostname aur]$ cd nkf
+[username@myhostname nkf]$ makepkg -si
+</pre>
+<p>
+cmigemoもAURからダウンロードしてインストールする。<br />
+</p>
+<pre class="example">
+[username@myhostname nkf]$ cd ~/work/aur
+[username@myhostname aur]$ git clone https://aur.archlinux.org/cmigemo-git.git
+[username@myhostname aur]$ cd cmigemo-git
+[username@myhostname cmigemo-git]$ makepkg -si
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1b2f0c2" class="outline-2">
+<h2 id="org1b2f0c2">GUI環境のインストール</h2>
+<div class="outline-text-2" id="text-org1b2f0c2">
+<p>
+非GUI環境はマシンへの負荷が低い代わりにユーザができることも限られる。テキスト入力だけの用途であっても、Emacsで変換キー、無変換キーなどの特殊キーが使用できないため、日本語入力の際に若干不便さを感じる。そこでGUI環境を導入するが、できるだけ軽量化するためにディスプレイマネージャにはLightDM、ウインドウマネージャはi3-wmを使用する。<br />
+</p>
+</div>
+<div id="outline-container-orge614a47" class="outline-3">
+<h3 id="orge614a47">Xサーバー(Xorg)のインストール</h3>
+<div class="outline-text-3" id="text-orge614a47">
+<ol class="org-ol">
+<li><p>
+Xorgをインストールする。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo pacman -S xorg-server xorg-xinit
+</pre>
+</div></li>
+<li><p>
+ビデオドライバをインストールする。インストールしなくても動くが、入れておくとバックライトの調整ができない。他にも不具合があるかもしれない。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo pacman -S xf86-video-intel
+</pre>
+</div></li>
+<li><p>
+後々、入力デバイスの情報を取得する必要が出てくるため、xorg-xinputをインストールしておく。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo pacman -S xorg-xinput
+</pre>
+</div></li>
+<li><p>
+日本語キーボードの設定を行う。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo localectl --no-convert set-x11-keymap jp jp106 <span style="color: #bdb76b;">""</span> ctrl:swapcaps
+</pre>
+</div></li>
+<li><p>
+Emacs用に日本語フォントRictyをインストールする。AURを使用するが、PKGBUILDファイル中に記載されているダウンロード元とシェルスクリプト名を修正する必要がある。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #8c8c8c;">[</span>username@myhostname aur<span style="color: #8c8c8c;">]</span>$ git clone https://aur.archlinux.org/ttf-ricty.git
+<span style="color: #8c8c8c;">[</span>username@myhostname aur<span style="color: #8c8c8c;">]</span>$ cd ttf-ricty
+<span style="color: #8c8c8c;">[</span>username@myhostname ttf-ricty<span style="color: #8c8c8c;">]</span>$ sudo pacman -S fontforge
+<span style="color: #8c8c8c;">[</span>username@myhostname ttf-ricty<span style="color: #8c8c8c;">]</span>$ vi PKGBUILD
+---
+...
+<span style="color: #9acd32;">source</span>=<span style="color: #8c8c8c;">(</span><span style="color: #bdb76b;">'https://rictyfonts.github.io/files/ricty_generator.sh'</span><span style="color: #8c8c8c;">)</span>
+...
+  chmod +x ./ricty_generator.sh
+  ./ricty_generator.sh -dr0 ...
+...
+---
+<span style="color: #8c8c8c;">[</span>username@myhostname ttf-ricty<span style="color: #8c8c8c;">]</span>$ makepkg -si
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org3fc7bfc" class="outline-3">
+<h3 id="org3fc7bfc">ウインドウマネージャ(i3)のインストール</h3>
+<div class="outline-text-3" id="text-org3fc7bfc">
+<ol class="org-ol">
+<li><p>
+i3とi3の標準アプリケーションランチャーであるdmenu、もう一つのアプリケーションランチャーであるrofiをインストールする。また、ターミナルソフトウェア(urxvt)とスクリーンロックの際に使用するxss-lockもここでインストールしておく。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">   <span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo pacman -S i3
+   <span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo pacman -S dmenu
+   <span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo pacman -S rofi
+   <span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo pacman -S rxvt-unicode
+   <span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo pacman -S xss-lock
+<span style="color: #40e0d0;">2</span><span style="color: #88090B;">)</span> i3&#12398;&#12473;&#12486;&#12540;&#12479;&#12473;&#34892;&#12398;&#35373;&#23450;&#12434;&#34892;&#12358;&#12290;ipv6&#12289;Ethernet&#12399;&#19981;&#35201;&#12394;&#12398;&#12391;&#34920;&#31034;&#12375;&#12394;&#12356;&#12424;&#12358;&#12395;&#12467;&#12513;&#12531;&#12488;&#12450;&#12454;&#12488;&#12377;&#12427;&#12290;
+   <span style="color: #00cd66;">#</span><span style="color: #00cd66;">+BEGIN_EXAMPLE</span>
+   <span style="color: #88090B;">[</span>username@myhostname ~<span style="color: #88090B;">]</span>$ sudo vi /etc/i3status.conf
+   ---
+   <span style="color: #00cd66;"># </span><span style="color: #00cd66;">i3status configuration file.</span>
+   ...
+   <span style="color: #00cd66;"># </span><span style="color: #00cd66;">order += "ipv6"</span>
+   ...
+   <span style="color: #00cd66;"># </span><span style="color: #00cd66;">order += "ethernet _first_"</span>
+   ...
+   <span style="color: #00cd66;">#</span><span style="color: #00cd66;">+END_EXAMPLE</span>
+<span style="color: #40e0d0;">3</span><span style="color: #88090B;">)</span> X&#12454;&#12452;&#12531;&#12489;&#12454;&#36215;&#21205;&#26178;&#12395;i3&#12364;&#31435;&#12385;&#19978;&#12364;&#12427;&#12424;&#12358;&#12395;&#12289;.xinitrc&#12434;&#32232;&#38598;&#12377;&#12427;&#12290;
+   <span style="color: #00cd66;">#</span><span style="color: #00cd66;">+begin_example</span>
+   <span style="color: #88090B;">[</span>username@myhostname ~<span style="color: #88090B;">]</span>$ vi ~/.xinitrc
+   ---
+   <span style="color: #ffffff;">exec</span> i3
+   <span style="color: #00cd66;">#</span><span style="color: #00cd66;">+end_example</span>
+<span style="color: #40e0d0;">4</span><span style="color: #88090B;">)</span> Xorg&#12398;&#21205;&#20316;&#30906;&#35469;&#12434;&#34892;&#12358;&#12290;
+   <span style="color: #00cd66;">#</span><span style="color: #00cd66;">+BEGIN_SRC shell</span>
+   <span style="color: #88090B;">[</span>username@myhostname ~<span style="color: #88090B;">]</span>$ startx
+</pre>
+</div></li>
+<li>Xorgの起動確認後、ログアウト(i3を終了)する。<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc9ce6f9" class="outline-3">
+<h3 id="orgc9ce6f9">ディスプレイマネージャ(LightDM)のインストール</h3>
+<div class="outline-text-3" id="text-orgc9ce6f9">
+<p>
+ディスプレイマネージャにはLightDMを使う。<br />
+</p>
+<ol class="org-ol">
+<li><p>
+LightDMをインストールする<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo pacman -S lightdm lightdm-gtk-greeter
+</pre>
+</div></li>
+<li><p>
+グラフィックドライバが読み込まれてから起動するようにLightDMを設定する。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo vi /etc/lightdm/lightdm.conf
+---
+<span style="color: #8c8c8c;">[</span>LightDM<span style="color: #8c8c8c;">]</span>
+logind-check-graphical=true
+</pre>
+</div></li>
+<li><p>
+LightDMの言語を日本語に設定する。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo vi /etc/environment
+---
+<span style="color: #9acd32;">LANG</span>=ja_JP.UTF-8
+</pre>
+</div></li>
+<li><p>
+システム起動時にlightdmが開始するようにサービスを登録する。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #8c8c8c;">[</span>username@myhostname ~<span style="color: #8c8c8c;">]</span>$ sudo systemctl enable lightdm
+</pre>
+</div></li>
+<li>システムを再起動し、GUIログイン画面が表示されることを確認する。<br /></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2020-03-15 日 00:00</p>
+<p class="author">&#33879;&#32773;: Kazumasa</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

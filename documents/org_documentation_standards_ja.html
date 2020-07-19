@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Orgについての文書作成に関するメモ by Phil Rooke</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Phil Rooke" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Orgについての文書作成に関するメモ by Phil Rooke</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org21fcba8">1. 背景</a></li>
+<li><a href="#orgec7a512">2. システム、パッケージ、モードなどの参照</a></li>
+<li><a href="#org380e1e8">3. その他のOrg特有の慣習</a></li>
+<li><a href="#orga3d0ab2">4. org-manual.org 特有の慣習</a></li>
+<li><a href="#org8ac89ad">5. その他</a></li>
+<li><a href="#org5b98089">6. 原文</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org21fcba8" class="outline-2">
+<h2 id="org21fcba8"><span class="section-number-2">1</span> 背景</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+私が思うに、Carstenの目標は、Orgモードをこの素晴らしいパッケージのソースコードを読んだり改造したりする人たちだけではなく、すべてのEmacsユーザーが簡単に使えるようにすることである。そのために、品質が高くユーザ視点に立った文書を誰でも簡単に利用できるよう、Orgコミュニティによって多くの努力が続けられている。
+</p>
+
+<p>
+Orgシステムのすべての機能の使用法や、ユーザー自身が機能を拡張する方法、増え続けるアドオンパッケージのいくつかを紹介しているわかりやすいガイドがOrgパッケージ自身に含まれている。このガイド(The Org Manual)はこのシステムで作業を行うことに集中している。これを補足するために、Org web pagesには多くの入門記事や、Orgを基礎としてオーガナイゼーションシステムを作るときに人々が使ったアイデアを含んだハウツー記事へのリンクが含まれている。
+</p>
+
+<p>
+私はOrgを使っているが、Orgは大きなシステムである。次第に私は、Orgについての文書の一貫性、明確性、正確性を改善することは自分だけでなく他のOrgユーザーの利益になると考えるようになった。これを補助するために、そして正確性と明確性を保つために、この短いメモには私が文書を改定した際に使用したいくつかのガイドラインと規則を書いてある。他の人たちにもOrgへの貢献をする際にはこの規則を使ってほしいと願っている。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgec7a512" class="outline-2">
+<h2 id="orgec7a512"><span class="section-number-2">2</span> システム、パッケージ、モードなどの参照</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+もともとOrgは単一のモードであり、Orgモードが意味するものについて曖昧さはなかった。しかし、状況は変わり、CarstenはOrgを、メジャーモードといくつかのマイナーモード、それにOrgモードの基本機能の上に構築された増え続ける追加パッケージやプラグインを含んだものと今は考えている。これら全てに対する一貫した方法を見つけることは本当に難しいが、私がやろうとしていることは、次のガイドラインに従うことである(まだ完璧ではなく、スタートしたばかりである)。
+</p>
+
+<ul class="org-ul">
+<li>できる限り「Org」と記述する。特に全体としてOrgに適用できるコンセプトや特徴、機能について議論する際にはそのように記述する。</li>
+
+<li>ある特徴に固有の事柄について言及するときは、例えば、「Orgtblマイナーモード」のように、より具体的に記述する。これは、例えば、そのモードやアドオンパッケージ、プラグインをを使ってファイルを編集するときにだけ、あるコマンドが利用できるという場合である。</li>
+
+<li>「Org-mode」や「org-mode」よりも「Org mode」と書くようにする。これは単に「The Emacs Manual」がこの形式でモード名を記載しているという慣習を反映している(Text mode、Outline mode、Mail mode等)。</li>
+
+<li>同様に、Orgの機能を使って編集することが必要なファイルやバッファであることを、「Org file」または「Org buffer」と書くことで可能な限り表す。</li>
+
+<li>OrgはEmacsコードベースの中で"org-&#x2026;"を自分の名前空間を示すために使用する。これはコード中ではっきりと保たれている。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org380e1e8" class="outline-2">
+<h2 id="org380e1e8"><span class="section-number-2">3</span> その他のOrg特有の慣習</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+より良い方法がない限り、次の慣習を適用するように努める(Carstenや他の重要なEmacsの文書に書かれている先例を参照することで正当化されると考えている。もちろん、私がそれらを作っていない場合の話である)。
+</p>
+
+<ul class="org-ul">
+<li>Orgは多くのコマンドを持ち、そのうちの多くはある種のプレフィックス付き引数を取る。引数について再度言及したい場合、「プレフィクス付き引数」、「数値型プレフィクス付き引数」、または「数値型プレフィクス付き変数N」のように省略せずに書く。</li>
+
+<li>Orgは他のEmacsパッケージと調和していたりしていなかったりする。それらのパッケージの名前を作者と保守担当者が作成した際に書くようにする。(私の考えでは)BBDBやMH-E、Rmail、VM、Gnus、CDLatexなどが該当する。</li>
+
+<li>TODO キーワードは、Orgが定義しているか、ユーザが定義しているかにかかわらず、大文字で書く</li>
+
+<li>Orgモードで最初から定義されている特殊な意味合いを持つタグ(例えばARCHIVE)は大文字で書く。ユーザが定義したタグ(例えば、boss、home)は小文字で書く。</li>
+
+<li>Orgモードで最初から定義されているプロパティ(例えば、PRIORITY)は大文字で書く。ユーザ定義のプロパティ(例えば、Release)は小文字で書く</li>
+
+<li>コンセプトインデックス中のエントリーは、他にルールがなければ、通常すべて小文字で書く。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga3d0ab2" class="outline-2">
+<h2 id="orga3d0ab2"><span class="section-number-2">4</span> org-manual.org 特有の慣習</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Org gitリポジトリは、マニュアルの.org版を=doc/=ディレクトリに含んでいる。このバージョンのマニュアルに特有の指示は次のとおりである。
+</p>
+
+<ul class="org-ul">
+<li>標準のTexinfoインデックスのうち5つがOrgマニュアルで使用されている。
+
+<dl class="org-dl">
+<dt>#+cindex:</dt><dd>コンセプトインデックス。一般的なコンセプトに使用する</dd>
+<dt>#+findex:</dt><dd>関数インデックス。関数や関数風の名前に使用する</dd>
+<dt>#+kindex:</dt><dd>キーストロークインデックス。キーボードコマンドに使用する</dd>
+<dt>#+pindex:</dt><dd>プログラムインデックス。プログラム名に使用する</dd>
+<dt>#+vindex:</dt><dd>変数インデックス。変数名に使用する</dd>
+</dl></li>
+
+<li>1行のみの例には固定幅の領域を使用する</li>
+
+<li>Orgの文法には、"begin_src org"ではなく、exampleブロックを使用する</li>
+
+<li>見出しへの文書内リンクは常に星印で開始する</li>
+
+<li>タグ、ノードのプロパティは左右のコロンなしで表示する</li>
+
+<li>マークアップに = &#x2026; = や ~ &#x2026; ~ を使うのは次の場合である。
+
+<ul class="org-ul">
+<li>ファイルや拡張子には = &#x2026; = を使う。</li>
+<li>Orgバッファに書かれるべきものには、= &#x2026; = を使う</li>
+<li>プログラミング言語内で意味を持つトークンには ~ &#x2026; ~ を使う</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8ac89ad" class="outline-2">
+<h2 id="org8ac89ad"><span class="section-number-2">5</span> その他</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>コンセプトとキーに対して標準的なTexinfoインデックスのうち2つのみが使われる。これには次のような意味合いを含んでいる。
+
+<ul class="org-ul">
+<li>コマンドは名前ではなくキーを用いて説明することが望ましい。</li>
+
+<li>Texinfoコマンドのうち、@varや@defoptionは使用しない。これらが示す事柄については、ユーザーがカスタマイズグループを閲覧することが望ましいからである。もし、例えば、変数名について述べる必要があるならば、「変数@code{org-startup-folded}」のように記述する。</li>
+
+<li>コンセプトインデックス中のエントリは通常、特に他のルールが指示されていない場合、全て小文字である。</li>
+</ul></li>
+
+<li>Org文書は米語で書かれている。自分は米語が少し苦手であるが、米語で生活している。</li>
+
+<li>Orgはいくつかの複合語を使っている。それらを分離するか、ハイフンを入れるか、それとも複合語のままで行くかどうか悩む代わりに、大抵の場合原文のままにし、スペルチェッカをこの選ばれた標準に対応させ、それ以上気にしないことにしている。</li>
+
+<li>私は定期的にスペルチェッカをかける。Aspellはうまく動き、Texinfoコマンドを無視するフィルタ機能を持っている(しかし、困ったことにispell.elではうまく行かないため、コマンドラインから実行している)。私はOrg専用のAspell設定ファイル(米語辞書の使用と複合語に対するルール等)と自分が使用したより詳細である程度任意性を持ったルールを、関連語と代替語のファイルとともに保存している。</li>
+
+<li><p>
+Orgを使うための壁は低い。必要なのは次のことだけと思われる。
+</p>
+
+<ul class="org-ul">
+<li>Text mode、またはその派生モードを使用できる。</li>
+<li>より生活を組織的にしたいという動機を持っている。</li>
+</ul>
+
+<p>
+それゆえに、関連する文書を書いてみれば、様々な人々に読んでもらえる。
+</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5b98089" class="outline-2">
+<h2 id="org5b98089"><span class="section-number-2">6</span> 原文</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+<a href="https://code.orgmode.org/bzg/org-mode/src/master/doc/Documentation_Standards.org">Documentation_Standards.org</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2020-02-23 日 19:32</p>
+<p class="author">&#33879;&#32773;: Phil Rooke</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

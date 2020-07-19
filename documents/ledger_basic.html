@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ledger(ledger-cli)入門</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Kazumasa" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Ledger(ledger-cli)入門</h1>
+<div id="table-of-contents">
+<h2>&#30446;&#27425;</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org5590503">はじめに</a></li>
+<li><a href="#orgd537dbc">仕訳帳(journal)の作成</a>
+<ul>
+<li><a href="#orge65f802">取引の記入</a></li>
+<li><a href="#orgf7e7d84">開始残高の設定</a></li>
+</ul>
+</li>
+<li><a href="#orge125e1f">レポートの作成</a>
+<ul>
+<li><a href="#org55efcca">コマンドラインでの文法</a></li>
+<li><a href="#org363e21c">レポートの種類</a>
+<ul>
+<li><a href="#org583bc95">残高レポート(balance report)</a></li>
+<li><a href="#org6242b9a">取引レポート</a></li>
+<li><a href="#org45af31d">決済レポート</a></li>
+</ul>
+</li>
+<li><a href="#orgfae2a60">期間の指定</a></li>
+<li><a href="#org0c5c1fb">取引の小計</a>
+<ul>
+<li><a href="#orgde6933a">期間単位での小計</a></li>
+<li><a href="#org9239d2f">その他の単位での小計</a></li>
+</ul>
+</li>
+<li><a href="#org78620f0">正規表現の使用</a></li>
+<li><a href="#org8a214bd">レポート作成コマンドの例</a></li>
+</ul>
+</li>
+<li><a href="#org58ba0b7">環境設定</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5590503" class="outline-2">
+<h2 id="org5590503">はじめに</h2>
+<div class="outline-text-2" id="text-org5590503">
+<p>
+Ledgerは複式簿記の考え方でお金の出入りを管理する会計システムです。グラフィカルなユーザーインターフェースは持っていません。英語のドキュメントは充実しているようですが、わかりにくいところがあります。自分の英語力や会計についての知識不足もありますが、自分なりの理解でLedgerの使い方をまとめたいと思います。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgd537dbc" class="outline-2">
+<h2 id="orgd537dbc">仕訳帳(journal)の作成</h2>
+<div class="outline-text-2" id="text-orgd537dbc">
+</div>
+<div id="outline-container-orge65f802" class="outline-3">
+<h3 id="orge65f802">取引の記入</h3>
+<div class="outline-text-3" id="text-orge65f802">
+<p>
+Ledgerが処理するファイルを仕訳帳(journal)と呼びます。仕訳帳には日々の取引(transaction)の内容を記述してあります。次は取引の記入例です。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-ledger"><span style="color: #ffffff;">9/29</span> <span style="color: #f5deb3; background-color: #000000;">(1023)</span> <span style="color: #ff8c69;">Pacific Bell</span>
+    Expenses:Utilities:Phone                   <span style="color: #40e0d0;">$23.00</span>
+    Assets:Checking                           <span style="color: #40e0d0;">$-23.00</span>
+</pre>
+</div>
+
+<p>
+一行目には取引の日付(9/29)と取引コード(1023)、そして受取人名(Pacific Bell)が書かれています。これを取引行と呼ぶことにします。取引コードは必ずしも書く必要はありません。日付についても2018/9/29のように年を指定することもできます。<br />
+二行目以降は仕訳の内容が書かれています。これを仕訳行(posting)と呼ぶことにします。仕訳行には勘定項目(account item)と金額が書かれていますが、仕訳行の先頭は半角スペースを一つ以上空けておく必要があります。<br />
+最初の仕訳行の勘定項目(account item)は「Expenses:Utilities:Phone」で、対応する金額は$23.00です。正の値なので借方であることを意味します。次の仕訳行の勘定項目は「Assets:Checking」で、対応する金額は$-23.00です。負の値になっているので、こちらは貸方であることを意味しています。勘定項目は「大項目:中項目:小項目」のように階層化されています。階層の深さは3つ以上でも構いません。仕訳行は何行になっても構いませんが、借方と貸方を合わせた資産の合計は0に釣り合わなければなりません。しかし、一行だけであれば金額を省略することが可能です。その場合、自動的に取引の総額が0になるような値が設定されます。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-ledger"><span style="color: #ffffff;">9/29</span> <span style="color: #f5deb3; background-color: #000000;">(1023)</span> <span style="color: #ff8c69;">Pacific Bell</span>
+    Expenses:Utilities:Phone                   <span style="color: #40e0d0;">$23.00</span>
+    Assets:Checking
+</pre>
+</div>
+
+
+<p>
+受取人名や勘定項目には日本語を使うこともできるようです(「支出:光熱費:電気」など)。ただし、文字コードに制約があるかもしれません。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-ledger"><span style="color: #ffffff;">9/29</span> <span style="color: #f5deb3; background-color: #000000;">(1023)</span> <span style="color: #ff8c69;">&#12497;&#12471;&#12501;&#12451;&#12483;&#12463;&#12505;&#12523;</span>
+     &#25903;&#20986;:&#20809;&#29105;&#36027;:&#38651;&#35441;                      <span style="color: #40e0d0;">$23.00</span>
+     &#36039;&#29987;:&#24403;&#24231;&#38928;&#37329;                           <span style="color: #40e0d0;">$-23.00</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf7e7d84" class="outline-3">
+<h3 id="orgf7e7d84">開始残高の設定</h3>
+<div class="outline-text-3" id="text-orgf7e7d84">
+<p>
+Ledgerを使い始める段階で、すでにいくらかの資産を持っているはずです。その資産を開始残高としてLedgerへ取引の形で記録します。例えば、当座預金口座(Assets:Checking)に$100.00を持っていたとします。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-ledger"><span style="color: #ffffff;">10/2</span>  <span style="color: #ff8c69;">Opening Balance</span>
+    Assets:Checking                         <span style="color: #40e0d0;">$100.00</span>
+    Equity:Opening Balances
+</pre>
+</div>
+
+<p>
+複式簿記の考え方に従えば、取引は釣り合いが取れていなければなりません。釣り合いを取るための勘定項目がエクイティ口座(Equity:Opening Balances)です。<br />
+エクイティ口座は残高レポートでは大きな負の値として表示されますが、その絶対値がLedger開始時のあなたの資産です。この絶対値を総資産が超えている場合、Ledgerを使い始めてから資産が増加したことを意味します。<br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orge125e1f" class="outline-2">
+<h2 id="orge125e1f">レポートの作成</h2>
+<div class="outline-text-2" id="text-orge125e1f">
+</div>
+<div id="outline-container-org55efcca" class="outline-3">
+<h3 id="org55efcca">コマンドラインでの文法</h3>
+<div class="outline-text-3" id="text-org55efcca">
+<p>
+Ledgerはいくつかのレポート作成コマンドとそれらのコマンドからの出力を変形するための多くのオプションを持っています。Ledgerの基本文法は、<br />
+</p>
+<pre class="example">
+$ ledger [OPTIONS...] COMMAND [ARGS...]
+</pre>
+<p>
+命令語(COMMAND)のあと、引数(ARGS&#x2026;)が続きます。大抵の命令語では、引数は正規表現です。Ledgerは、正規表現に適合した項目に関係した出力を行います。<br />
+正規表現は通常、勘定項目に適合します。取引の受取人に関連した出力を行うには、正規表現の前にpayeeという語を挿入するか、正規表現の先頭に@をつけます。例えば、次のbalance命令は家賃(rent)、食費(food)、映画(movie)についての勘定項目の残高を示しますが、受取人がfreddieになっているものだけを抽出します。<br />
+</p>
+<pre class="example">
+$ ledger -f sample.dat balance rent food movies payee freddie
+$ ledger -f sample.dat balance rent food movies @freddie
+</pre>
+<p>
+上の例ではledgerで処理する仕訳帳ファイルが指定してありませんが、仕訳帳ファイルはオプションの&#x2013;fileまたは-fで指定するか、環境変数LEDGER_FILEに予め設定しておく必要があります。&#x2013;fileオプションに渡すファイル名には、標準入力(/dev/stdin)の短縮形として「-」を使うことができます。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org363e21c" class="outline-3">
+<h3 id="org363e21c">レポートの種類</h3>
+<div class="outline-text-3" id="text-org363e21c">
+<p>
+Ledgerが作成するレポートには、残高レポート、取引レポート、決済レポートがあります。<br />
+ここでは次の簡単な仕訳帳ファイル(sample.dat)を考えます。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-ledger" id="org30f2384"><span style="color: #ffffff;">2011/03/01</span> * <span style="color: #b3b3b3;">Opening Balance</span>
+    Assets:Wallet                         <span style="color: #40e0d0;">$1000.00</span>
+    Assets:Checking                       <span style="color: #40e0d0;">$2000.00</span>
+    Equity:Opening Balances
+<span style="color: #ffffff;">2011/03/15</span> * <span style="color: #b3b3b3;">Trader Joe's</span>
+    Expenses:Groceries                    <span style="color: #40e0d0;">$100.00</span>
+    Assets:Wallet
+<span style="color: #ffffff;">2011/03/17</span>   <span style="color: #ff8c69;">Whole Food Market</span>
+    Expenses:Groceries                    <span style="color: #40e0d0;">$75.00</span>
+    Liabilities:Credit Card
+<span style="color: #ffffff;">2011/03/19</span> *  <span style="color: #b3b3b3;">Pacific Bell</span>
+    Expenses:Utilities:Phone              <span style="color: #40e0d0;">$23.00</span>
+    Assets:Checking
+</pre>
+</div>
+
+<p>
+2011/03/01の時点で、開始残高として財布(Assets:Wallet)に$1000.00、当座預金に$2000.00を持っています。2011/03/15にTrader Joe'sという店で$100.00の食料品(Expenses:Groceries)を現金(Assets:Wallet)で購入しています。次に2011/03/17にWhole Food Marketで$75.00分の食料をクレジットカード(Liabilities:Credit Card)で買っています。2011/03/19にPacific Bellによって当座預金から電話料金が引き落とされています。<br />
+これを使ってLedgerがどのようなレポートを出力するか見ていきましょう。<br />
+</p>
+</div>
+
+<div id="outline-container-org583bc95" class="outline-4">
+<h4 id="org583bc95">残高レポート(balance report)</h4>
+<div class="outline-text-4" id="text-org583bc95">
+<p>
+すべての勘定項目の残高を表示するためには、次のコマンドを実行します。<br />
+</p>
+<pre class="example">
+$ ledger -f sample.dat balance
+</pre>
+<p>
+出力は次のようになります。<br />
+</p>
+<pre class="example">
+            $2877.00  Assets
+            $1977.00    Checking
+             $900.00    Wallet
+           $-3000.00  Equity:Opening Balances
+             $198.00  Expenses
+             $175.00    Groceries
+              $23.00    Utilities:Phone
+             $-75.00  Liabilities:Credit Card
+--------------------
+                   0
+</pre>
+
+<p>
+最初の行は「当座預金(Assets:Checking)」と「財布(Assets:Wallet)」が属する「資産(Assets)」グループの残高を表しています。<br />
+4行目のエクイティ口座(Equity:Opening Balances)は先に述べたように負の値を持ち、その絶対値は開始残高を表しています。「資産(Assets)」を使って買い物をしたので、「資産(Assets)」グループの残高は開始残高を下回っています。<br />
+5行目はこの仕訳帳ファイル(sample.dat)内の「支出(Expenses)」を表しています。6行目の「食料品(Groceries)」は、Trader Joe'sとWhole Food Marketで購入した食料品の総額です。7行目はPacific Bellに支払った「電話料金(Utilities:Phone)」です。<br />
+8行目はクレジットカードによる支払い額で、「負債(Liabilities)」として扱われるため、負の値になっています。<br />
+最終行は、金額の総計が0になっており、すべての勘定項目の釣り合いが取れていることを表しています。<br />
+</p>
+
+<p>
+コマンドの後ろに勘定項目名を指定すると、表示内容を絞り込むことができます。例えば、資産(Assets)と負債(Liabilities)のみを表示させてみましょう。<br />
+</p>
+<pre class="example">
+$ ledger -f sample.dat balance Assets Liabilities
+</pre>
+<p>
+実行結果は下記になります。<br />
+</p>
+<pre class="example">
+            $2877.00  Assets
+            $1977.00    Checking
+             $900.00    Wallet
+             $-75.00  Liabilities:Credit Card
+--------------------
+            $2802.00
+</pre>
+
+
+<p>
+最終行は、「資産(Assets)」と「負債(Liabilities)」の和、つまり純資産を表しています。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org6242b9a" class="outline-4">
+<h4 id="org6242b9a">取引レポート</h4>
+<div class="outline-text-4" id="text-org6242b9a">
+<p>
+すべての取引と資産の累計を表示させるには、次のコマンドを実行します。<br />
+</p>
+<pre class="example">
+$ ledger -f sample.dat register
+</pre>
+<p>
+Ledgerは次を表示します。<br />
+</p>
+<pre class="example">
+11-Mar-01 Opening Balance       Assets:Wallet              $1000.00     $1000.00
+                                Assets:Checking            $2000.00     $3000.00
+                                Equit:Opening Balances    $-3000.00            0
+11-Mar-15 Trader Joe's          Expenses:Groceries          $100.00      $100.00
+                                Assets:Wallet              $-100.00            0
+11-Mar-17 Whole Food Market     Expenses:Groceries           $75.00       $75.00
+                                Liabilitie:Credit Card      $-75.00            0
+11-Mar-19 Pacific Bell          Expens:Utilities:Phone       $23.00       $23.00
+                                Assets:Checking             $-23.00            0
+</pre>
+
+
+<p>
+各行には2つの金額が表示されています。最初の金額は正の金額なら貸方、負の金額なら借方を表し、二番目の金額は資産の累計です。<br />
+コマンドラインに勘定項目を追加することで、確認したい勘定項目だけを表示させることができます。<br />
+</p>
+<pre class="example">
+$ ledger -f drewr3.dat register Groceries
+</pre>
+<pre class="example">
+11-Mar-15 Trader Joe's          Expenses:Groceries          $100.00      $100.00
+11-Mar-17 Whole Food Market     Expenses:Groceries           $75.00      $175.00
+</pre>
+
+
+<p>
+特定の受取人にだけ関係する取引を表示したい場合、「payee」か「@」を使用します。<br />
+</p>
+<pre class="example">
+$ ledger -f drewr3.dat register payee "Organic"
+</pre>
+<pre class="example">
+11-Mar-15 Trader Joe's          Expenses:Groceries          $100.00      $100.00
+                                Assets:Wallet              $-100.00            0
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org45af31d" class="outline-4">
+<h4 id="org45af31d">決済レポート</h4>
+<div class="outline-text-4" id="text-org45af31d">
+<p>
+例えば、クレジットカード払いなどは、クレジットカードを使用した日から実際に決済が完了するまでに何日かかかることがありますが、クレジットカードを使用した時点でお金は使われたと考えておくべきです。しかし、まだ決済がすべて完了していると仮定したときの残高と、実際に決済が完了している残高との比較は、債務を把握する上で有益です。<br />
+決済が完了した取引には、取引の日付と受取人の間にアスタリスク(「*」)を書きます。<br />
+決済が済んでいない残高を表示するためには、次のコマンドを入力します。<br />
+</p>
+<pre class="example">
+$ ledger -f sample.dat cleared
+</pre>
+
+<pre class="example">
+        $2877.00            $2877.00                 Assets
+        $1977.00            $1977.00    11-Mar-19      Checking
+         $900.00             $900.00    11-Mar-15      Wallet
+       $-3000.00           $-3000.00    11-Mar-01    Equity:Opening Balances
+         $198.00             $123.00                 Expenses
+         $175.00             $100.00    11-Mar-15      Groceries
+          $23.00              $23.00    11-Mar-19      Utilities:Phone
+         $-75.00                   0                 Liabilities:Credit Card
+----------------    ----------------    ---------
+               0                   0             
+</pre>
+
+<p>
+最初の列には決済がすんでいない取引も含まれた残高が表示されていますが、次の列はすでに決済が完了している取引のみから算出した残高が表示されています。3番目の列は決済が完了している取引が最後に行われた日付です。<br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfae2a60" class="outline-3">
+<h3 id="orgfae2a60">期間の指定</h3>
+<div class="outline-text-3" id="text-orgfae2a60">
+<p>
+レポートの集計期間を限定するには、次のオプションを使います。<br />
+</p>
+<ul class="org-ul">
+<li>&#x2013;begin DATE<br /></li>
+<li>-b DATE<br />
+DATEで表される日付以降の取引を使ってレポートを作成します。残高レポートはこの日以前の残高を0として累計を計算します。<br /></li>
+<li>&#x2013;end DATE<br /></li>
+<li>-e DATE<br />
+DATEで表される日付より後の取引をレポート作成には使用しません。<br /></li>
+<li>&#x2013;current<br />
+現在の日付以前の取引に集計範囲を限定します。現在の日付は&#x2013;nowオプションを使うことで、を実際とは違う日に設定することも可能です。<br />
+<ul class="org-ul">
+<li>&#x2013;now DATE<br />
+現在の日付を定義します<br /></li>
+</ul></li>
+</ul>
+<p>
+日付を表す引数DATEは、何も指定しなければ、"4桁の西暦/月/日"です(2018/1/31など)。DATEの書式を変えるには、次のオプションを使います。<br />
+</p>
+<ul class="org-ul">
+<li>&#x2013;input-date-format DATE_FORMAT<br />
+日付を表すパラメータ(DATE)の書式をDATE_FORMATに設定します。例えば、日付の書式を"日/月/2桁の西暦"とするには、&#x2013;input-date-format '%d/%m/%y'とします。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0c5c1fb" class="outline-3">
+<h3 id="org0c5c1fb">取引の小計</h3>
+<div class="outline-text-3" id="text-org0c5c1fb">
+</div>
+<div id="outline-container-orgde6933a" class="outline-4">
+<h4 id="orgde6933a">期間単位での小計</h4>
+<div class="outline-text-4" id="text-orgde6933a">
+<p>
+月単位、週単位など一定期間で取引をグループ化し、その小計を取るには、次のオプションを使います。<br />
+</p>
+<ul class="org-ul">
+<li>&#x2013;daily<br /></li>
+<li>-D<br />
+日単位で小計を取ります。<br /></li>
+<li>&#x2013;weekly<br /></li>
+<li>-W<br />
+週単位で小計を取ります。<br /></li>
+<li>&#x2013;monthly<br /></li>
+<li>-M<br />
+月単位で小計を取ります。<br /></li>
+<li>&#x2013;quarterly<br />
+四半期単位で小計を取ります。<br /></li>
+<li>&#x2013;yearly<br /></li>
+<li>-Y<br />
+年単位で小計を取ります。<br /></li>
+<li>&#x2013;dow<br />
+曜日単位で小計を取ります。<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9239d2f" class="outline-4">
+<h4 id="org9239d2f">その他の単位での小計</h4>
+<div class="outline-text-4" id="text-org9239d2f">
+<ul class="org-ul">
+<li>&#x2013;by-payee<br /></li>
+<li>-P<br />
+受取人毎に小計を取ります。<br /></li>
+<li>&#x2013;subtotal<br /></li>
+<li>-s<br />
+台帳レポートでも残高レポートと同様に勘定項目毎に小計を取ります。<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org78620f0" class="outline-3">
+<h3 id="org78620f0">正規表現の使用</h3>
+<div class="outline-text-3" id="text-org78620f0">
+<p>
+Ledgerが文字列を必要とする箇所で一般的な正規表現を使うことができます。<br />
+次の例はCrで始まるすべての勘定項目を探します。Crで始まる勘定項目はありません。<br />
+</p>
+<pre class="example">
+$ ledger balance -f sample.dat ^Cr
+</pre>
+<p>
+Crを含む勘定項目を探すには次のようにします。<br />
+</p>
+<pre class="example">
+$ ledger balance -f sample.dat Cr
+</pre>
+<pre class="example">
+$-75.00  Liabilities:Credit Card
+</pre>
+
+
+<p>
+もし特定の勘定項目から特定の受取人に支払った額を知りたければ、次のようにすれば、財布(Assets:Wallet)からTrader Joe'sへの支払額を調べることができます。<br />
+</p>
+<pre class="example">
+$ ledger balance --limit 'account=~/Wallet/' --limit 'payee=~/Joe/'
+</pre>
+<pre class="example">
+$75.00  Expenses:Groceries
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8a214bd" class="outline-3">
+<h3 id="org8a214bd">レポート作成コマンドの例</h3>
+<div class="outline-text-3" id="text-org8a214bd">
+<p>
+次のコマンドは昨年10月(last oct)以降のすべての支出(Expenses)を表示します。<br />
+</p>
+<pre class="example">
+$ ledger -b "last oct" -S T balance ^Expenses
+</pre>
+<p>
+オプション-Sは出力のソートを指示します。TはTOTALを意味しており、総計で並べ替えることを意味しています。<br />
+次のコマンドは、月毎に支出をまとめます。<br />
+</p>
+<pre class="example">
+$ ledger -M --period-sort "(amount)" register ^Expenses
+</pre>
+<p>
+オプションの&#x2013;period-sort "(amount)"は各月の支出を金額で並べ替えます。<br />
+逆にどのような手段で支払っているかを知りたいかもしれません。その時は次のコマンドを使用します。<br />
+</p>
+<pre class="example">
+$ ledger -M --period-sort "(amount)" --related register ^Expenses
+</pre>
+<p>
+オプションの&#x2013;relatedは支出と対になる、つまり支払いに使った勘定項目を表示します。もし、MasterCardでいくら支払ったかを知りたいだけであれば、&#x2013;displayオプションを使う必要があります。registerコマンドの後には^Expenses(支出)を置いて計算範囲を決定する必要がある一方で、&#x2013;relatedオプションで表示される支払いに使った勘定項目からMasterCardを抽出したいからです。具体的には次のようになります。<br />
+</p>
+<pre class="example">
+$ ledger -M --related --display 'account=~/MasterCard/' register ^Expenses
+</pre>
+<p>
+もし、下の階層の勘定項目をまとめてしまいたい場合は、&#x2013;collapseオプションを使います。<br />
+</p>
+<pre class="example">
+$ ledger -M --collapse register ^Expenses
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org58ba0b7" class="outline-2">
+<h2 id="org58ba0b7">環境設定</h2>
+<div class="outline-text-2" id="text-org58ba0b7">
+<p>
+Ledgerは多くのコマンドラインオプションを持っていますが、環境変数や初期設定ファイルに予め設定しておくことができます。<br />
+次は環境変数の例です。<br />
+</p>
+<ul class="org-ul">
+<li>LEDGER_FILE<br />
+Ledgerの仕訳帳ファイルを指定します。<br /></li>
+<li>LEDGER_INIT_FILE<br />
+Ledgerの初期設定ファイルを指定します。何も指定していなければ、「~/.ledgerrc」が使われます。<br /></li>
+<li>LEDGER_PRICE_DB<br />
+価格履歴ファイルを指定します。<br /></li>
+</ul>
+<p>
+初期設定ファイルは、環境変数LEDGER_INIT_FILEや&#x2013;init-fileオプションで指定しなければ、~/.ledgerrcが使用されます。初期設定ファイルにはコマンドラインオプションを一行に一つ書きます。<br />
+</p>
+<pre class="example">
+--f ledger.dat
+--input-date-format "%m/%d/%Y"
+--price-db ~/finance/.pricedb
+--wide
+</pre>
+<p>
+初期設定ファイルの設定内容よりも、環境変数やコマンドラインオプションで指定した内容のほうが優先されます。<br />
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">&#26085;&#20184;: 2018-09-17 月 19:09</p>
+<p class="author">&#33879;&#32773;: Kazumasa</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
