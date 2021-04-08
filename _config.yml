@@ -64,7 +64,7 @@ plugins:
 
 # The following settings are NECESSARY for the Prologue theme to run:
 #remote_theme: chrisbobbe/jekyll-theme-prologue
-theme: jekyll-theme-prologue
+theme: jekyll-theme-dinky
 #theme: jekyll-theme-minimal
 #theme: jekyll-theme-leap-day
 #theme: jekyll-theme-dinky
