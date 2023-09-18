@@ -1,0 +1,92 @@
+# main links
+main:
+  - title: "About"
+    url: /about/
+  - title: "Documents"
+    url: /docs/top/
+#  - title: "Posts"
+#    url: /year-archive/
+
+# documentation links
+docs:
+  - title: "Tiny Basicを読む"
+    url: /docs/comments-on-tinybasic/
+  - title: "Spacemacs on WSL"
+    url: /docs/spacemacs-on-wsl/
+  - title: "Ledger(ledger-cli)入門"
+    url: /docs/ledger-beginner/
+  - title: "Dell Inspiron 11 3000へのArch Linuxのインストール"
+    url: /docs/installing-archlinux/
+  - title: "Raspberry Pi 1をサーバーとして使う"
+    url: /docs/install-vaultwarden-on-raspberrypi/
+  - title: "Arch LinuxへのRedmineのインストール"
+    url: /docs/installing-redmine/
+  - title: "低水準言語の技術"
+    url: /docs/low-level-language-techniques/
+
+low-level:
+  - title: "低水準言語の技術"
+    url: /docs/low-level-language-techniques/
+    children:
+      - title: "数値を16進数へ変換する"
+        url: /docs/low-level-language-techniques-a/
+      - title: "8ビットCPUでの乗算"
+        url: /docs/low-level-language/low-level-language-techniques-b/
+      - title: "バイナリ値をBCDに変換する(1)"
+        url: /docs/low-level-language-techniques-c/
+      - title: "バイナリ値をBCDに変換する(2)"
+        url: /docs/low-level-language-techniques-d/
+      - title: "バイナリ値をBCDに変換する(3)"
+        url: /docs/low-level-language-techniques-e/
+      - title: "バイナリ値をBCDに変換する(4)"
+        url: /docs/low-level-language-techniques-f/
+      - title: "バイナリ値をBCDに変換する(5)"
+        url: /docs/low-level-language-techniques-g/
+      - title: "バイナリ値をBCDに変換する(6)"
+        url: /docs/low-level-language-techniques-h/
+      - title: "変数の入れ替え"
+        url: /docs/low-level-language-techniques-i/
+      - title: "最小値を求める"
+        url: /docs/low-level-language-techniques-j/
+      - title: "参考資料"
+        url: /docs/low-level-language-techniques-z/
+
+pi-server:
+  - title: "Raspberry Pi 1をサーバーとして使う"
+    url: /docs/install-vaultwarden-on-raspberrypi/
+    children:
+    - title: "Raspberry Pi 1をSSDから起動する"
+      url: /docs/install-vaultwarden-on-raspberrypi-a/
+    - title: "サーバーの構成について"
+      url: /docs/install-vaultwarden-on-raspberrypi-b/
+    - title: "オレオレ証明書の作成"
+      url: /docs/install-vaultwarden-on-raspberrypi-c/
+    - title: "Dockerのインストール"
+      url: /docs/install-vaultwarden-on-raspberrypi-d/
+    - title: "Vaultwardenとnginxのインストール"
+      url: /docs/install-vaultwarden-on-raspberrypi-e/
+    - title: "Sambaのインストール"
+      url: /docs/install-vaultwarden-on-raspberrypi-f/
+    - title: "Raspberry Piの常時運用"
+      url: /docs/install-vaultwarden-on-raspberrypi-g/
+    - title: "aptパッケージの自動更新"
+      url: /docs/install-vaultwarden-on-raspberrypi-h/
+    - title: "Dockerコンテナの自動更新"
+      url: /docs/install-vaultwarden-on-raspberrypi-i/
+    - title: "定期バックアップ設定"
+      url: /docs/install-vaultwarden-on-raspberrypi-j/
+
+redmine:
+  - title: "Arch LinuxへのRedmineのインストール"
+    url: /docs/installing-redmine/
+    children:
+      - title: "必要なパッケージのインストール"
+        url: /docs/installing-redmine-a/
+      - title: "Webサーバー(nginx)の起動"
+        url: /docs/installing-redmine-b/
+      - title: "データベース(MariaDB)の準備"
+        url: /docs/installing-redmine-c/
+      - title: "Redmineの設定"
+        url: /docs/installing-redmine-d/
+      - title: "Easy Gantt Freeのインストール"
+        url: /docs/installing-redmine-e/
