@@ -1,6 +1,6 @@
 ---
 title: Ledger(ledger-cli)入門
-permalink: /docs/ledger-beginner
+permalink: /docs/ledger-beginner/
 toc: true
 ---
 ## はじめに
