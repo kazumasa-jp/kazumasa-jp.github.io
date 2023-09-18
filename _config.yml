@@ -294,9 +294,19 @@ tag_archive:
 #     tag: /tags/:name/
 
 
+<<<<<<< HEAD
 # HTML Compression
 # - http://jch.penibelst.de/
 compress_html:
   clippings: all
   ignore:
     envs: development
+=======
+# The following settings are NECESSARY for the Prologue theme to run:
+#remote_theme: chrisbobbe/jekyll-theme-prologue
+theme: jekyll-theme-dinky
+#theme: jekyll-theme-minimal
+#theme: jekyll-theme-leap-day
+#theme: jekyll-theme-dinky
+collections: [sections]
+>>>>>>> 9a75db6b31cb187d14d967b6d8fd9035f4410fcf
